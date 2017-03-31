@@ -1,0 +1,32 @@
+:::::
+VILLE : codeinsee_ville, nom_ville, codepostal_ville
+
+:::
+FAIRE_PARTIE, 11 SONDE, 0N> CSP
+CSP : id_csp, libelle_csp
+ETRE_DANS, 11 ADRESSE, 0N> VILLE
+
+::
+APPARTENIR, 1N PANEL, 1N SONDE
+SONDE : id_sonde, nom_sonde, prenom_sonde, sexe_sonde, datenaiss_sonde, tel_sonde
+SONDE_AVOIR_ADRESSE, 11 SONDE, 11 ADRESSE
+ADRESSE : id_adresse, numero_adresse, bister_adresse, libellevoie_adresse, batiment_adresse, etage_adresse, escalier_adresse, appartement_adresse
+
+CHOIX_MULTIPLE : id_choixmul, intitule_choixmul
+:
+PANEL : id_panel, intitule_panel
+CONCERNER, 11 QUESTIONNAIRE, 0N> PANEL
+:
+ENTREPRISE_AVOIR_ADRESSE, 11 ENTREPRISE, 11 ADRESSE
+
+ASSOCIER, 11 CHOIX_MULTIPLE, 0N> QUESTION
+QUESTION : id_question, enonce_question,urlanal_question
+CONSTITUER, 11 QUESTION, 1N> QUESTIONNAIRE
+QUESTIONNAIRE : id_questionnaire,intitule_questionnaire, dateheurelim_questionnaire, accessible_questionnaire,termine_questionnaire,analyse_questionnaire
+ACHETER, 11 QUESTIONNAIRE, 1N> ENTREPRISE
+ENTREPRISE  :id_entreprise, nom_entreprise, tel_entreprise, email_entreprise
+
+:
+AVOIR_TYPE_QUESTION, 11 QUESTION, 1N> TYPE_QUESTION
+TYPE_QUESTION : id_typequest, libelle_typequest
+:::

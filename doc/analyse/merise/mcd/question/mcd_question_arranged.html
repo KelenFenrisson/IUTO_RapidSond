@@ -1,0 +1,98 @@
+<html>
+<head>
+<meta charset='utf-8'>
+<style>
+  #mld .relation { font-variant: small-caps; font-weight: bold }
+  #mld .primary { text-decoration: underline }
+  #mld .foreign { font-style: oblique }
+  #mld .normal { }
+</style>
+</head>
+<body>
+<div id='mld'>
+<!--
+<div>
+  <span class='relation'>DATE</span> (
+    <span class='primary'>aaaa-mm-jj_hh:mm:ss'ms</span>
+  )
+</div>
+-->
+<!--
+<div>
+  <span class='relation'>DATE</span> (
+    <span class='primary'>aaaa-mm-jj_hh:mm:ss'ms</span>
+  )
+</div>
+-->
+<div>
+  <span class='relation'>ENREGISTRER_NOTE</span> (
+    <span class='foreign primary'>id_question</span>,
+    <span class='foreign primary'>aaaa-mm-jj_hh:mm:ss'ms</span>,
+    <span class='normal'>note</span>
+  )
+</div>
+<div>
+  <span class='relation'>ENREGISTRER_REPONSE</span> (
+    <span class='foreign primary'>id_question</span>,
+    <span class='foreign primary'>aaaa-mm-jj_hh:mm:ss'ms</span>,
+    <span class='normal'>commentaire</span>
+  )
+</div>
+<div>
+  <span class='relation'>QUESTION</span> (
+    <span class='primary'>id_question</span>,
+    <span class='normal'>enonce_question</span>
+  )
+</div>
+<div>
+  <span class='relation'>ENREGISTRER_CHOIX</span> (
+    <span class='foreign primary'>id_question</span>,
+    <span class='foreign primary'>aaaa-mm-jj_hh:mm:ss'ms</span>,
+    <span class='foreign primary'>id_choixmul</span>
+  )
+</div>
+<!--
+<div>
+  <span class='relation'>DATE</span> (
+    <span class='primary'>aaaa-mm-jj_hh:mm:ss'ms</span>
+  )
+</div>
+-->
+<div>
+  <span class='relation'>ENREGISTRER_CLASSEMENT</span> (
+    <span class='foreign primary'>id_question</span>,
+    <span class='foreign primary'>aaaa-mm-jj_hh:mm:ss'ms</span>,
+    <span class='foreign primary'>id_choixmul</span>,
+    <span class='normal'>position</span>
+  )
+</div>
+<!--
+<div>
+  <span class='relation'>DATE</span> (
+    <span class='primary'>aaaa-mm-jj_hh:mm:ss'ms</span>
+  )
+</div>
+-->
+<div>
+  <span class='relation'>CHOIX_MULTIPLE</span> (
+    <span class='primary'>id_choixmul</span>,
+    <span class='normal'>intitule_choixmul</span>
+  )
+</div>
+<div>
+  <span class='relation'>ENREGISTRER_SELECTION</span> (
+    <span class='foreign primary'>id_question</span>,
+    <span class='foreign primary'>aaaa-mm-jj_hh:mm:ss'ms</span>,
+    <span class='foreign primary'>id_choixmul</span>
+  )
+</div>
+<!--
+<div>
+  <span class='relation'>DATE</span> (
+    <span class='primary'>aaaa-mm-jj_hh:mm:ss'ms</span>
+  )
+</div>
+-->
+</div>
+</body>
+</html>

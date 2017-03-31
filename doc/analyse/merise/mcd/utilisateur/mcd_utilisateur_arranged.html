@@ -1,0 +1,71 @@
+<html>
+<head>
+<meta charset='utf-8'>
+<style>
+  #mld .relation { font-variant: small-caps; font-weight: bold }
+  #mld .primary { text-decoration: underline }
+  #mld .foreign { font-style: oblique }
+  #mld .normal { }
+</style>
+</head>
+<body>
+<div id='mld'>
+<div>
+  <span class='relation'>TYPE_UTILISATEUR</span> (
+    <span class='primary'>id_typeutil</span>,
+    <span class='normal'>libelle_typeutil</span>
+  )
+</div>
+<div>
+  <span class='relation'>UTILISATEUR</span> (
+    <span class='primary'>id_utilisateur</span>,
+    <span class='normal'>nom_utilisateur</span>,
+    <span class='normal'>prenom_utilisateur</span>,
+    <span class='normal'>login_utilisateur</span>,
+    <span class='normal'>password_utilisateur</span>,
+    <span class='foreign'>id_typeutil</span>
+  )
+</div>
+<div>
+  <span class='relation'>SONDER</span> (
+    <span class='foreign primary'>id_utilisateur</span>,
+    <span class='foreign primary'>id_sonde</span>,
+    <span class='foreign primary'>id_questionnaire</span>,
+    <span class='normal'>dateheure_sondage</span>
+  )
+</div>
+<!--
+<div>
+  <span class='relation'>DATE</span> (
+    <span class='primary'>aaaa-mm-jj_hh:mm:ss'ms</span>
+  )
+</div>
+-->
+<div>
+  <span class='relation'>SONDE</span> (
+    <span class='primary'>id_sonde</span>,
+    <span class='normal'>nom_sonde</span>,
+    <span class='normal'>prenom_sonde</span>,
+    <span class='normal'>sexe_sonde</span>,
+    <span class='normal'>datenaiss_sonde</span>,
+    <span class='normal'>tel_sonde</span>
+  )
+</div>
+<div>
+  <span class='relation'>QUESTIONNAIRE</span> (
+    <span class='primary'>id_questionnaire</span>,
+    <span class='normal'>intitule_questionnaire</span>,
+    <span class='normal'>dateheurelim_questionnaire</span>,
+    <span class='normal'>accessible_questionnaire</span>,
+    <span class='normal'>termine_questionnaire</span>,
+    <span class='normal'>analyse_questionnaire</span>,
+    <span class='foreign'>id_utilisateur</span>,
+    <span class='foreign'>aaaa-mm-jj_hh:mm:ss'ms</span>,
+    <span class='foreign'>id_utilisateur.1</span>,
+    <span class='foreign'>aaaa-mm-jj_hh:mm:ss'ms.1</span>,
+    <span class='normal'>url_analyse</span>
+  )
+</div>
+</div>
+</body>
+</html>

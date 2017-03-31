@@ -1,0 +1,6 @@
+TYPE_UTILISATEUR (_id_typeutil_, libelle_typeutil)
+UTILISATEUR (_id_utilisateur_, nom_utilisateur, prenom_utilisateur, login_utilisateur, password_utilisateur, #id_typeutil)
+SONDER (_#id_utilisateur_, _#id_sonde_, _#id_questionnaire_, dateheure_sondage)
+DATE (_aaaa-mm-jj_hh:mm:ss'ms_)
+SONDE (_id_sonde_, nom_sonde, prenom_sonde, sexe_sonde, datenaiss_sonde, tel_sonde)
+QUESTIONNAIRE (_id_questionnaire_, intitule_questionnaire, dateheurelim_questionnaire, accessible_questionnaire, termine_questionnaire, analyse_questionnaire, #id_utilisateur, #aaaa-mm-jj_hh:mm:ss'ms, #id_utilisateur.1, #aaaa-mm-jj_hh:mm:ss'ms.1, url_analyse)

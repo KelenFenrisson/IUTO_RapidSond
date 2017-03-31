@@ -1,0 +1,17 @@
+
+DATE : aaaa-mm-jj_hh:mm:ss'ms[date]
+QUESTION : id_question, enonce_question
+ENREGISTRER_REPONSE, 0N QUESTION, 0N DATE: commentaire_reponse
+
+DATE2 : aaaa-mm-jj_hh:mm:ss'ms[date]
+ENREGISTRER_NOTE, 0N QUESTION, 0N DATE2 : note_reponse[int]
+
+DATE3 : aaaa-mm-jj_hh:mm:ss'ms[date]
+CHOIX_MULTIPLE : id_choixmul, intitule_choixmul
+ENREGISTRER_SELECTION, 0N QUESTION, 0N DATE3, 0N CHOIX_MULTIPLE
+
+DATE4 : aaaa-mm-jj_hh:mm:ss'ms[date]
+ENREGISTRER_CLASSEMENT, 0N QUESTION, 0N DATE4, 0N CHOIX_MULTIPLE: position[int]
+
+DATE5 : aaaa-mm-jj_hh:mm:ss'ms[date]
+ENREGISTRER_CHOIX, 0N QUESTION, 0N DATE5, 0N CHOIX_MULTIPLE
