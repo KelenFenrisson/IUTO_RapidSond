@@ -1,53 +1,45 @@
 #!/usr/bin/env python
 # encoding: utf-8
-# Généré par Mocodo 2.3.7 le Mon, 03 Apr 2017 17:49:23
+# Généré par Mocodo 2.3.7 le Mon, 03 Apr 2017 20:29:11
 
 from __future__ import division
 from math import hypot
 
 import time, codecs
 
-(width,height) = (744,514)
+(width,height) = (480,554)
 cx = {
-    u"TYPE_UTILISATEUR"      :  248,
-    u"AVOIR_TYPE_UTILISATEUR":  454,
-    u"SONDE"                 :  656,
-    u"UTILISATEUR"           :  454,
-    u"SONDER"                :  656,
-    u"ANALYSER"              :   63,
-    u"DATE"                  :  248,
-    u"CREER"                 :  454,
-    u"QUESTIONNAIRE"         :  454,
+    u"TYPE_UTILISATEUR"      :  215,
+    u"AVOIR_TYPE_UTILISATEUR":  215,
+    u"UTILISATEUR"           :  215,
+    u"CREER"                 :   38,
+    u"QUESTIONNAIRE"         :  215,
+    u"ANALYSER"              :  417,
+    u"DATE"                  :  215,
 }
 cy = {
-    u"TYPE_UTILISATEUR"      :   80,
-    u"AVOIR_TYPE_UTILISATEUR":   80,
-    u"SONDE"                 :   80,
-    u"UTILISATEUR"           :  201,
-    u"SONDER"                :  201,
-    u"ANALYSER"              :  313,
-    u"DATE"                  :  313,
-    u"CREER"                 :  313,
-    u"QUESTIONNAIRE"         :  434,
+    u"TYPE_UTILISATEUR"      :   44,
+    u"AVOIR_TYPE_UTILISATEUR":  129,
+    u"UTILISATEUR"           :  241,
+    u"CREER"                 :  398,
+    u"QUESTIONNAIRE"         :  398,
+    u"ANALYSER"              :  398,
+    u"DATE"                  :  519,
 }
 shift = {
     u"AVOIR_TYPE_UTILISATEUR,UTILISATEUR"     :    0,
     u"AVOIR_TYPE_UTILISATEUR,TYPE_UTILISATEUR":    0,
-    u"SONDER,UTILISATEUR"                     :    0,
-    u"SONDER,SONDE"                           :    0,
-    u"SONDER,QUESTIONNAIRE"                   :    0,
-    u"ANALYSER,UTILISATEUR"                   :    0,
-    u"ANALYSER,QUESTIONNAIRE"                 :    0,
-    u"ANALYSER,DATE"                          :    0,
     u"CREER,UTILISATEUR"                      :    0,
     u"CREER,QUESTIONNAIRE"                    :    0,
     u"CREER,DATE"                             :    0,
+    u"ANALYSER,UTILISATEUR"                   :    0,
+    u"ANALYSER,QUESTIONNAIRE"                 :    0,
+    u"ANALYSER,DATE"                          :    0,
 }
 ratio = {
     u"AVOIR_TYPE_UTILISATEUR,TYPE_UTILISATEUR":  1.00,
-    u"SONDER,UTILISATEUR"                     :  1.00,
-    u"ANALYSER,UTILISATEUR"                   :  1.00,
     u"CREER,UTILISATEUR"                      :  1.00,
+    u"ANALYSER,UTILISATEUR"                   :  1.00,
 }
 colors = {
     u"annotation_color"                : '#060707',
@@ -255,30 +247,6 @@ lines += u"""\n	<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(
 lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">CREER</text>""" % {'x': -22+x, 'y': -7.4+y, 'text_color': colors['association_cartouche_text_color']}
 lines += u"""\n</g>""" % {}
 
-lines += u"""\n\n<!-- Association AVOIR_TYPE_UTILISATEUR -->"""
-(x,y) = (cx[u"AVOIR_TYPE_UTILISATEUR"],cy[u"AVOIR_TYPE_UTILISATEUR"])
-(ex,ey) = (cx[u"UTILISATEUR"],cy[u"UTILISATEUR"])
-leg=straight_leg_factory(ex,ey,90,62,x,y,100,26,23+2*card_margin,14+2*card_margin)
-lines += u"""\n<line x1="%(ex)s" y1="%(ey)s" x2="%(ax)s" y2="%(ay)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'ex': ex, 'ey': ey, 'ax': x, 'ay': y, 'stroke_color': colors['leg_stroke_color']}
-(tx,ty)=offset(*leg.card_pos(False,shift[u"AVOIR_TYPE_UTILISATEUR,UTILISATEUR"]))
-lines += u"""\n<text x="%(tx)s" y="%(ty)s" fill="%(text_color)s" font-family="Courier New" font-size="12">1,1</text>""" % {'tx': tx, 'ty': ty, 'text_color': colors['card_text_color']}
-(ex,ey) = (cx[u"TYPE_UTILISATEUR"],cy[u"TYPE_UTILISATEUR"])
-leg=straight_leg_factory(ex,ey,73,35,x,y,100,26,23+2*card_margin,14+2*card_margin)
-lines += u"""\n<line x1="%(ex)s" y1="%(ey)s" x2="%(ax)s" y2="%(ay)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'ex': ex, 'ey': ey, 'ax': x, 'ay': y, 'stroke_color': colors['leg_stroke_color']}
-(tx,ty)=offset(*leg.card_pos(False,shift[u"AVOIR_TYPE_UTILISATEUR,TYPE_UTILISATEUR"]))
-lines += u"""\n<text x="%(tx)s" y="%(ty)s" fill="%(text_color)s" font-family="Courier New" font-size="12">1,N</text>""" % {'tx': tx, 'ty': ty, 'text_color': colors['card_text_color']}
-path=arrow(*leg.arrow_pos(">",ratio[u"AVOIR_TYPE_UTILISATEUR,TYPE_UTILISATEUR"]))
-lines += u"""\n<path d="%(path)s" fill="%(stroke_color)s" stroke-width="0"/>""" % {'path': path, 'stroke_color': colors['leg_stroke_color']}
-lines += u"""\n<g id="association-AVOIR_TYPE_UTILISATEUR">""" % {}
-path = upper_round_rect(-100+x,-26+y,200,26,14)
-lines += u"""\n	<path d="%(path)s" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'path': path, 'color': colors['association_cartouche_color'], 'stroke_color': colors['association_cartouche_color']}
-path = lower_round_rect(-100+x,0.0+y,200,26,14)
-lines += u"""\n	<path d="%(path)s" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'path': path, 'color': colors['association_color'], 'stroke_color': colors['association_color']}
-lines += u"""\n	<rect x="%(x)s" y="%(y)s" width="200" height="52" fill="%(color)s" rx="14" stroke="%(stroke_color)s" stroke-width="1.5"/>""" % {'x': -100+x, 'y': -26+y, 'color': colors['transparent_color'], 'stroke_color': colors['association_stroke_color']}
-lines += u"""\n	<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -100+x, 'y0': 0+y, 'x1': 100+x, 'y1': 0+y, 'stroke_color': colors['association_stroke_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">AVOIR_TYPE_UTILISATEUR</text>""" % {'x': -93+x, 'y': -7.4+y, 'text_color': colors['association_cartouche_text_color']}
-lines += u"""\n</g>""" % {}
-
 lines += u"""\n\n<!-- Association ANALYSER -->"""
 (x,y) = (cx[u"ANALYSER"],cy[u"ANALYSER"])
 (ex,ey) = (cx[u"UTILISATEUR"],cy[u"UTILISATEUR"])
@@ -309,49 +277,28 @@ lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Cou
 lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">url_analyse</text>""" % {'x': -47+x, 'y': 18.6+y, 'text_color': colors['association_attribute_text_color']}
 lines += u"""\n</g>""" % {}
 
-lines += u"""\n\n<!-- Association SONDER -->"""
-(x,y) = (cx[u"SONDER"],cy[u"SONDER"])
+lines += u"""\n\n<!-- Association AVOIR_TYPE_UTILISATEUR -->"""
+(x,y) = (cx[u"AVOIR_TYPE_UTILISATEUR"],cy[u"AVOIR_TYPE_UTILISATEUR"])
 (ex,ey) = (cx[u"UTILISATEUR"],cy[u"UTILISATEUR"])
-leg=straight_leg_factory(ex,ey,90,62,x,y,79,26,23+2*card_margin,14+2*card_margin)
+leg=straight_leg_factory(ex,ey,90,62,x,y,100,26,23+2*card_margin,14+2*card_margin)
 lines += u"""\n<line x1="%(ex)s" y1="%(ey)s" x2="%(ax)s" y2="%(ay)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'ex': ex, 'ey': ey, 'ax': x, 'ay': y, 'stroke_color': colors['leg_stroke_color']}
-(tx,ty)=offset(*leg.card_pos(False,shift[u"SONDER,UTILISATEUR"]))
-lines += u"""\n<text x="%(tx)s" y="%(ty)s" fill="%(text_color)s" font-family="Courier New" font-size="12">0,N</text>""" % {'tx': tx, 'ty': ty, 'text_color': colors['card_text_color']}
-path=arrow(*leg.arrow_pos(">",ratio[u"SONDER,UTILISATEUR"]))
+(tx,ty)=offset(*leg.card_pos(False,shift[u"AVOIR_TYPE_UTILISATEUR,UTILISATEUR"]))
+lines += u"""\n<text x="%(tx)s" y="%(ty)s" fill="%(text_color)s" font-family="Courier New" font-size="12">1,1</text>""" % {'tx': tx, 'ty': ty, 'text_color': colors['card_text_color']}
+(ex,ey) = (cx[u"TYPE_UTILISATEUR"],cy[u"TYPE_UTILISATEUR"])
+leg=straight_leg_factory(ex,ey,73,35,x,y,100,26,23+2*card_margin,14+2*card_margin)
+lines += u"""\n<line x1="%(ex)s" y1="%(ey)s" x2="%(ax)s" y2="%(ay)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'ex': ex, 'ey': ey, 'ax': x, 'ay': y, 'stroke_color': colors['leg_stroke_color']}
+(tx,ty)=offset(*leg.card_pos(False,shift[u"AVOIR_TYPE_UTILISATEUR,TYPE_UTILISATEUR"]))
+lines += u"""\n<text x="%(tx)s" y="%(ty)s" fill="%(text_color)s" font-family="Courier New" font-size="12">1,N</text>""" % {'tx': tx, 'ty': ty, 'text_color': colors['card_text_color']}
+path=arrow(*leg.arrow_pos(">",ratio[u"AVOIR_TYPE_UTILISATEUR,TYPE_UTILISATEUR"]))
 lines += u"""\n<path d="%(path)s" fill="%(stroke_color)s" stroke-width="0"/>""" % {'path': path, 'stroke_color': colors['leg_stroke_color']}
-(ex,ey) = (cx[u"SONDE"],cy[u"SONDE"])
-leg=straight_leg_factory(ex,ey,69,71,x,y,79,26,23+2*card_margin,14+2*card_margin)
-lines += u"""\n<line x1="%(ex)s" y1="%(ey)s" x2="%(ax)s" y2="%(ay)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'ex': ex, 'ey': ey, 'ax': x, 'ay': y, 'stroke_color': colors['leg_stroke_color']}
-(tx,ty)=offset(*leg.card_pos(False,shift[u"SONDER,SONDE"]))
-lines += u"""\n<text x="%(tx)s" y="%(ty)s" fill="%(text_color)s" font-family="Courier New" font-size="12">0,N</text>""" % {'tx': tx, 'ty': ty, 'text_color': colors['card_text_color']}
-(ex,ey) = (cx[u"QUESTIONNAIRE"],cy[u"QUESTIONNAIRE"])
-leg=straight_leg_factory(ex,ey,115,71,x,y,79,26,23+2*card_margin,14+2*card_margin)
-lines += u"""\n<line x1="%(ex)s" y1="%(ey)s" x2="%(ax)s" y2="%(ay)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'ex': ex, 'ey': ey, 'ax': x, 'ay': y, 'stroke_color': colors['leg_stroke_color']}
-(tx,ty)=offset(*leg.card_pos(False,shift[u"SONDER,QUESTIONNAIRE"]))
-lines += u"""\n<text x="%(tx)s" y="%(ty)s" fill="%(text_color)s" font-family="Courier New" font-size="12">0,N</text>""" % {'tx': tx, 'ty': ty, 'text_color': colors['card_text_color']}
-lines += u"""\n<g id="association-SONDER">""" % {}
-path = upper_round_rect(-79+x,-26+y,158,26,14)
+lines += u"""\n<g id="association-AVOIR_TYPE_UTILISATEUR">""" % {}
+path = upper_round_rect(-100+x,-26+y,200,26,14)
 lines += u"""\n	<path d="%(path)s" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'path': path, 'color': colors['association_cartouche_color'], 'stroke_color': colors['association_cartouche_color']}
-path = lower_round_rect(-79+x,0.0+y,158,26,14)
+path = lower_round_rect(-100+x,0.0+y,200,26,14)
 lines += u"""\n	<path d="%(path)s" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'path': path, 'color': colors['association_color'], 'stroke_color': colors['association_color']}
-lines += u"""\n	<rect x="%(x)s" y="%(y)s" width="158" height="52" fill="%(color)s" rx="14" stroke="%(stroke_color)s" stroke-width="1.5"/>""" % {'x': -79+x, 'y': -26+y, 'color': colors['transparent_color'], 'stroke_color': colors['association_stroke_color']}
-lines += u"""\n	<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -79+x, 'y0': 0+y, 'x1': 79+x, 'y1': 0+y, 'stroke_color': colors['association_stroke_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">SONDER</text>""" % {'x': -26+x, 'y': -7.4+y, 'text_color': colors['association_cartouche_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">dateheure_sondage</text>""" % {'x': -72+x, 'y': 18.6+y, 'text_color': colors['association_attribute_text_color']}
-lines += u"""\n</g>""" % {}
-
-lines += u"""\n\n<!-- Entity TYPE_UTILISATEUR -->"""
-(x,y) = (cx[u"TYPE_UTILISATEUR"],cy[u"TYPE_UTILISATEUR"])
-lines += u"""\n<g id="entity-TYPE_UTILISATEUR">""" % {}
-lines += u"""\n	<g id="frame-TYPE_UTILISATEUR">""" % {}
-lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="146" height="26" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'x': -73+x, 'y': -35+y, 'color': colors['entity_cartouche_color'], 'stroke_color': colors['entity_cartouche_color']}
-lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="146" height="44" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'x': -73+x, 'y': -9.0+y, 'color': colors['entity_color'], 'stroke_color': colors['entity_color']}
-lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="146" height="70" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="1.5"/>""" % {'x': -73+x, 'y': -35+y, 'color': colors['transparent_color'], 'stroke_color': colors['entity_stroke_color']}
-lines += u"""\n		<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -73+x, 'y0': -9+y, 'x1': 73+x, 'y1': -9+y, 'stroke_color': colors['entity_stroke_color']}
-lines += u"""\n	</g>""" % {}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">TYPE_UTILISATEUR</text>""" % {'x': -68+x, 'y': -16.4+y, 'text_color': colors['entity_cartouche_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">id_typeutil</text>""" % {'x': -68+x, 'y': 9.6+y, 'text_color': colors['entity_attribute_text_color']}
-lines += u"""\n	<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -68+x, 'y0': 12.0+y, 'x1': 26+x, 'y1': 12.0+y, 'stroke_color': colors['entity_attribute_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">libelle_typeutil</text>""" % {'x': -68+x, 'y': 27.6+y, 'text_color': colors['entity_attribute_text_color']}
+lines += u"""\n	<rect x="%(x)s" y="%(y)s" width="200" height="52" fill="%(color)s" rx="14" stroke="%(stroke_color)s" stroke-width="1.5"/>""" % {'x': -100+x, 'y': -26+y, 'color': colors['transparent_color'], 'stroke_color': colors['association_stroke_color']}
+lines += u"""\n	<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -100+x, 'y0': 0+y, 'x1': 100+x, 'y1': 0+y, 'stroke_color': colors['association_stroke_color']}
+lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">AVOIR_TYPE_UTILISATEUR</text>""" % {'x': -93+x, 'y': -7.4+y, 'text_color': colors['association_cartouche_text_color']}
 lines += u"""\n</g>""" % {}
 
 lines += u"""\n\n<!-- Entity DATE -->"""
@@ -366,6 +313,24 @@ lines += u"""\n	</g>""" % {}
 lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">DATE</text>""" % {'x': -18+x, 'y': -7.4+y, 'text_color': colors['entity_cartouche_text_color']}
 lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">aaaa-mm-jj_hh:mm:ss'ms</text>""" % {'x': -93+x, 'y': 18.6+y, 'text_color': colors['entity_attribute_text_color']}
 lines += u"""\n	<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -93+x, 'y0': 21.0+y, 'x1': 93+x, 'y1': 21.0+y, 'stroke_color': colors['entity_attribute_text_color']}
+lines += u"""\n</g>""" % {}
+
+lines += u"""\n\n<!-- Entity UTILISATEUR -->"""
+(x,y) = (cx[u"UTILISATEUR"],cy[u"UTILISATEUR"])
+lines += u"""\n<g id="entity-UTILISATEUR">""" % {}
+lines += u"""\n	<g id="frame-UTILISATEUR">""" % {}
+lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="180" height="26" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'x': -90+x, 'y': -62+y, 'color': colors['entity_cartouche_color'], 'stroke_color': colors['entity_cartouche_color']}
+lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="180" height="98" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'x': -90+x, 'y': -36.0+y, 'color': colors['entity_color'], 'stroke_color': colors['entity_color']}
+lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="180" height="124" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="1.5"/>""" % {'x': -90+x, 'y': -62+y, 'color': colors['transparent_color'], 'stroke_color': colors['entity_stroke_color']}
+lines += u"""\n		<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -90+x, 'y0': -36+y, 'x1': 90+x, 'y1': -36+y, 'stroke_color': colors['entity_stroke_color']}
+lines += u"""\n	</g>""" % {}
+lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">UTILISATEUR</text>""" % {'x': -47+x, 'y': -43.4+y, 'text_color': colors['entity_cartouche_text_color']}
+lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">id_utilisateur</text>""" % {'x': -85+x, 'y': -17.4+y, 'text_color': colors['entity_attribute_text_color']}
+lines += u"""\n	<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -85+x, 'y0': -15.0+y, 'x1': 34+x, 'y1': -15.0+y, 'stroke_color': colors['entity_attribute_text_color']}
+lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">nom_utilisateur</text>""" % {'x': -85+x, 'y': 0.6+y, 'text_color': colors['entity_attribute_text_color']}
+lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">prenom_utilisateur</text>""" % {'x': -85+x, 'y': 18.6+y, 'text_color': colors['entity_attribute_text_color']}
+lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">login_utilisateur</text>""" % {'x': -85+x, 'y': 36.6+y, 'text_color': colors['entity_attribute_text_color']}
+lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">password_utilisateur</text>""" % {'x': -85+x, 'y': 54.6+y, 'text_color': colors['entity_attribute_text_color']}
 lines += u"""\n</g>""" % {}
 
 lines += u"""\n\n<!-- Entity QUESTIONNAIRE -->"""
@@ -387,41 +352,19 @@ lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Cou
 lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">analyse_questionnaire</text>""" % {'x': -110+x, 'y': 63.6+y, 'text_color': colors['entity_attribute_text_color']}
 lines += u"""\n</g>""" % {}
 
-lines += u"""\n\n<!-- Entity SONDE -->"""
-(x,y) = (cx[u"SONDE"],cy[u"SONDE"])
-lines += u"""\n<g id="entity-SONDE">""" % {}
-lines += u"""\n	<g id="frame-SONDE">""" % {}
-lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="138" height="26" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'x': -69+x, 'y': -71+y, 'color': colors['entity_cartouche_color'], 'stroke_color': colors['entity_cartouche_color']}
-lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="138" height="116" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'x': -69+x, 'y': -45.0+y, 'color': colors['entity_color'], 'stroke_color': colors['entity_color']}
-lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="138" height="142" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="1.5"/>""" % {'x': -69+x, 'y': -71+y, 'color': colors['transparent_color'], 'stroke_color': colors['entity_stroke_color']}
-lines += u"""\n		<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -69+x, 'y0': -45+y, 'x1': 69+x, 'y1': -45+y, 'stroke_color': colors['entity_stroke_color']}
+lines += u"""\n\n<!-- Entity TYPE_UTILISATEUR -->"""
+(x,y) = (cx[u"TYPE_UTILISATEUR"],cy[u"TYPE_UTILISATEUR"])
+lines += u"""\n<g id="entity-TYPE_UTILISATEUR">""" % {}
+lines += u"""\n	<g id="frame-TYPE_UTILISATEUR">""" % {}
+lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="146" height="26" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'x': -73+x, 'y': -35+y, 'color': colors['entity_cartouche_color'], 'stroke_color': colors['entity_cartouche_color']}
+lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="146" height="44" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'x': -73+x, 'y': -9.0+y, 'color': colors['entity_color'], 'stroke_color': colors['entity_color']}
+lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="146" height="70" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="1.5"/>""" % {'x': -73+x, 'y': -35+y, 'color': colors['transparent_color'], 'stroke_color': colors['entity_stroke_color']}
+lines += u"""\n		<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -73+x, 'y0': -9+y, 'x1': 73+x, 'y1': -9+y, 'stroke_color': colors['entity_stroke_color']}
 lines += u"""\n	</g>""" % {}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">SONDE</text>""" % {'x': -22+x, 'y': -52.4+y, 'text_color': colors['entity_cartouche_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">id_sonde</text>""" % {'x': -64+x, 'y': -26.4+y, 'text_color': colors['entity_attribute_text_color']}
-lines += u"""\n	<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -64+x, 'y0': -24.0+y, 'x1': 4+x, 'y1': -24.0+y, 'stroke_color': colors['entity_attribute_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">nom_sonde</text>""" % {'x': -64+x, 'y': -8.4+y, 'text_color': colors['entity_attribute_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">prenom_sonde</text>""" % {'x': -64+x, 'y': 9.6+y, 'text_color': colors['entity_attribute_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">sexe_sonde</text>""" % {'x': -64+x, 'y': 27.6+y, 'text_color': colors['entity_attribute_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">datenaiss_sonde</text>""" % {'x': -64+x, 'y': 45.6+y, 'text_color': colors['entity_attribute_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">tel_sonde</text>""" % {'x': -64+x, 'y': 63.6+y, 'text_color': colors['entity_attribute_text_color']}
-lines += u"""\n</g>""" % {}
-
-lines += u"""\n\n<!-- Entity UTILISATEUR -->"""
-(x,y) = (cx[u"UTILISATEUR"],cy[u"UTILISATEUR"])
-lines += u"""\n<g id="entity-UTILISATEUR">""" % {}
-lines += u"""\n	<g id="frame-UTILISATEUR">""" % {}
-lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="180" height="26" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'x': -90+x, 'y': -62+y, 'color': colors['entity_cartouche_color'], 'stroke_color': colors['entity_cartouche_color']}
-lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="180" height="98" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="0"/>""" % {'x': -90+x, 'y': -36.0+y, 'color': colors['entity_color'], 'stroke_color': colors['entity_color']}
-lines += u"""\n		<rect x="%(x)s" y="%(y)s" width="180" height="124" fill="%(color)s" stroke="%(stroke_color)s" stroke-width="1.5"/>""" % {'x': -90+x, 'y': -62+y, 'color': colors['transparent_color'], 'stroke_color': colors['entity_stroke_color']}
-lines += u"""\n		<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -90+x, 'y0': -36+y, 'x1': 90+x, 'y1': -36+y, 'stroke_color': colors['entity_stroke_color']}
-lines += u"""\n	</g>""" % {}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">UTILISATEUR</text>""" % {'x': -47+x, 'y': -43.4+y, 'text_color': colors['entity_cartouche_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">id_utilisateur</text>""" % {'x': -85+x, 'y': -17.4+y, 'text_color': colors['entity_attribute_text_color']}
-lines += u"""\n	<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -85+x, 'y0': -15.0+y, 'x1': 34+x, 'y1': -15.0+y, 'stroke_color': colors['entity_attribute_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">nom_utilisateur</text>""" % {'x': -85+x, 'y': 0.6+y, 'text_color': colors['entity_attribute_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">prenom_utilisateur</text>""" % {'x': -85+x, 'y': 18.6+y, 'text_color': colors['entity_attribute_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">login_utilisateur</text>""" % {'x': -85+x, 'y': 36.6+y, 'text_color': colors['entity_attribute_text_color']}
-lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">password_utilisateur</text>""" % {'x': -85+x, 'y': 54.6+y, 'text_color': colors['entity_attribute_text_color']}
+lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">TYPE_UTILISATEUR</text>""" % {'x': -68+x, 'y': -16.4+y, 'text_color': colors['entity_cartouche_text_color']}
+lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">id_typeutil</text>""" % {'x': -68+x, 'y': 9.6+y, 'text_color': colors['entity_attribute_text_color']}
+lines += u"""\n	<line x1="%(x0)s" y1="%(y0)s" x2="%(x1)s" y2="%(y1)s" stroke="%(stroke_color)s" stroke-width="1"/>""" % {'x0': -68+x, 'y0': 12.0+y, 'x1': 26+x, 'y1': 12.0+y, 'stroke_color': colors['entity_attribute_text_color']}
+lines += u"""\n	<text x="%(x)s" y="%(y)s" fill="%(text_color)s" font-family="Courier New" font-size="14">libelle_typeutil</text>""" % {'x': -68+x, 'y': 27.6+y, 'text_color': colors['entity_attribute_text_color']}
 lines += u"""\n</g>""" % {}
 lines += u'\n</svg>'
 
