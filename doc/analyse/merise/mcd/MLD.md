@@ -67,4 +67,4 @@ ENREGISTRER_NOTE ( ***id_question***, **dateheure_note**, note )
 ENREGISTRER_REPONSE ( ***id_question***, **dateheure_reponse**, commentaire )
 
 
-ENREGISTRER_SELECTION ( ***id_question***, **dateheure_selection**, *id_choixmul* )
+ENREGISTRER_SELECTION ( ***id_question***, **dateheure_selection**, ***id_choixmul*** )

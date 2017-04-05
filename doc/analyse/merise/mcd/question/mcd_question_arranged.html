@@ -25,17 +25,24 @@
 </div>
 -->
 <div>
+  <span class='relation'>ENREGISTRER_CHOIX</span> (
+    <span class='foreign primary'>id_question</span>,
+    <span class='foreign primary'>aaaa-mm-jj_hh:mm:ss'ms</span>,
+    <span class='normal'>id_choixmul</span>
+  )
+</div>
+<!--
+<div>
+  <span class='relation'>DATE</span> (
+    <span class='primary'>aaaa-mm-jj_hh:mm:ss'ms</span>
+  )
+</div>
+-->
+<div>
   <span class='relation'>ENREGISTRER_NOTE</span> (
     <span class='foreign primary'>id_question</span>,
     <span class='foreign primary'>aaaa-mm-jj_hh:mm:ss'ms</span>,
-    <span class='normal'>note</span>
-  )
-</div>
-<div>
-  <span class='relation'>ENREGISTRER_REPONSE</span> (
-    <span class='foreign primary'>id_question</span>,
-    <span class='foreign primary'>aaaa-mm-jj_hh:mm:ss'ms</span>,
-    <span class='normal'>commentaire</span>
+    <span class='normal'>note_reponse</span>
   )
 </div>
 <div>
@@ -45,7 +52,7 @@
   )
 </div>
 <div>
-  <span class='relation'>ENREGISTRER_CHOIX</span> (
+  <span class='relation'>ENREGISTRER_SELECTION</span> (
     <span class='foreign primary'>id_question</span>,
     <span class='foreign primary'>aaaa-mm-jj_hh:mm:ss'ms</span>,
     <span class='foreign primary'>id_choixmul</span>
@@ -58,6 +65,13 @@
   )
 </div>
 -->
+<div>
+  <span class='relation'>ENREGISTRER_REPONSE</span> (
+    <span class='foreign primary'>id_question</span>,
+    <span class='foreign primary'>aaaa-mm-jj_hh:mm:ss'ms</span>,
+    <span class='normal'>commentaire_reponse</span>
+  )
+</div>
 <div>
   <span class='relation'>ENREGISTRER_CLASSEMENT</span> (
     <span class='foreign primary'>id_question</span>,
@@ -66,24 +80,10 @@
     <span class='normal'>position</span>
   )
 </div>
-<!--
-<div>
-  <span class='relation'>DATE</span> (
-    <span class='primary'>aaaa-mm-jj_hh:mm:ss'ms</span>
-  )
-</div>
--->
 <div>
   <span class='relation'>CHOIX_MULTIPLE</span> (
     <span class='primary'>id_choixmul</span>,
     <span class='normal'>intitule_choixmul</span>
-  )
-</div>
-<div>
-  <span class='relation'>ENREGISTRER_SELECTION</span> (
-    <span class='foreign primary'>id_question</span>,
-    <span class='foreign primary'>aaaa-mm-jj_hh:mm:ss'ms</span>,
-    <span class='foreign primary'>id_choixmul</span>
   )
 </div>
 <!--
