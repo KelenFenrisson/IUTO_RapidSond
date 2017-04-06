@@ -27,11 +27,23 @@
   )
 </div>
 <div>
-  <span class='relation'>SONDER</span> (
+  <span class='relation'>QUESTIONNAIRE</span> (
+    <span class='primary'>id_questionnaire</span>,
+    <span class='normal'>intitule_questionnaire</span>,
+    <span class='normal'>dateheurelim_questionnaire</span>,
+    <span class='normal'>accessible_questionnaire</span>,
+    <span class='normal'>termine_questionnaire</span>,
+    <span class='normal'>analyse_questionnaire</span>,
+    <span class='foreign'>id_utilisateur</span>,
+    <span class='foreign'>aaaa-mm-jj_hh:mm:ss'ms</span>
+  )
+</div>
+<div>
+  <span class='relation'>ANALYSER</span> (
     <span class='foreign primary'>id_utilisateur</span>,
-    <span class='foreign primary'>id_sonde</span>,
     <span class='foreign primary'>id_questionnaire</span>,
-    <span class='normal'>dateheure_sondage</span>
+    <span class='foreign primary'>aaaa-mm-jj_hh:mm:ss'ms</span>,
+    <span class='normal'>url_analyse</span>
   )
 </div>
 <!--
@@ -41,31 +53,6 @@
   )
 </div>
 -->
-<div>
-  <span class='relation'>SONDE</span> (
-    <span class='primary'>id_sonde</span>,
-    <span class='normal'>nom_sonde</span>,
-    <span class='normal'>prenom_sonde</span>,
-    <span class='normal'>sexe_sonde</span>,
-    <span class='normal'>datenaiss_sonde</span>,
-    <span class='normal'>tel_sonde</span>
-  )
-</div>
-<div>
-  <span class='relation'>QUESTIONNAIRE</span> (
-    <span class='primary'>id_questionnaire</span>,
-    <span class='normal'>intitule_questionnaire</span>,
-    <span class='normal'>dateheurelim_questionnaire</span>,
-    <span class='normal'>accessible_questionnaire</span>,
-    <span class='normal'>termine_questionnaire</span>,
-    <span class='normal'>analyse_questionnaire</span>,
-    <span class='foreign'>id_utilisateur</span>,
-    <span class='foreign'>aaaa-mm-jj_hh:mm:ss'ms</span>,
-    <span class='foreign'>id_utilisateur.1</span>,
-    <span class='foreign'>aaaa-mm-jj_hh:mm:ss'ms.1</span>,
-    <span class='normal'>url_analyse</span>
-  )
-</div>
 </div>
 </body>
 </html>

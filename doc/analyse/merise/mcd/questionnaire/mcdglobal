@@ -10,7 +10,7 @@ PANEL : id_panel, intitule_panel
 
 CSP : id_csp, libelle_csp
 
-QUESTIONNAIRE : id_questionnaire,intitule_questionnaire, dateheurelim_questionnaire, accessible_questionnaire,termine_questionnaire,analyse_questionnaire
+QUESTIONNAIRE : id_questionnaire,intitule_questionnaire, dateheurelim_questionnaire, accessible_questionnaire,termine_questionnaire
 
 QUESTION : id_question, enonce_question,urlanal_question
 
@@ -37,3 +37,5 @@ AVOIR_TYPE_QUESTION, 11 QUESTION, 1N> TYPE_QUESTION
 CONCERNER, 11 QUESTIONNAIRE, 0N> PANEL
 
 ASSOCIER, 11 CHOIX_MULTIPLE, 0N> QUESTION
+
+REMPLIR, 0N SONDE, 0N QUESTIONNAIRE : id_utilisateur, date
