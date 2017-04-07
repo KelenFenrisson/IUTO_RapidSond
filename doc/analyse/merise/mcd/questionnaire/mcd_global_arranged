@@ -1,0 +1,35 @@
+TYPE_QUESTION : id_typequest, libelle_typequest
+AVOIR_TYPE_QUESTION, 11 QUESTION, 1N> TYPE_QUESTION
+QUESTION : id_question, enonce_question,urlanal_question
+ASSOCIER, 11 CHOIX_MULTIPLE, 0N> QUESTION
+CHOIX_MULTIPLE : id_choixmul, intitule_choixmul
+:
+
+::
+CONSTITUER, 11 QUESTION, 1N> QUESTIONNAIRE
+:::
+
+:
+CONCERNER, 11 QUESTIONNAIRE, 0N> PANEL
+QUESTIONNAIRE : id_questionnaire,intitule_questionnaire, dateheurelim_questionnaire, accessible_questionnaire,termine_questionnaire
+ACHETER, 11 QUESTIONNAIRE, 1N> ENTREPRISE
+::
+
+:
+PANEL : id_panel, intitule_panel
+REMPLIR, 0N SONDE, 0N QUESTIONNAIRE : id_utilisateur, date
+ENTREPRISE  :id_entreprise, nom_entreprise, tel_entreprise, email_entreprise
+ENTREPRISE_AVOIR_ADRESSE, 11 ENTREPRISE, 11 ADRESSE
+VILLE : codeinsee_ville, nom_ville, codepostal_ville
+
+:
+APPARTENIR, 1N PANEL, 1N SONDE
+SONDE : id_sonde, nom_sonde, prenom_sonde, sexe_sonde, datenaiss_sonde, tel_sonde
+SONDE_AVOIR_ADRESSE, 11 SONDE, 11 ADRESSE
+ADRESSE : id_adresse, numero_adresse, bister_adresse, libellevoie_adresse, batiment_adresse, etage_adresse, escalier_adresse, appartement_adresse
+ETRE_DANS, 11 ADRESSE, 0N> VILLE
+
+::
+FAIRE_PARTIE, 11 SONDE, 0N> CSP
+CSP : id_csp, libelle_csp
+::
