@@ -1,0 +1,115 @@
+<html>
+<head>
+<meta charset='utf-8'>
+<style>
+  #mld .relation { font-variant: small-caps; font-weight: bold }
+  #mld .primary { text-decoration: underline }
+  #mld .foreign { font-style: oblique }
+  #mld .normal { }
+</style>
+</head>
+<body>
+<div id='mld'>
+<div>
+  <span class='relation'>TYPE_QUESTION</span> (
+    <span class='primary'>id_typequest</span>,
+    <span class='normal'>libelle_typequest</span>
+  )
+</div>
+<div>
+  <span class='relation'>QUESTION</span> (
+    <span class='primary'>id_question</span>,
+    <span class='normal'>enonce_question</span>,
+    <span class='normal'>urlanal_question</span>,
+    <span class='foreign'>id_typequest</span>,
+    <span class='foreign'>id_questionnaire</span>
+  )
+</div>
+<div>
+  <span class='relation'>CHOIX_MULTIPLE</span> (
+    <span class='primary'>id_choixmul</span>,
+    <span class='normal'>intitule_choixmul</span>,
+    <span class='foreign'>id_question</span>
+  )
+</div>
+<div>
+  <span class='relation'>QUESTIONNAIRE</span> (
+    <span class='primary'>id_questionnaire</span>,
+    <span class='normal'>intitule_questionnaire</span>,
+    <span class='normal'>dateheurelim_questionnaire</span>,
+    <span class='normal'>accessible_questionnaire</span>,
+    <span class='normal'>termine_questionnaire</span>,
+    <span class='foreign'>id_entreprise</span>,
+    <span class='foreign'>id_panel</span>
+  )
+</div>
+<div>
+  <span class='relation'>PANEL</span> (
+    <span class='primary'>id_panel</span>,
+    <span class='normal'>intitule_panel</span>
+  )
+</div>
+<div>
+  <span class='relation'>REMPLIR</span> (
+    <span class='foreign primary'>id_sonde</span>,
+    <span class='foreign primary'>id_questionnaire</span>,
+    <span class='normal'>id_utilisateur</span>,
+    <span class='normal'>date</span>
+  )
+</div>
+<div>
+  <span class='relation'>ENTREPRISE</span> (
+    <span class='primary'>id_entreprise</span>,
+    <span class='normal'>nom_entreprise</span>,
+    <span class='normal'>tel_entreprise</span>,
+    <span class='normal'>email_entreprise</span>,
+    <span class='foreign'>id_adresse</span>
+  )
+</div>
+<div>
+  <span class='relation'>VILLE</span> (
+    <span class='primary'>codeinsee_ville</span>,
+    <span class='normal'>nom_ville</span>,
+    <span class='normal'>codepostal_ville</span>
+  )
+</div>
+<div>
+  <span class='relation'>APPARTENIR</span> (
+    <span class='foreign primary'>id_panel</span>,
+    <span class='foreign primary'>id_sonde</span>
+  )
+</div>
+<div>
+  <span class='relation'>SONDE</span> (
+    <span class='primary'>id_sonde</span>,
+    <span class='normal'>nom_sonde</span>,
+    <span class='normal'>prenom_sonde</span>,
+    <span class='normal'>sexe_sonde</span>,
+    <span class='normal'>datenaiss_sonde</span>,
+    <span class='normal'>tel_sonde</span>,
+    <span class='foreign'>id_csp</span>,
+    <span class='foreign'>id_adresse</span>
+  )
+</div>
+<div>
+  <span class='relation'>ADRESSE</span> (
+    <span class='primary'>id_adresse</span>,
+    <span class='normal'>numero_adresse</span>,
+    <span class='normal'>bister_adresse</span>,
+    <span class='normal'>libellevoie_adresse</span>,
+    <span class='normal'>batiment_adresse</span>,
+    <span class='normal'>etage_adresse</span>,
+    <span class='normal'>escalier_adresse</span>,
+    <span class='normal'>appartement_adresse</span>,
+    <span class='foreign'>codeinsee_ville</span>
+  )
+</div>
+<div>
+  <span class='relation'>CSP</span> (
+    <span class='primary'>id_csp</span>,
+    <span class='normal'>libelle_csp</span>
+  )
+</div>
+</div>
+</body>
+</html>

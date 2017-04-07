@@ -1,0 +1,21 @@
+PREPARE QuestionsDuQuestionnaire FROM
+'SELECT *
+FROM QUESTION NATURAL JOIN QUESTIONNAIRE
+WHERE id_questionnaire=?';
+
+PREPARE SondesNonInterrogees FROM
+'
+SELECT id_sonde
+FROM QUESTIONNAIRE NATURAL JOIN PANEL NATURAL JOIN APPARTENIR
+WHERE id_questionnaire=? AND NOT IN (
+	SELECT *
+	FROM SONDE NATURAL JOIN REMPLIR
+	WHERE id_questionnaire=?
+';
+
+PREPARE QuestionXDuQuestionnaireY FROM
+'
+SELECT *
+FROM QUESTIONNAIRE NATURAL JOIN QUESTION
+WHERE id_questionnaire=? AND id_question=?
+';

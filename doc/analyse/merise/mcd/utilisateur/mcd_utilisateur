@@ -1,11 +1,9 @@
 UTILISATEUR: id_utilisateur, nom_utilisateur, prenom_utilisateur, login_utilisateur, password_utilisateur
 QUESTIONNAIRE : id_questionnaire,intitule_questionnaire, dateheurelim_questionnaire, accessible_questionnaire,termine_questionnaire,analyse_questionnaire
-SONDE : id_sonde, nom_sonde, prenom_sonde, sexe_sonde, datenaiss_sonde, tel_sonde
 TYPE_UTILISATEUR : id_typeutil, libelle_typeutil
 
-SONDER, 0N> UTILISATEUR, 0N SONDE, 0N QUESTIONNAIRE:dateheure_sondage
 CREER, 1N> UTILISATEUR, 01 QUESTIONNAIRE, 0N DATE
 DATE: aaaa-mm-jj_hh:mm:ss'ms
-ANALYSER, 1N> UTILISATEUR, 01 QUESTIONNAIRE, 0N DATE : url_analyse
-AVOIR_TYPE_UTILISATEUR, 11 UTILISATEUR, 1N> TYPE_UTILISATEUR
 
+ANALYSER, 1N> UTILISATEUR, 0N QUESTIONNAIRE, 0N DATE : url_analyse
+AVOIR_TYPE_UTILISATEUR, 11 UTILISATEUR, 1N> TYPE_UTILISATEUR
