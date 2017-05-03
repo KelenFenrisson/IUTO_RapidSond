@@ -28,11 +28,11 @@ Rappel des deadlines :
 
 
 #### Planning
-
+- __[Etat: ATTENTE(Mathieu)]__ Planning previsionnel(Gantt)
 
 
 #### Fiches personnelles
-
+- __[Etat: ATTENTE(Olivier)]__ Template de fiches individuelles
 
 ###### Julien Besançon
 - __[Etat: ATTENTE]__ Phase 2
@@ -81,15 +81,21 @@ Rappel des deadlines :
 - __[Etat: FAIT (Mathieu)]__ DDD : dans doc/analyse
 
 #### UML
-- __[Etat: ATTENTE (Olivier)]__ Diagramme Cas Utilisation module analyse
-- __[Etat: ATTENTE (Julien)]__ Diagramme Cas Utilisation module questionnaire
-- __[Etat: ATTENTE (Roméo)]__ Diagramme Cas Utilisation module sondage
+- __[Etat: FAIT (Olivier)]__ Diagramme Cas Utilisation module analyse
+- __[Etat: FAIT (Julien)]__ Diagramme Cas Utilisation module questionnaire
+- __[Etat: ATTENTE (Julien)]__ Description textuelle module questionnaire
+- __[Etat: FAIT (Roméo)]__ Diagramme Cas Utilisation module sondage
+- __[Etat: ATTENTE (Jérémie)]__ Description textuelle module sondage
+- __[Etat: ATTENTE (Roméo&Léo)]__ Diagramme Sequence module sondage
+- __[Etat: ATTENTE (Mathieu&Julien)]__ Diagramme Activite module sondage
+
+
 
 ## Conception
 
 #### Base de données
-- __[Etat: ATTENTE (Leo)]__ Script SQL Creation de tables
-- __[Etat: ATTENTE (Leo)]__ Script SQL Requetes
+- __[Etat: FAIT (Leo)]__ Script SQL Creation de tables
+- __[Etat: FAIT (Leo)]__ Script SQL Requetes
 
 
 ## Module Questionnaires
