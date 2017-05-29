@@ -12,7 +12,7 @@ def loaddb(filename):
 	db.create_all()
 
 	import json
-	with open(mkpath(filename)) as json_file:
+	with open(mkpath("../"+filename)) as json_file:
 		sondage = json.load(json_file)
 
 	# Import des modèles
