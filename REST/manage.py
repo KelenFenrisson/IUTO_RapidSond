@@ -1,8 +1,6 @@
 #! /usr/bin/env python3
-from app import manager, api_manager
-from models import Utilisateur, Questionnaire, Client, Sonde
-from commands import syncdb
-from views import home
+from sondages.application import *
+from sondages.models import *
 # Create API endpoints, which will be available at /api/<tablename> by
 # default. Allowed HTTP methods can be specified as well.
 api_manager.create_api(Utilisateur, methods=['GET'])
