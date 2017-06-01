@@ -6,6 +6,7 @@ from flask_restless import APIManager
 from flask_bootstrap import Bootstrap
 
 from .db_credentials import *
+from .utils import mkpath
 #########################  HELPER FUNCTIONS
 def mkpath(p):
 	return os.path.normpath(
@@ -27,8 +28,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 #app.config['SQLALCHEMY_DATABASE_URI'] = ('sqlite:///'+mkpath('../sondages/sondages.db'))
 #app.config['SQLALCHEMY_DATABASE_URI'] = ('sqlite:///'+mkpath('relative_path_from_directory_to_mydatabase.db'))
 
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://{0}:{1}@{2}/{3}'.format(MYSQL_LOGIN, MYSQL_PASSWORD, MYSQL_SERVER, MYSQL_DATABASE)
+try:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://{0}:{1}@{2}/{3}'.format(MYSQL_LOGIN, MYSQL_PASSWORD, MYSQL_SERVER, MYSQL_DATABASE)
+except Exception() as e :
+    print(e)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@server/database'
 
 
