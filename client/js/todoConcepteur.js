@@ -26,8 +26,8 @@ function accueilConcepteur(){
 */
 
 
-$.get("../tests/test1.html", function (data) {
-			 $("#main").append(data);
-	 });
+	  $('#main').load("../js/test.html");
+
+
 
 }
