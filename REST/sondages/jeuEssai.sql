@@ -1526,7 +1526,7 @@ insert into sonde values
 	(1348,'ZARTHE','Domitille',STR_TO_DATE('12/10/1971','%d/%m/%Y'),'0657352221','F37');
 
 -- ajouter des années aux personnes pour garder une cohérence avec les tranches d'age
-update SONDE set datenaissond=datenaissond + INTERVAL '1' YEAR;
+update sonde set date_naissance=date_naissance + INTERVAL '1' YEAR;
 
 -- les élément des panels
 insert into constituer values
