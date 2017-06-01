@@ -3,6 +3,7 @@ function accueilConcepteur(){
 	// $('#test').append('coucou  ');
 
 	//création du bouton créer un nouveau sondage
+	/*
 	$('#main').append('<div id="boutonNewSondage" class="col-md-12" />');
 	$('#boutonNewSondage').append('<input type="button" class="col-md-offset-5 col-md-2 btn btn-info navbar-btn" value="Créer un nouveau sondage"/> ');
 	$('#div2').append('test div 2');
@@ -22,6 +23,11 @@ function accueilConcepteur(){
 
 	$('#formFiltre').append('<label id="labelConcepteur" for="listeConcepteur" class="col-md-1 ">Concepteur <label /> ');
 	$('#formFiltre').append('<select id="listeConcepteur" name="listeConcepteur" class="col-md-2 " /> ');
+*/
 
+
+$.get("../tests/test1.html", function (data) {
+			 $("#main").append(data);
+	 });
 
 }
