@@ -5,17 +5,7 @@
 - Intégrateur global : Mathieu Pubert
 - Documentaliste Projet : A définir
 
-- Module Questionnaire :
-  - Intégrateur Module :
-  - Documentaliste Module :
-
-
-- Module Analyse :
-  - Intégrateur Module :
-  - Documentaliste Module :
-
-
-- Module Sondage :
+- Module Client :
   - Intégrateur Module :
   - Documentaliste Module :
 
