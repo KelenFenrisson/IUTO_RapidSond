@@ -11,6 +11,7 @@ function accueilConcepteur(){
 	//création de la div de filtrage
 
 
+<<<<<<< HEAD
 
 	$('#main').append('<div id="filreSondage" class="col-md-12 " />');
 	$('#filreSondage').append('<form id="formFiltre" class="col-md-12 form-horizontal" method="GET" /></form>');
@@ -29,7 +30,6 @@ function accueilConcepteur(){
 
 
 		$("#main").append($("<div>").load("formulaireFiltre.html"));
-
 
 
 }

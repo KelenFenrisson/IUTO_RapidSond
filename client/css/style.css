@@ -1,6 +1,9 @@
 .top-10{
 	margin-top: 10px;
 }
+.bot-10{
+	margin-bottom: 10px;
+}
 .border{
 	border-style: double;
 }
