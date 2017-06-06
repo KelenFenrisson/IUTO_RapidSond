@@ -29,6 +29,7 @@ class Panel(db.Model):
     __tablename__="panel"
     id=db.Column(db.Integer, primary_key=True)
     intitule=db.Column(db.String(30))
+    # sondes=db.relationship('Constituer', backref='panels', lazy='dynamic', uselist=True)
 
 class Categorie(db.Model):
     __tablename__="categorie"
@@ -57,6 +58,7 @@ class Questionnaire(db.Model):
     id_client= db.Column(db.Integer, db.ForeignKey(Client.id, name="questionnaire_fk1_client"))
     id_concepteur= db.Column(db.Integer, db.ForeignKey(Utilisateur.id, name="questionnaire_fk2_utilisateur"))
     id_panel= db.Column(db.Integer, db.ForeignKey(Panel.id, name="questionnaire_fk3_panel"))
+    # client=db.relationship('Client', backref='questionnaires', lazy='dynamic', uselist=True)
 
 class TypeQuestion(db.Model):
     __tablename__="typequestion"
@@ -66,11 +68,11 @@ class TypeQuestion(db.Model):
 
 class Question(db.Model):
     __tablename__="question"
-    id=db.Column(db.Integer, primary_key=True)
+    id=db.Column(db.Integer, db.ForeignKey(Questionnaire.id, name="question_fk1_questionnaire") , primary_key=True)
     numero= db.Column(db.Integer, index=True, primary_key=True)
     intitule=db.Column(db.String(2000))
     max_val=db.Column(db.Integer)
-    id_type=db.Column(db.String(1), db.ForeignKey(TypeQuestion.id, name="question_fk1_typequestion"))
+    id_type=db.Column(db.String(1), db.ForeignKey(TypeQuestion.id, name="question_fk2_typequestion"))
 
 class ValeurPossible(db.Model):
     __tablename__="valeurpossible"
@@ -87,6 +89,8 @@ class Sonde(db.Model):
     date_naissance=db.Column(db.String(10))
     telephone=db.Column(db.String(10))
     id_caracteristique=db.Column(db.String(3), db.ForeignKey(Caracteristique.id, name="sonde_fk1_caracteristique"))
+    # panels=db.relationship('Constituer', backref='sondes', lazy='dynamic', uselist=True)
+
 
 class Constituer(db.Model):
     __tablename__="constituer"
