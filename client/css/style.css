@@ -1,6 +1,11 @@
 .top-10{
-	margin-top: 10px;
+	margin: 10px 10px 10px 10px;
 }
-.border{
-	border-style: double;
+
+.right-5{
+	margin: 5px 5px 5px 5px;
+}
+
+fieldset{
+	border:2px solid;
 }
