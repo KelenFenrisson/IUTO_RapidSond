@@ -7,11 +7,12 @@
 .border{
 	border-style: double;
   	border-radius: 10px;
-	
-.right-5{
-	margin: 5px 5px 5px 5px;
 }
 
 fieldset{
 	border:2px solid;
+}
+
+.right-5{
+	margin: 5px 5px 5px 5px;
 }

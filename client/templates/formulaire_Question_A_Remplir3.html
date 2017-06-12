@@ -16,10 +16,11 @@
             <fieldset>
               <legend id="legendeQuestion">Question 1: Bla</legend>
               <div class="row top-10 center-block">
-                <label id="question" class="col-md-4">Quelle est la réponse à la question ?</label>
+				  <label id="question" for="question" class="col-md-1">Question:</label>
+                  <input type="text" id="question" name="question" class="col-md-3" >
                 <select name="ChoixTypeQ" id="choixTypeQuestion" class="col-md-offset-4 col-md-2">
-          					<option value="choixM">Choix multiple</option>
-                    <option value="yesOrNo">Yes or No</option>
+          			<option value="choixM">Choix multiple</option>
+                    <option value="yesOrNo" selected="selected">Yes or No</option>
                     <option value="reponseLibre">Réponse Libre</option>
           			</select>
               </div>
@@ -46,10 +47,6 @@
                   <input type="reset" value="Annuler" id="boutonAnnuler" class="col-md-2 col-sm-push-3 right-5"/>
 
               </div>
-
-              <div class="row top-10 center-block">
-              <input type="submit" value="Ajouter une réponse" id="boutonAjoutReponse"/>
-            </div>
 
             </fieldset>
           </form>
