@@ -1,12 +1,14 @@
 function accueilConcepteur(){
 
-	// $('#test').append('coucou  ');
+		$("#main").empty();
+		$("#main").append('<input type="submit" value="Créer un nouveau sondage" class="btn btn-primary btn-lg active top-10 col-md-offset-3 col-md-6 bot-10">');
+		$("#main").append($("<div>").load("formulaire_Recherche_Sondage.html"));
+		// CECI EST POUR LEXEMPLE, à EDITER PAR LA SUITE AVEC UNE RECHERCHE DANS LA BASE
+		for(var i =0;i<4;i++)
+		$("#main").append($("<div>").load("formulaire_Info_Sondage.html"));
 
-	//création du bouton créer un nouveau sondage
-	$('#main').append('<div id="boutonNewSondage" class="col-md-12" />');
-	$('#boutonNewSondage').append('<input type="button" class="col-md-offset-5 col-md-2 btn btn-info navbar-btn" value="Créer un nouveau sondage"/> ');
-	$('#div2').append('test div 2');
 
+<<<<<<< HEAD
 	//création de la div de filtrage
 
 	$('#main').append('<div id="filreSondage" class="col-md-12 " />');
@@ -32,4 +34,6 @@ function creationFormulaire(){
 		$("#main").show()
 	}
 >>>>>>> jeremy/master
+=======
+>>>>>>> leo/master
 }
