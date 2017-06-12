@@ -16,17 +16,17 @@
             <fieldset>
               <legend id="legendeQuestion">Question 1: Bla</legend>
 
-              <div class="row top-10 center-block">
+              <div class="row all-10 center-block">
 				<label id="question" for="question" class="col-md-1">Question:</label>
                 <input type="text" id="question" name="question" class="col-md-3" >
-                <select name="ChoixTypeQ" id="choixTypeQuestion" class="col-md-offset-4 col-md-2">
+                <select name="ChoixTypeQ" id="choixTypeQuestion" class="col-md-offset-4 col-md-2" onchange="choisirTypeQuestion(this)">
           			<option value="choixM">Choix multiple</option>
                     <option value="yesOrNo">Yes or No</option>
                     <option value="reponseLibre" selected="selected">Réponse Libre</option>
           			</select>
               </div>
 
-			  <div class="row top-10 center-block">
+			  <div class="row all-10 center-block">
 
                 <div class="col-md-4">
                 </div>
