@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-<title>Rapid'Sond</title>
+<!-- <title>Rapid'Sond</title>
 <head>
 
     <meta charset="UTF-8"/>
@@ -10,10 +10,7 @@
 	<script src="../js/todoSondeur.js"></script>
 	<link rel="stylesheet" href="../css/style.css"/>
 
-</head>
-		<title> Formulaire Filtre </title>
-	</head>
-	<body>
+</head> -->
 
 	<div id="formulaire_Recherche_Sondage" class="col-md-offset-1 col-md-10">
 
@@ -22,7 +19,11 @@
 			<div class="row">
 
 				<label id="labelEntreprise" for="listeEntreprise" class="col-md-2 top-10 text-center">Entreprise </label>
-				<div class="col-md-2"><select id="listeEntreprise" name="listeEntreprise" class="col-md-10 top-10 text-center" /></select></div>
+				<div class="col-md-2">
+					<select id="listeEntreprise" name="listeEntreprise" class="col-md-10 top-10 text-center">
+						<option value="1" selected="selected">test</option>
+					</select>
+				</div>
 
 				<label id="labelStatut" for="listeStatut" class="col-md-2 top-10 text-center">Statut </label>
 				<div class="col-md-2"><select id="listeStatut" name="listeStatut" class="col-md-10 top-10 text-center" /></select></div>
@@ -55,6 +56,9 @@
 		</form>
 
 	</div>
+<script>
+console.log("test1111111");
+console.log($("#listeEntreprise option:selected").text());
+</script>
 
-	</body>
 </html>
