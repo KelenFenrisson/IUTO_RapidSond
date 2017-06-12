@@ -19,8 +19,8 @@
 				  <label id="question" for="question" class="col-md-1">Question:</label>
                   <input type="text" id="question" name="question" class="col-md-3" >
                 <select name="ChoixTypeQ" id="choixTypeQuestion" class="col-md-offset-4 col-md-2" onchange="choisirTypeQuestion(this)">
-          			<option value="choixM" selected="on">Choix multiple</option>
-                    <option value="yesOrNo">Yes or No</option>
+          			<option value="choixM">Choix multiple</option>
+                    <option value="yesOrNo" selected="selected">Yes or No</option>
                     <option value="reponseLibre">Réponse Libre</option>
           			</select>
               </div>
@@ -30,21 +30,15 @@
 
                 <div class="col-md-4">
                   <div class="row">
-                    <label id="r1">
-                      <input type="checkbox" id="reponse1" value="reponse1" checked />
-                      Réponse 1
+                    <label id="yes">
+                      <input type="radio" name="yes" value="yes" id="yes">
+                      YES
                     </label>
                   </div>
                   <div class="row">
-                    <label id="r2">
-                      <input type="checkbox" id="reponse2" value="reponse2"/>
-                      Réponse 2
-                    </label>
-                  </div>
-                  <div class="row">
-                    <label id="r3">
-                      <input type="checkbox" id="reponse3" value="reponse3"/>
-                      Réponse 3
+                    <label id="no">
+                      <input type="radio" name="no" value="no" id="no">
+                      NO
                     </label>
                   </div>
                 </div>
@@ -53,10 +47,6 @@
                   <input type="reset" value="Annuler" id="boutonAnnuler" class="col-md-2 col-sm-push-3 right-5"/>
 
               </div>
-
-              <div class="row all-10 center-block">
-              <input type="submit" value="Ajouter une réponse" id="boutonAjoutReponse"/>
-            </div>
 
             </fieldset>
           </form>
