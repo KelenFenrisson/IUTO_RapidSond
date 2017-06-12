@@ -1,5 +1,5 @@
 ################################### DESCRIPTION ET PARAMETRAGE DES API
-from sondages.application import api_manager
+from sondages.application import api_manager, app
 from sondages.models import *
 
 
@@ -19,7 +19,7 @@ def post_get_single_Utilisateur(**kw):
 def post_get_many_Utilisateur(**kw):
     print("PRE_GET_MANY_UTILISATEUR")
 
-api_manager.create_api(Utilisateur, methods=['GET'], preprocessors={'GET_SINGLE':[pre_get_single_Utilisateur],
+api_manager.create_api(Utilisateur, methods=['GET', 'POST'], preprocessors={'GET_SINGLE':[pre_get_single_Utilisateur],
                                                                     'GET_MANY':[pre_get_many_Utilisateur]})
 
 
@@ -36,6 +36,8 @@ def post_get_single_Questionnaire(instance_id=None, result=None, **kw):
     result['concepteur']= api_manager.url_for(Utilisateur, instid=result['id_concepteur'])
     result['panel']= api_manager.url_for(Panel, instid=result['id_panel'])
 
+
+
 def post_get_many_Questionnaire(result=None, **kw):
     print("POST_GET_MANY_QUESTIONNAIRE")
     for item in result['objects']:
@@ -44,7 +46,7 @@ def post_get_many_Questionnaire(result=None, **kw):
         item['panel']= api_manager.url_for(Panel, instid=item['id_panel'])
 
 api_manager.create_api(Questionnaire,
-                       methods=['GET'],
+                       methods=['GET', 'POST', 'PATCH'],
                        preprocessors={'GET_SINGLE':[pre_get_single_Questionnaire],
                                       'GET_MANY':[pre_get_many_Questionnaire]},
                        postprocessors={'GET_SINGLE': [post_get_single_Questionnaire],
@@ -67,7 +69,7 @@ def post_get_single_Client(**kw):
 def post_get_many_Client(**kw):
     print("POST_GET_MANY_CLIENT")
 
-api_manager.create_api(Client, methods=['GET'], preprocessors={'GET_SINGLE':[pre_get_single_Client],
+api_manager.create_api(Client, methods=['GET', 'POST'], preprocessors={'GET_SINGLE':[pre_get_single_Client],
                                                                 'GET_MANY':[pre_get_many_Client]})
 
 ###### API SONDE
@@ -83,7 +85,7 @@ def post_get_single_Sonde(**kw):
 def post_get_many_Sonde(**kw):
     print("POST_GET_MANY_SONDE")
 
-api_manager.create_api(Sonde, methods=['GET'], preprocessors={'GET_SINGLE':[pre_get_single_Sonde],
+api_manager.create_api(Sonde, methods=['GET', 'PATCH'], preprocessors={'GET_SINGLE':[pre_get_single_Sonde],
                                                               'GET_MANY':[pre_get_many_Sonde]})
 
 
@@ -97,16 +99,13 @@ def pre_get_many_Question(**kw):
 
 def post_get_single_Question(instance_id=None, result=None, **kw):
     print("POST_GET_SINGLE_QUESTION")
-    result['valeurs_possibles'] = api_manager.url_for(ValeurPossible, instid=result['id'])
 
 def post_get_many_Question(instance_id=None, result=None, **kw):
     print("POST_GET_MANY_QUESTION")
-    for item in result['objects']:
-        item['valeurs_possibles'] = api_manager.url_for(ValeurPossible, instid=item['id'])
 
 
 api_manager.create_api(Question,
-                       methods=['GET'],
+                       methods=['GET', 'POST', 'PATCH', 'DELETE'],
                        preprocessors={'GET_SINGLE':[pre_get_single_Question],
                                       'GET_MANY':[pre_get_many_Question]},
                        postprocessors={'GET_SINGLE':[post_get_single_Question],
@@ -129,3 +128,5 @@ def post_get_many_Panel(**kw):
 
 api_manager.create_api(Panel, methods=['GET'], preprocessors={'GET_SINGLE':[pre_get_single_Panel],
                                                                  'GET_MANY':[pre_get_many_Panel]})
+
+api_manager.create_api(ValeurPossible, methods=['GET'])

@@ -73,13 +73,19 @@ class Question(db.Model):
     intitule=db.Column(db.String(2000))
     max_val=db.Column(db.Integer)
     id_type=db.Column(db.String(1), db.ForeignKey(TypeQuestion.id, name="question_fk2_typequestion"))
+    questionnaire = db.relationship('Questionnaire', backref='questions', lazy='dynamic', uselist=True)
+
 
 class ValeurPossible(db.Model):
     __tablename__="valeurpossible"
-    question_id = db.Column(db.Integer, db.ForeignKey(Question.id, name="valeurpossible_fk1_question"),primary_key=True)
-    question_num = db.Column(db.Integer, db.ForeignKey(Question.numero, name="valeurpossible_fk2_question") ,primary_key=True)
+    question_id = db.Column(db.Integer, primary_key=True)
+    question_num = db.Column(db.Integer, primary_key=True)
     id=db.Column(db.Integer, primary_key=True)
     valeur=db.Column(db.Text)
+    __table_args__ = (db.ForeignKeyConstraint([question_id, question_num],[Question.id, Question.numero]),{})
+    question = db.relationship('Question', backref='reponses', lazy='dynamic', uselist=True)
+
+
 
 class Sonde(db.Model):
     __tablename__="sonde"
