@@ -10,8 +10,16 @@
 	margin-top: 100px;
 }
 
+.bot-100{
+	margin-bottom: 100px;
+}
+
+
 .bot-10{
 	margin-bottom: 10px;
+}
+.bot-30{
+	margin-bottom: 30px;
 }
 
 .top-50{
@@ -30,9 +38,9 @@ fieldset{
 	margin: 5px 5px 5px 5px;
 }
 
-form{
+/*form{
  margin-bottom:5%;
-}
+}*/
 
 
 .top-10-pour{

@@ -18,19 +18,8 @@ function connect(adresse, fonction){
 }
 
 function remplirlisteEntreprise(){
-
-
   console.log("OCUOCU");
-
-
-
     $('#listeEntreprise').append("<option value ='1'>couille</option>");
-
-
-
-
-
-
 }
 
 function appui(){

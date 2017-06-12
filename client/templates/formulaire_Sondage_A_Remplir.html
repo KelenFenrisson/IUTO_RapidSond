@@ -1,40 +1,33 @@
-<!doctype html>
-<html>
-  <title>Rapid'Sond</title>
-  <head>
+<div>
+        <div id="sondageARemplir" class="col-md-offset-1 col-md-10 border top-10 bot-10">
 
-      <meta charset="UTF-8"/>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></head>
-      <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-      <script src="../js/todoConcepteur.js"></script>
-      <script src="../js/todoSondeur.js"></script>
-	  <link rel="stylesheet" href="../css/style.css"/>
+          <h2 class="col-md-12 text-center top-10">Formulaire n </h2>
 
-  </head>
-        <div id="main" class="col-md-10">
-          <h2 class="col-md-12 text-center ">Formulaire n </h2>
-          <div class="col-md-8">
-            <label class="col-md-5">Cree le :</label>
-            <form id="listeClient" class="col-md-3">Client :
-                  <select name="choixClient" size="1">
-                    <option>
-                  </select>
+          <div class="row">
+            <form class="form-horizontal" role="form" method="POST" action="">
+
+
+              <div class="row col-md-10 top-10">
+                <label class="col-md-offset-1 col-md-1">Cree le :</label>
+                <select class="col-md-2" id="dateCreation"  size="1"></select>
+                <label class="col-md-offset-1 col-md-1">Client :</label>
+                <select class="col-md-2" id="listeClient"  size="1"></select>
+              </div>
+
+              <div class="row col-md-10 top-10 bot-10">
+                <label class="col-md-offset-1 col-md-1">Panel :</label>
+                <select class="col-md-2" id="choixPanel"  size="1"></select>
+                <label class="col-md-offset-1 col-md-1">Par :</label>
+                <select class="col-md-2" id="choixConcepteur"  size="1"></select>
+                <label class="col-md-4 text-center"><input type="checkbox">Autoriser les sondages</label>
+              </div>
+
+              <div class="row col-md-2 ">
+                <button id="ButtonEnregistreF">Enregistrer Formulaire</button>
+              </div>
+
             </form>
           </div>
-          <div class="col-md-2 col-md-offset-2">
-            <button id="ButtonEnregistreF">Enregistrer Formulaire</button>
-          </div>
-          <div class="col-md-12">
-            <form id="listePanel" class="col-md-3">Panel :
-                  <select name="choixPanel" size="1">
-                    <option>
-                  </select>
-            </form>
-            <form id="listePar" class="col-md-4">Par :
-                  <select name="choixPar" size="1">
-                    <option>
-                  </select>
-            </form>
-            <label class="col-md-4"><input type="checkbox">Autoriser les sondages</label>
+
         </div>
-</html>
+</div>

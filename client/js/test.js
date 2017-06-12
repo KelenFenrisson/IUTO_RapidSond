@@ -15,7 +15,7 @@ $(function() {
          console.log(JSON.stringify(response));
      },
      error: function (xhr, status) {
-         console.log("Mon cul");
+         console.log("Pas de données");
      }
   });
 
