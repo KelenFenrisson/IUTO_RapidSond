@@ -1,6 +1,65 @@
 .top-10{
-	margin-top: 10px;
+	margin-top: 10px ;
+}
+
+.all-10{
+		margin:10px 10px 10px 10px;
+}
+
+.top-100{
+	margin-top: 100px;
+}
+
+.bot-10{
+	margin-bottom: 10px;
+}
+
+.top-50{
+	margin-top: 50px;
 }
 .border{
 	border-style: double;
+  	border-radius: 10px;
+}
+
+fieldset{
+	border:2px solid;
+}
+
+.right-5{
+	margin: 5px 5px 5px 5px;
+}
+
+form{
+ margin-bottom:5%;
+}
+
+
+.top-10-pour{
+	margin-top:10%;
+}
+
+.top-20-pour{
+	margin-top:20%;
+}
+
+.btn-circle {
+ width: 30px;
+ height: 30px;
+ text-align: center;
+ padding: 6px 0;
+ font-size: 12px;
+ line-height: 1.428571429;
+ border-radius: 15px;
+}
+
+
+footer {
+    position:fixed;
+    bottom: 0;
+}
+
+.haut
+{
+	position:fixed;
 }
