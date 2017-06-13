@@ -1,4 +1,3 @@
-
 -- les roles
 insert into roleutilisateur VALUES
 	(1,'Concepteur'),
@@ -58,7 +57,7 @@ insert into questionnaire values
 insert into typequestion values
 ('u','Choix unique','Entier'),
 ('m','Choix multiple','Caractères'),
-('c','Classement','Caractères'), 
+('c','Classement','Caractères'),
 ('n','Note','Entier'),
 ('l','Réponse libre', 'Caractères');
 
@@ -174,7 +173,7 @@ insert into caracteristique values
 	('H42','H','4','2');
 
 
--- liste des sondes ATTENTION UNE COMMANDE MODIFIE LES DATES DE NAISSANCE 
+-- liste des sondes ATTENTION UNE COMMANDE MODIFIE LES DATES DE NAISSANCE
 insert into sonde values
 	(1,'BANAZIAI','Mathieu',STR_TO_DATE('23/1/1980','%d/%m/%Y'),'0415700849','H26'),
 	(2,'DONGEPLI','Charlotte',STR_TO_DATE('22/4/1982','%d/%m/%Y'),'0968323713','F26'),
@@ -1526,7 +1525,7 @@ insert into sonde values
 	(1348,'ZARTHE','Domitille',STR_TO_DATE('12/10/1971','%d/%m/%Y'),'0657352221','F37');
 
 -- ajouter des années aux personnes pour garder une cohérence avec les tranches d'age
-update SONDE set datenaissond=datenaissond + INTERVAL '1' YEAR;
+update sonde set date_naissance=date_naissance + INTERVAL '1' YEAR;
 
 -- les élément des panels
 insert into constituer values
