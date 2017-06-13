@@ -40,14 +40,15 @@ function accueilConcepteur(){
 }
 
 function creerFormulaire(){
-		$("#main").empty();
-    $("#main").append($(formulaire_Sondage_A_Remplir).html());
+	$("#main").empty();
+  $("#main").append($(formulaire_Sondage_A_Remplir).html());
 	$("#main").append($(formulaire_Question_A_Remplir).html());
-    $("#main").append($(formulaire_Question_A_Remplir3).html());
-    $("#main").append($(formulaire_Question_A_Remplir2).html());
+  $("#main").append($(formulaire_Question_A_Remplir3).html());
+  $("#main").append($(formulaire_Question_A_Remplir2).html());
 	$("#typeQuestionnaire").empty();
-    $("#typeQuestionnaire2").empty();
-    $("#typeQuestionnaire3").empty();
+  $("#typeQuestionnaire2").empty();
+  $("#typeQuestionnaire3").empty();
+  remplissageFormSonde();
 }
 
 function choisirTypeQuestion(type){
