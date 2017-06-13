@@ -1,54 +1,37 @@
-<!doctype html>
-<html>
-  <title>Rapid'Sond</title>
-  <head>
-
-      <meta charset="UTF-8"/>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></head>
-      <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-      <script src="../js/todoConcepteur.js"></script>
-      <script src="../js/todoSondeur.js"></script>
-	  <link rel="stylesheet" href="../css/style.css"/>
-
-  </head>
-        <div id="main" class="col-md-12">
-          <form name="questions">
-            <fieldset>
-              <legend id="legendeQuestion">Question 1: Bla</legend>
-              <div class="row all-10 center-block">
-				  <label id="question" for="question" class="col-md-1">Question:</label>
-                  <input type="text" id="question" name="question" class="col-md-3" >
-                <select name="ChoixTypeQ" id="choixTypeQuestion" class="col-md-offset-4 col-md-2" onchange="choisirTypeQuestion(this)">
-          			<option value="choixM">Choix multiple</option>
-                    <option value="yesOrNo" selected="selected">Yes or No</option>
-                    <option value="reponseLibre">Réponse Libre</option>
-          			</select>
-              </div>
-
-
-              <div class="row all-10 center-block">
-
-                <div class="col-md-4">
-                  <div class="row">
-                    <label id="yes">
-                      <input type="radio" name="yes" value="yes" id="yes">
-                      YES
-                    </label>
-                  </div>
-                  <div class="row">
-                    <label id="no">
-                      <input type="radio" name="no" value="no" id="no">
-                      NO
-                    </label>
-                  </div>
-                </div>
-
-                  <input type="submit" value="Valider" id="boutonValider" class="col-md-offset-1 col-md-2 col-sm-push-3 right-5"/>
-                  <input type="reset" value="Annuler" id="boutonAnnuler" class="col-md-2 col-sm-push-3 right-5"/>
-
-              </div>
-
-            </fieldset>
-          </form>
+<div>
+  <div id="typeQuestionnaire3" class="col-md-offset-1 col-md-10">
+    <form name="questions">
+      <fieldset>
+        <legend id="legendeQuestion">Question 1 :</legend>
+        <div class="row all-10 center-block">
+          <label id="questionLabel" for="question" class="col-md-1">Question:</label>
+          <input type="text" id="question" name="question" placeholder="Ecrire ici la question" class="col-md-3"/>
+          <select name="ChoixTypeQ" id="choixTypeQuestion" class="col-md-offset-4 col-md-2" onchange="choisirTypeQuestion(this)">
+            <option value="choixM">Choix multiple</option>
+            <option value="yesOrNo" selected="selected">Yes or No</option>
+            <option value="reponseLibre">Réponse Libre</option>
+          </select>
         </div>
-</html>
+
+        <div class="row all-10 center-block">
+
+          <div class="col-md-4">
+              <label id="yes">
+                <input type="radio" name="yes" value="yes" id="yes"/>
+                YES
+              </label>
+              <label class="col-md-offset-1" id="no">
+                <input type="radio" name="no" value="no" id="no"/>
+                NO
+              </label>
+          </div>
+
+          <input type="button" value="Valider" id="boutonValider" class="col-md-offset-1 col-md-2 col-sm-push-3 right-5"/>
+          <input type="button" value="Annuler" id="boutonAnnuler" class="col-md-2 col-sm-push-3 right-5"/>
+
+        </div>
+
+      </fieldset>
+    </form>
+  </div>
+</div>

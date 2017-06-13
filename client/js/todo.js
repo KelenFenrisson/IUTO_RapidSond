@@ -17,7 +17,7 @@ $(function() {
                     $('#taches ul')
                     .append($('<li>')
                     .append($('<a>')
-                        .text(tasks[i].title)
+                        .text(tasks[i].title
                         ).on("click", tasks[i], details)
                     );
                         }

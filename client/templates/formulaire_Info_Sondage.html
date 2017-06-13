@@ -1,17 +1,7 @@
-<!doctype html>
-<html>
-  <title>Rapid'Sond</title>
-  <head>
 
-      <meta charset="UTF-8"/>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></head>
-      <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-      <script src="../js/todoConcepteur.js"></script>
-      <script src="../js/todoSondeur.js"></script>
-	  <link rel="stylesheet" href="../css/style.css"/>
 
-  </head>
-        <div id="formulaire_Info_Sondage" class="col-md-offset-1 col-md-10 border bot-10">
+<div>
+  <div id="formulaire_Info_Sondage" class="col-md-offset-1 col-md-10 border bot-10">
 				<div class="row">
 					<h1 id="titreSondage" class="col-md-offset-3 col-md-6 text-center"> Sondage N° 112184321</h1>
 				</div>
@@ -24,30 +14,29 @@
 						<label id="labelEntreprise" for="listeEntreprise" class="col-md-offset-1 col-md-1 text-center">Entreprise:</label>
 						<label id="listeEntreprise" for="listeEntreprise" class="col-md-1 text-center">Butoni </label>
 
-						<label id="labelEntreprise" for="listeEntreprise" class="col-md-1 text-center">Statut :</label>
-						<label id="listeEntreprise" for="listeEntreprise" class="col-md-1 text-center">Conception </label>
+						<label id="labelStatut" for="listeStatut" class="col-md-1 text-center">Statut :</label>
+						<label id="listeStatut" for="listeStatut" class="col-md-1 text-center">Conception </label>
 
-						<label id="labelEntreprise" for="listeEntreprise" class="col-md-1 text-center">Par :</label>
-						<label id="listeEntreprise" for="listeEntreprise" class="col-md-1 text-center">Jean-claude </label>
+						<label id="labelUser" for="listeUser" class="col-md-1 text-center">Par :</label>
+						<label id="listeUser" for="listeUser" class="col-md-1 text-center">Jean-claude </label>
 
-						<button class="btn btn-primary col-md-offset-2 col-md-2">Edit</button>
+						<button type="button" class="btn btn-primary col-md-offset-2 col-md-2" onclick="modifSondageDonnees(1)">Edit</button>
 					</div>
 
 					<div class="row top-10">
 
-						<label id="labelEntreprise" for="listeEntreprise" class="col-md-offset-1 col-md-1 text-center">Panel :</label>
-						<label id="listeEntreprise" for="listeEntreprise" class="col-md-1 text-center">Les roux </label>
+						<label id="labelPanel" for="listePanel" class="col-md-offset-1 col-md-1 text-center">Panel :</label>
+						<label id="listePanel" for="listePanel" class="col-md-1 text-center">Les roux </label>
 
-						<label id="labelEntreprise" for="listeEntreprise" class="col-md-1 text-center">Crée le :</label>
-						<label id="listeEntreprise" for="listeEntreprise" class="col-md-1 text-center">20/06/2017 </label>
+						<label id="labelDate" for="listeDate" class="col-md-1 text-center">Crée le :</label>
+						<label id="listeDate" for="listeDate" class="col-md-1 text-center">20/06/2017 </label>
 
-						<button class="btn btn-danger col-md-offset-4 col-md-2 bot-10">Suppr</button>
+						<button type="button" class="btn btn-danger col-md-offset-4 col-md-2 bot-10">Suppr</button>
 
 					</div>
 
 
 					</form>
 				</div>
-
-        </div>
-</html>
+      </div>
+</div>
