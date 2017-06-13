@@ -39,6 +39,12 @@ function remplissageFormQuest(){
   connect("/api/panel",ajoutePanel);
 }
 
+function remplissageFormQuestRecherche(){
+  connect("/api/client",ajouteClientRecherche);
+  connect("/api/utilisateur",ajouteUtilisateurRecherche);
+  connect("/api/panel",ajoutePanelRecherche);
+}
+
 // function enregistreFormulaire(){
 //   connect("")
 // }
