@@ -84,3 +84,10 @@ function ajoutReponse(){
 function supprReponse(){
   $('#row').last().remove();
 }
+
+//Debut fonction Jérémie
+//Fin fonction Jérémie
+//Debut fonction Olivier
+//Fin fonction Olivier
+//Debut fonction Julien
+//Fin fonction Julien
