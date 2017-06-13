@@ -21,6 +21,33 @@ function connect(adresse,fonc){
 
 }
 
+
+function Sonde(nom){
+    this.nom=nom;
+}
+
+
+function modif(){
+    $.ajax({
+        url:"http://192.168.13.162:5000/api/sonde/1",
+        type:'PUT',
+        contentType: "application/json",
+        data:JSON.stringify({"id":1,"nom":"picouille"}),
+        xhrFields: {
+            withCredentials: true
+        },
+        // This is the important part
+        crossDomain: true,
+        dataType: 'jsonp',
+        success: function (msg) {
+            alert('Update Success');
+        },
+        error: function (err){
+            alert('Update Error');
+        }
+        });
+
+}
 // Début fonction Léo
 function remplirInfosFormulaireQuestionnaire(idFormulaire){
   connect("/api/questionnaire/"+idFormulaire,ajoutJSONformulaire);
@@ -31,8 +58,24 @@ function setNomPanel(lienPanel){
 function setNomClient(lienClient){
   connect(lienClient,setNomClientJSON);
 }
+function setNomConcepteur(lienConcept){
+  connect(lienConcept,setNomConcepteurJSON);
+}
 function remplirInfosFormulaireSonde(idSonde){
   connect("/api/sonde/"+idSonde,ajoutJSONsonde);
+}
+function remplirInfoQuestionnaireDetails(idFormulaire){
+  connect("/api/questionnaire/"+idFormulaire,ajoutJSONQuestDetail);
+}
+function setNomSonde(idSonde){
+  connect("/api/sonde/"+idSonde,setNomSondeJSON);
+}
+function afficheLesTitresQuestions(idFormulaire){
+    connect("/api/questionnaire/"+idFormulaire,afficheJSONQuestion);
+}
+
+function setNomQuestion(lienQuest){
+  connect(lienQuest,setNomQuestionJSON);
 }
 // Fin fonction Léo
 
