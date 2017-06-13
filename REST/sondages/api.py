@@ -5,7 +5,7 @@ from flask_cors import CORS
 import json
 
 
-
+app.config['API_LIST']={}
 ####### API UTILISATEUR
 
 
@@ -21,7 +21,7 @@ def post_get_single_Utilisateur(**kw):
 def post_get_many_Utilisateur(**kw):
     print("PRE_GET_MANY_UTILISATEUR")
 
-api_manager.create_api(Utilisateur, methods=['GET', 'POST'], preprocessors={'GET_SINGLE':[pre_get_single_Utilisateur],
+app.config['API_LIST']['Utilisateur']=api_manager.create_api(Utilisateur, methods=['GET', 'POST'], preprocessors={'GET_SINGLE':[pre_get_single_Utilisateur],
                                                                     'GET_MANY':[pre_get_many_Utilisateur]})
 
 
@@ -55,7 +55,7 @@ def post_get_many_Questionnaire(result=None, **kw):
                        for quest in item['questions']]
         item['questions'] = l_questlink
 
-api_manager.create_api(Questionnaire,
+app.config['API_LIST']['Questionnaire']=api_manager.create_api(Questionnaire,
                        methods=['GET', 'POST', 'PATCH'],
                        preprocessors={'GET_SINGLE':[pre_get_single_Questionnaire],
                                       'GET_MANY':[pre_get_many_Questionnaire]},
@@ -79,7 +79,7 @@ def post_get_single_Client(result=None,**kw):
 def post_get_many_Client(result=None,**kw):
     print("POST_GET_MANY_CLIENT")
 
-api_manager.create_api(Client, methods=['GET', 'POST'], preprocessors={'GET_SINGLE':[pre_get_single_Client],
+app.config['API_LIST']['Client']=api_manager.create_api(Client, methods=['GET', 'POST'], preprocessors={'GET_SINGLE':[pre_get_single_Client],
                                                                 'GET_MANY':[pre_get_many_Client]})
 
 ###### API SONDE
@@ -99,7 +99,7 @@ def post_get_many_Sonde(result=None,**kw):
         item['panels'] = [api_manager.url_for(Panel, instid=p['id_panel']) for p in item['panels']]
 
 
-api_manager.create_api(Sonde,
+app.config['API_LIST']['Sonde']=api_manager.create_api(Sonde,
                        methods=['GET', 'PATCH'],
                        preprocessors={'GET_SINGLE':[pre_get_single_Sonde], 'GET_MANY':[pre_get_many_Sonde]},
                        postprocessors={'GET_SINGLE':[post_get_single_Sonde], 'GET_MANY':[post_get_many_Sonde]})
@@ -134,7 +134,7 @@ def post_get_many_Question(instance_id=None, search_params=None, result=None, **
         item['reponses'] = [api_manager.url_for(ValeurPossible, q=json.dumps({"filters": [{"and": [{"name": "question_id", "op": "==", "val": rep['question_id']}, {"name": "question_num", "op": "eq", "val": rep['question_num']},{"name": "id", "op": "eq", "val": rep['id']}]}]}))
                        for rep in item['reponses']]
 
-api_manager.create_api(Question,
+app.config['API_LIST']['Question']=api_manager.create_api(Question,
                        methods=['GET', 'POST', 'PATCH', 'DELETE'],
                        primary_key='numero',
                        preprocessors={'GET_SINGLE':[pre_get_single_Question],
@@ -162,12 +162,12 @@ def post_get_many_Panel(result=None, **kw):
         item['sondes'] = [api_manager.url_for(Sonde, instid=p['id_sonde']) for p in item['sondes']]
 
 
-api_manager.create_api(Panel,
+app.config['API_LIST']['Panel']=api_manager.create_api(Panel,
                        methods=['GET'],
                        preprocessors={'GET_SINGLE':[pre_get_single_Panel],'GET_MANY':[pre_get_many_Panel]},
                        postprocessors={'GET_SINGLE':[post_get_single_Panel],'GET_MANY':[post_get_many_Panel]},
                        )
 
-api_manager.create_api(ValeurPossible, methods=['GET'], exclude_columns=['question'])
-api_manager.create_api(Interroger, methods=['GET'])
+app.config['API_LIST']['ValeurPossible']=api_manager.create_api(ValeurPossible, methods=['GET'], exclude_columns=['question'])
+app.config['API_LIST']['Interroger']=api_manager.create_api(Interroger, methods=['GET'])
 CORS(app)
