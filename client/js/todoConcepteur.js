@@ -157,9 +157,16 @@ function recupIdPanel(panel){
 }
 
 function ajoutFormulaire(){
-  var str='{"client": "/api/client/'+idCli+'", "etat": "C", ';
-  str=str+'"concepteur": "/api/utilisateur/'+idC+'", "id_client": '+idCli+', "id_concepteur": '+idC+', ';
-  str=str+'"id_panel": '+idPan+', "panel": "/api/panel/'+idPan+'"}';
+  var str={
+    "etat": "C",
+    "id_client": idCli,
+    "id_concepteur": idC,
+    "id_panel": idPan,
+    "titre": "nouveau Q"
+  }
+  // var str='"client": "/api/client/'+idCli+'", "etat": "C", ';
+  // str=str+'"concepteur": "/api/utilisateur/'+idC+'", "id_client": '+idCli+', "id_concepteur": '+idC+', ';
+  // str=str+'"id_panel": '+idPan+', "panel": "/api/panel/'+idPan+'", "titre": "nouveau Q"';
   return str;
 }
 // --------------------------------------- Fin fonction Olivier ---------------------------------------

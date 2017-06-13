@@ -100,22 +100,6 @@ function setNomQuestion(lienQuest){
 //Fin fonction Jérémie
 //Debut fonction Olivier
 
-// function ajouterDansBase(adresse,data){
-//     $.ajax({
-//         url:urlBase+adresse,
-//         type:'POST',
-//         data:JSON.stringify(data),
-//         //JSON.stringify({"id":1,"nom":"MABITE"})
-//         contentType: "application/json",
-//         success: function (msg) {
-//             console.log('Update Success');
-//         },
-//         error: function (err){
-//             console.log('Update Error');
-//         }
-//         });
-// }
-
 
 function remplissageFormQuest(){
   connect("/api/client",ajouteClient);
@@ -138,9 +122,8 @@ function recupId(){
 
 function AjouteFormBase(){
   var str=ajoutFormulaire();
-  console.log(str);
-  ajouterDansBase("/api/questionnaire",str);
-
+  ajout("/api/questionnaire",JSON.stringify(str));
+  $("#typeQuestionnaire").replaceWith($(formulaire_Question_A_Remplir).html());
 }
 //Fin fonction Olivier
 
