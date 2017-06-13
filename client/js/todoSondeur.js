@@ -34,3 +34,10 @@ function accueilSondeur(){
 
   $("#main").append($(formulaire_Appel).html());
 }
+
+
+
+
+function remplirInfosFormulaire(idFormulaire){
+  
+}

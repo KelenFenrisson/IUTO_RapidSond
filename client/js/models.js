@@ -1,8 +1,8 @@
 var urlBase = "http://192.168.13.162:5000";
 
-function connect(adresse, fonction){
+function connect(adresse){
       $.ajax({
-         url: adresse,
+         url: "192.168.13.162:5000"+adresse,
          type: "GET",
          // This is the important part
          xhrFields: {
@@ -11,7 +11,9 @@ function connect(adresse, fonction){
          // This is the important part
          crossDomain: true,
          dataType: 'jsonp',
-         success: fonction,
+         success: function (response) {
+             return response;
+         },
          error: function (xhr, status) {
              console.log("Erreur de connexion");
          }
