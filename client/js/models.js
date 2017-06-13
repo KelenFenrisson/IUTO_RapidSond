@@ -1,3 +1,4 @@
+var urlBase = "http://192.168.13.162:5000";
 
 function connect(adresse, fonction){
       $.ajax({
@@ -24,4 +25,28 @@ function remplirlisteEntreprise(){
 
 function appui(){
   console.log($("#listeEntreprise").val());
+}
+
+function modifSondage(idSondage){
+
+	$.ajax({
+		url: urlBase+"/api/questionnaire/"+idSondage,
+	   	type: "GET",
+	   	// This is the important part
+	   	xhrFields: {
+		   withCredentials: true
+	   	},
+	   	// This is the important part
+	   	crossDomain: true,
+	   	dataType: 'jsonp',
+	   	success: function (response) {
+		   console.log(JSON.stringify(response));
+		   return response;
+
+	   	},
+	   	error: function (xhr, status) {
+		   console.log("Pas de données");
+	   	}
+	});
+
 }

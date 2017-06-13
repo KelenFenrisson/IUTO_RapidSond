@@ -1,8 +1,9 @@
 $(function() {
 
+var urlBase="http://192.168.13.162:5000";
 
   $.ajax({
-     url: "http://192.168.13.162:5000/api/questionnaire",
+     url: urlBase+"/api/questionnaire",
      type: "GET",
      // This is the important part
      xhrFields: {
