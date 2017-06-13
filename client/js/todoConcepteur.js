@@ -128,58 +128,38 @@ function ajoutePanelRecherche(panel){
 //Debut fonction Julien
 
 function affiche_Question_Affichage(data){
-	console.log(data);
+	console.log(JSON.stringify(data));
 	console.log(data["data"]["id_type"]);
-	console.log(data["data"]["id"]);
+	console.log(data["data"]["numero"]);
 
-	var id = data["data"]["id"];
-
-	//création et affichage de la question
-	$("#main").append($(formulaire_Question_A_Remplir).html());
-	$("#typeQuestionnaire").attr("id","typeQuestionnaire"+id);
-	$("#legendeQuestion").attr("id","legendeQuestion"+id);
-	$("#question").attr("id","question"+id);
-	$("#boutonValider").attr("id","boutonValider"+id);
-	$("#boutonAnnuler").attr("id","boutonAnnuler"+id);
-	//changement des noms des Ids  ******************************************************
-	// change le numéro de la question
-	$("#legendeQuestion"+id).text("Question"+id);
-	//remplit la question
-	$("#question"+id).val(data["data"]["intitule"]);
-	//désactive la question
-	$("#question"+id).prop('disabled', true);
-	//change le boutton en edit avec sa fonction du onclick
-	$("#boutonValider"+id).attr("value","Edit");
-	$("#boutonValider"+id).attr("onclick","editQuestion()");
-	//change le boutton en suppr avec sa fonction du onclick
-	$("#boutonAnnuler"+id).attr("value","Suppr");
-	$("#boutonAnnuler"+id).attr("onclick","suppressionQuestion()");
-	//cache les bouttons
-	$("#boutonAjoutReponse").hide();
-	$("#boutonSupprimerReponse").hide();
-	$("#choixTypeQuestion").hide();
-
+	var num = data["data"]["numero"];
 
 	switch(data["data"]["id_type"]) {
 
 	    case "u":
-		// 	console.log("C'est un type Unique");
-		// 	$("#main").append($(formulaire_Question_A_Remplir3).html());
+			$("#main").append($(formulaire_Question_A_Remplir3).html());
+			$("#typeQuestionnaire3").attr("id","typeQuestionnaire"+num);
 	        break;
 
 		case "l":
-		// 	console.log("C'est un type Libre");
-		// 	$("#main").append($(formulaire_Question_A_Remplir2).html());
+			$("#main").append($(formulaire_Question_A_Remplir2).html());
+			$("#typeQuestionnaire2").attr("id","typeQuestionnaire"+num);
 			break;
 
 		case "m":
+
+			//création et affichage de la question
+			$("#main").append($(formulaire_Question_A_Remplir).html());
+			$("#typeQuestionnaire").attr("id","typeQuestionnaire"+num);
+
+
 			console.log("C'est un type Note");
 			var reponses = data["data"]["reponses"];
 
 			//juste pour test
-			reponses[0]="cool";
-			reponses[1]="Pas top";
-			reponses[2]="NULLLLLLLLL";
+			// reponses[0]="cool";
+			// reponses[1]="Pas top";
+			// reponses[2]="NULLLLLLLLL";
 			//juste pour test
 
 			// affiche les réponses dans les input avec désactivation
@@ -189,6 +169,38 @@ function affiche_Question_Affichage(data){
 			}
 			break;
 	}
+	try{
+		$("#legendeQuestion").attr("id","legendeQuestion"+num);
+		$("#question").attr("id","question"+num);
+		$("#boutonValider").attr("id","boutonValider"+num);
+		$("#boutonAnnuler").attr("id","boutonAnnuler"+num);
+		$("#choixTypeQuestion").attr("id","choixTypeQuestion"+num);
+
+		//changement des noms des Ids  ******************************************************
+		// change le numéro de la question
+
+		$("#legendeQuestion"+num).text("Question "+num);
+		//remplit la question
+		$("#question"+num).val(data["data"]["intitule"]);
+		//désactive la question
+		$("#question"+num).prop('disabled', true);
+		//change le boutton en edit avec sa fonction du onclick
+		$("#boutonValider"+num).attr("value","Edit");
+		$("#boutonValider"+num).attr("onclick","editQuestion(id)");
+		//change le boutton en suppr avec sa fonction du onclick
+		$("#boutonAnnuler"+num).attr("value","Suppr");
+		$("#boutonAnnuler"+num).attr("onclick","suppressionQuestion(num)");
+		//cache les bouttons
+		$("#boutonAjoutReponse").hide();
+		$("#boutonSupprimerReponse").hide();
+		$("#choixTypeQuestion"+num).hide();
+	}
+	catch(err)
+	{
+		console.log("Pas de questions")
+	}
+
+
 }
 
 function modifierSondageAffichage(data){
@@ -196,15 +208,53 @@ function modifierSondageAffichage(data){
 	console.log(data["data"]["questions"]);
 	console.log(data["data"]["id"]);
 
+	$("#typeQuestionnaire2").remove();
+	$("#typeQuestionnaire3").remove();
+	$("#typeQuestionnaire").remove();
+
 	var listeQuestion = data["data"]["questions"];
 	for(var i=0;i<listeQuestion.length;++i){
 		console.log(listeQuestion[i]);
 		affiche_Question_Donnees(listeQuestion[i]);
-
 	}
 
 	$('#TitreFormulaire').text("Formulaire N°"+data["data"]["id"]);
 }
 
+function editQuestion(id){
+	console.log(id);
+	var newId = id.charAt(13);
+	console.log(newId);
+	$("#question"+newId).prop('disabled', false);
+	$("#boutonValider"+newId).attr("value","Valider");
+	$("#boutonValider"+newId).attr("onclick","Envoi(data)");
+	$("#boutonAnnuler"+newId).attr("value","Annuler");
+	$("#boutonAnnuler"+newId).attr("onclick","Annule(data)");
+}
+
+function supprQuestion(id){
+	console.log(id);
+	var newId = id.charAt(13);
+	console.log(newId);
+
+	$.ajax({
+	   url: "http://192.168.13.162:5000/api/question/"+newId,
+	   type: "DELETE",
+	   // This is the important part
+	   xhrFields: {
+		   withCredentials: true
+	   },
+	   // This is the important part
+	   crossDomain: true,
+	   dataType: 'jsonp',
+	   success: function(tasks){
+		   console.log("Suppression ok !!!");
+	   }
+	   error: function (xhr, status) {
+		   console.log("Erreur de connexion");
+	   }
+	});
+
+}
 
 //Fin fonction Julien
