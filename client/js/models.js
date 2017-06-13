@@ -45,6 +45,24 @@ function modif(adresse,data){
         });
 
 }
+
+function ajout(adresse,data){
+    $.ajax({
+        url:urlBase+adresse,
+        type:'POST',
+        data:data,
+        //JSON.stringify({"id":1,"nom":"MABITE"})
+        contentType: "application/json",
+        success: function (msg) {
+            console.log('Insert Success');
+        },
+        error: function (err){
+            console.log('Insert Error');
+        }
+        });
+
+}
+
 // Début fonction Léo
 function remplirInfosFormulaireQuestionnaire(idFormulaire){
   connect("/api/questionnaire/"+idFormulaire,ajoutJSONformulaire);
