@@ -237,23 +237,6 @@ function supprQuestion(id){
 	var newId = id.charAt(13);
 	console.log(newId);
 
-	$.ajax({
-	   url: "http://192.168.13.162:5000/api/question/"+newId,
-	   type: "DELETE",
-	   // This is the important part
-	   xhrFields: {
-		   withCredentials: true
-	   },
-	   // This is the important part
-	   crossDomain: true,
-	   dataType: 'jsonp',
-	   success: function(tasks){
-		   console.log("Suppression ok !!!");
-	   }
-	   error: function (xhr, status) {
-		   console.log("Erreur de connexion");
-	   }
-	});
 
 }
 
