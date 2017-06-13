@@ -29,7 +29,7 @@ class Panel(db.Model):
     __tablename__="panel"
     id=db.Column(db.Integer, primary_key=True)
     intitule=db.Column(db.String(30))
-    # sondes=db.relationship('Constituer', backref='panels', lazy='dynamic', uselist=True)
+    sondes=db.relationship('Constituer', backref='panels', lazy='dynamic', uselist=True)
 
 class Categorie(db.Model):
     __tablename__="categorie"
@@ -95,7 +95,7 @@ class Sonde(db.Model):
     date_naissance=db.Column(db.String(10))
     telephone=db.Column(db.String(10))
     id_caracteristique=db.Column(db.String(3), db.ForeignKey(Caracteristique.id, name="sonde_fk1_caracteristique"))
-    # panels=db.relationship('Constituer', backref='sondes', lazy='dynamic', uselist=True)
+    panels=db.relationship('Constituer', backref='sondes', lazy='dynamic', uselist=True)
 
 
 class Constituer(db.Model):

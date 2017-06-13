@@ -63,10 +63,10 @@ def pre_get_single_Client(**kw):
 def pre_get_many_Client(**kw):
     print("PRE_GET_MANY_CLIENT")
 
-def post_get_single_Client(**kw):
+def post_get_single_Client(result=None,**kw):
     print("POST_GET_SINGLE_CLIENT")
 
-def post_get_many_Client(**kw):
+def post_get_many_Client(result=None,**kw):
     print("POST_GET_MANY_CLIENT")
 
 api_manager.create_api(Client, methods=['GET', 'POST'], preprocessors={'GET_SINGLE':[pre_get_single_Client],
@@ -79,14 +79,20 @@ def pre_get_single_Sonde(**kw):
 def pre_get_many_Sonde(**kw):
     print("PRE_GET_MANY_SONDE")
 
-def post_get_single_Sonde(**kw):
+def post_get_single_Sonde(result=None,**kw):
     print("POST_GET_SINGLE_SONDE")
+    result['panels']=[api_manager.url_for(Panel, instid=p['id_panel']) for p in result['panels']]
 
-def post_get_many_Sonde(**kw):
+def post_get_many_Sonde(result=None,**kw):
     print("POST_GET_MANY_SONDE")
+    for item in result['objects']:
+        item['panels'] = [api_manager.url_for(Panel, instid=p['id_panel']) for p in item['panels']]
 
-api_manager.create_api(Sonde, methods=['GET', 'PATCH'], preprocessors={'GET_SINGLE':[pre_get_single_Sonde],
-                                                              'GET_MANY':[pre_get_many_Sonde]})
+
+api_manager.create_api(Sonde,
+                       methods=['GET', 'PATCH'],
+                       preprocessors={'GET_SINGLE':[pre_get_single_Sonde], 'GET_MANY':[pre_get_many_Sonde]},
+                       postprocessors={'GET_SINGLE':[post_get_single_Sonde], 'GET_MANY':[post_get_many_Sonde]})
 
 
 
@@ -120,13 +126,21 @@ def pre_get_single_Panel(**kw):
 def pre_get_many_Panel(**kw):
     print("PRE_GET_MANY_QUESTION")
 
-def post_get_single_Panel(**kw):
+def post_get_single_Panel(result=None, **kw):
     print("POST_GET_SINGLE_QUESTION")
+    result['sondes']=[api_manager.url_for(Sonde, instid=p['id_sonde']) for p in result['sondes']]
 
-def post_get_many_Panel(**kw):
+
+def post_get_many_Panel(result=None, **kw):
     print("POST_GET_MANY_QUESTION")
+    for item in result['objects']:
+        item['sondes'] = [api_manager.url_for(Sonde, instid=p['id_sonde']) for p in item['sondes']]
 
-api_manager.create_api(Panel, methods=['GET'], preprocessors={'GET_SINGLE':[pre_get_single_Panel],
-                                                                 'GET_MANY':[pre_get_many_Panel]})
+
+api_manager.create_api(Panel,
+                       methods=['GET'],
+                       preprocessors={'GET_SINGLE':[pre_get_single_Panel],'GET_MANY':[pre_get_many_Panel]},
+                       postprocessors={'GET_SINGLE':[post_get_single_Panel],'GET_MANY':[post_get_many_Panel]},
+                       )
 
 api_manager.create_api(ValeurPossible, methods=['GET'])
