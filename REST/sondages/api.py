@@ -101,24 +101,6 @@ api_manager.create_api(Sonde,
 
 
 ###### API QUESTION
-def question_serialize(instance):
-    print(instance.numero)
-    question = {"id": str(instance.id)+"-"+str(instance.numero),
-                "id_type":instance.id_type,
-                "intitule":instance.intitule,
-                "max_val":instance.max_val,
-                "numero":instance.numero}
-    return Question.dump(instance).data
-
-def question_deserialize(data):
-    print(data)
-    question = Question()
-    question.id=data['id'].split('-')[0]
-    question.numero=data['numero']
-    question.max_val=data['max_val']
-    question.id_type=data['id_type']
-    question.intitule=data['intitule']
-    return Question.load(data).data
 
 def pre_get_single_Question(instance_id=None, search_params=None, data=None,**kw):
     print("PRE_GET_SINGLE_QUESTION")
@@ -131,14 +113,13 @@ def pre_get_many_Question(instance_id=None, search_params=None, data=None,**kw):
 
 def post_get_single_Question(instance_id=None, search_params=None, result=None, **kw):
     print("POST_GET_SINGLE_QUESTION")
-    print('')
     result['questionnaire']=[api_manager.url_for(Questionnaire, instid=q['id']) for q in result['questionnaire']]
 
 def post_get_many_Question(instance_id=None, search_params=None, result=None, **kw):
     print("POST_GET_MANY_QUESTION")
-    # for item in result['objects']:
-    #     if item['id']==int(search_params['id']) and item['numero']==int(search_params['numero']):
-    #         item['questionnaire'] = [api_manager.url_for(Questionnaire, instid=q['id']) for q in item['questionnaire']]
+    for item in result['objects']:
+        if item['id']==int(search_params['id']) and item['numero']==int(search_params['numero']):
+            item['questionnaire'] = [api_manager.url_for(Questionnaire, instid=q['id']) for q in item['questionnaire']]
 
 
 api_manager.create_api(Question,
@@ -146,9 +127,7 @@ api_manager.create_api(Question,
                        preprocessors={'GET_SINGLE':[pre_get_single_Question],
                                       'GET_MANY':[pre_get_many_Question]},
                        postprocessors={'GET_SINGLE':[post_get_single_Question],
-                                      'GET_MANY':[post_get_many_Question]},
-                       serializer=question_serialize,
-                       deserializer=question_deserialize
+                                      'GET_MANY':[post_get_many_Question]}
                        )
 
 
