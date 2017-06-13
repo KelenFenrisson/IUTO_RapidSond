@@ -34,9 +34,10 @@ function accueilConcepteur(){
 	$("#main").append('<input type="button" value="Créer un nouveau sondage" class="btn btn-primary btn-lg active top-10 col-md-offset-3 col-md-6 bot-10" onclick="creerFormulaire()">');
     $("#main").append($(formulaire_Recherche_Sondage).html());
 	// CECI EST POUR LEXEMPLE, à EDITER PAR LA SUITE AVEC UNE RECHERCHE DANS LA BASE
-	for(var i =0;i<4;i++)
-	$("#main").append($(formulaire_Info_Sondage).html());
-
+	for(var i =0;i<4;i++){
+  	$("#main").append($(formulaire_Info_Sondage).html());
+  }
+  remplissageFormQuestRecherche()
 }
 
 function creerFormulaire(){
@@ -103,6 +104,25 @@ function ajoutePanel(panel){
     $('#choixPanel').append('<option value="'+panel['data']['objects'][i]['intitule']+'">'+panel['data']['objects'][i]['intitule']+'</option>');
   }
 }
+
+function ajouteClientRecherche(client){
+  for(var i=0; i<client["data"]["num_results"]; i++){
+    $('#listeEntreprise').append('<option value="'+client['data']['objects'][i]['raison']+'">'+client['data']['objects'][i]['raison']+'</option>');
+  }
+}
+
+function ajouteUtilisateurRecherche(utilisateur){
+  for(var i=0; i<utilisateur["data"]["num_results"]; i++){
+    $('#listeConcepteur').append('<option value="'+utilisateur['data']['objects'][i]['nom']+'">'+utilisateur['data']['objects'][i]['nom']+'</option>');
+  }
+}
+
+function ajoutePanelRecherche(panel){
+  for(var i=0; i<panel["data"]["num_results"]; i++){
+    $('#listePanel').append('<option value="'+panel['data']['objects'][i]['intitule']+'">'+panel['data']['objects'][i]['intitule']+'</option>');
+  }
+}
+
 
 //Fin fonction Olivier
 //Debut fonction Julien
