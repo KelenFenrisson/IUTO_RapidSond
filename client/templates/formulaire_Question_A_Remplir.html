@@ -1,61 +1,50 @@
-<!doctype html>
-<html>
-<title>Rapid'Sond</title>
-<head>
-
-  <meta charset="UTF-8"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></head>
-  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-  <script src="../js/todoConcepteur.js"></script>
-  <script src="../js/todoSondeur.js"></script>
-  <script src="../js/formQuestions.js"></script>
-  <link rel="stylesheet" href="../css/style.css"/>
-
-</head>
-<div id="main" class="col-md-12">
-  <form name="questions">
-    <fieldset>
-      <legend id="legendeQuestion">Question 1 :</legend>
-      <div class="row all-10 center-block">
-        <label id="question" for="question" class="col-md-1">Question:</label>
-        <input type="text" id="question" name="question" placeholder="Ecrire ici la question" class="col-md-3" >
-        <select name="ChoixTypeQ" id="choixTypeQuestion" class="col-md-offset-4 col-md-2" onchange="choisirTypeQuestion(this)">
-          <option value="choixM" selected="on">Choix multiple</option>
-          <option value="yesOrNo">Yes or No</option>
-          <option value="reponseLibre">Réponse Libre</option>
-        </select>
-      </div>
-
-
-      <div class="row all-10 center-block">
-
-        <div class="col-md-4" id="checkboxReponses">
-          <div class="row" id="row">
-            <input type="checkbox" id="checkboxreponse" value="reponse" checked />
-            <input type="text" id="reponse" placeholder="Entrer une réponse"/>
-          </div>
-          <div class="row" id="row">
-            <input type="checkbox" id="checkboxreponse" value="reponse"/>
-            <input type="text" id="reponse" placeholder="Entrer une réponse"/>
-            </label>
-          </div>
-          <div class="row" id="row">
-            <input type="checkbox" id="checkboxreponse" value="reponse"/>
-            <input type="text" id="reponse" placeholder="Entrer une réponse"/>
-          </div>
+<div>
+  
+  <div id="typeQuestionnaire" class="col-md-offset-1 col-md-10">
+    <form name="questions">
+      <fieldset>
+        <legend id="legendeQuestion">Question 1 :</legend>
+        <div class="row all-10 center-block">
+          <label id="question" for="question" class="col-md-1">Question:</label>
+          <input type="text" id="question" name="question" placeholder="Ecrire ici la question" class="col-md-3" >
+          <select name="ChoixTypeQ" id="choixTypeQuestion" class="col-md-offset-4 col-md-2" onchange="choisirTypeQuestion(this)">
+            <option value="choixM" selected="on">Choix multiple</option>
+            <option value="yesOrNo">Yes or No</option>
+            <option value="reponseLibre">Réponse Libre</option>
+          </select>
         </div>
 
-        <input type="button" value="Valider" id="boutonValider" class="col-md-offset-1 col-md-2 col-sm-push-3 right-5"/>
-        <input type="reset" value="Annuler" id="boutonAnnuler" class="col-md-2 col-sm-push-3 right-5"/>
 
-      </div>
+        <div class="row all-10 center-block">
 
-      <div class="row all-10 center-block">
-        <input type="button" value="Ajouter une réponse" id="boutonAjoutReponse" onclick="ajoutReponse()"/>
-        <input type="button" value="Supprimer une réponse" id="boutonSupprimerReponse" onclick="supprReponse()"/>
-      </div>
+          <div class="col-md-4" id="checkboxReponses">
+            <div class="row" id="row">
+              <input type="checkbox" id="checkboxreponse" value="reponse" checked />
+              <input type="text" id="reponse" placeholder="Entrer une réponse"/>
+            </div>
+            <div class="row" id="row">
+              <input type="checkbox" id="checkboxreponse" value="reponse"/>
+              <input type="text" id="reponse" placeholder="Entrer une réponse"/>
+              </label>
+            </div>
+            <div class="row" id="row">
+              <input type="checkbox" id="checkboxreponse" value="reponse"/>
+              <input type="text" id="reponse" placeholder="Entrer une réponse"/>
+            </div>
+          </div>
 
-    </fieldset>
-  </form>
+
+          <input type="button" value="Valider" id="boutonValider" class="col-md-offset-1 col-md-2 col-sm-push-3 right-5"/>
+          <input type="reset" value="Annuler" id="boutonAnnuler" class="col-md-2 col-sm-push-3 right-5"/>
+
+        </div>
+
+        <div class="row all-10 center-block">
+          <input type="button" value="Ajouter une réponse" id="boutonAjoutReponse" onclick="ajoutReponse()"/>
+          <input type="button" value="Supprimer une réponse" id="boutonSupprimerReponse" onclick="supprReponse()"/>
+        </div>
+
+      </fieldset>
+    </form>
+  </div>
 </div>
-</html>

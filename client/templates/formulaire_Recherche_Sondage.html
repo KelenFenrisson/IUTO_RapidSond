@@ -1,28 +1,17 @@
-<!doctype html>
-<html>
-<title>Rapid'Sond</title>
-<head>
 
-    <meta charset="UTF-8"/>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></head>
-	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-	<script src="../js/todoConcepteur.js"></script>
-	<script src="../js/todoSondeur.js"></script>
-	<link rel="stylesheet" href="../css/style.css"/>
+<div>
+	<div id="formulaire_Recherche_Sondage" class="col-md-offset-1 col-md-10 top-10 bot-30">
 
-</head>
-		<title> Formulaire Filtre </title>
-	</head>
-	<body>
+		<form id="formFiltre" class="col-md-12 border" method="GET" >
 
-	<div id="formulaire_Recherche_Sondage" class="col-md-offset-1 col-md-10">
-
-		<form id="formFiltre" class="col-md-12 form-horizontal border" method="GET" >
-
-			<div class="row">
+			<div class="row top-10">
 
 				<label id="labelEntreprise" for="listeEntreprise" class="col-md-2 top-10 text-center">Entreprise </label>
-				<div class="col-md-2"><select id="listeEntreprise" name="listeEntreprise" class="col-md-10 top-10 text-center" /></select></div>
+				<div class="col-md-2">
+					<select id="listeEntreprise" name="listeEntreprise" class="col-md-10 top-10 text-center">
+						<option value="1" selected="selected">test</option>
+					</select>
+				</div>
 
 				<label id="labelStatut" for="listeStatut" class="col-md-2 top-10 text-center">Statut </label>
 				<div class="col-md-2"><select id="listeStatut" name="listeStatut" class="col-md-10 top-10 text-center" /></select></div>
@@ -32,12 +21,12 @@
 
 			</div>
 
-			<div class="row">
+			<div class="row bot-10">
 
 				<label id="labelPanel" for="listePanel" class="col-md-2 top-10 text-center">Panel</label>
 				<div class="col-md-2"><select id="listePanel" name="listePanel" class="col-md-10 top-10 text-center" /></select></div>
 
-				<label id="labelDateDebut" for="choixDateDebut" class="col-md-2 top-10 text-center">Date</label>
+				<label id="labelDateDebut" value="test" for="choixDateDebut" class="col-md-2 top-10 text-center">Date</label>
 
 				<div class="col-md-3">
 
@@ -48,13 +37,11 @@
 
 				</div>
 
-				<input type="submit" value="Actualiser" class="btn btn-primary top-10 col-md-offset-1 col-md-1 bot-10">
+				<input type="submit" value="Actualiser" class="btn btn-primary top-10 col-md-offset-1 col-md-1 " onclick="appui()"/>
 
 			</div>
 
 		</form>
 
 	</div>
-
-	</body>
-</html>
+</div>

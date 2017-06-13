@@ -1,17 +1,5 @@
-<!doctype html>
-<html>
-<title>Rapid'Sond</title>
-<head>
-
-  <meta charset="UTF-8"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></head>
-  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-  <script src="../js/todoConcepteur.js"></script>
-  <script src="../js/todoSondeur.js"></script>
-  <link rel="stylesheet" href="../css/style.css"/>
-
-</head>
-<div id="main" class="col-md-12">
+<div>
+<div id="typeQuestionnaire3" class="col-md-offset-1 col-md-10">
   <form name="questions">
     <fieldset>
       <legend id="legendeQuestion">Question 1 :</legend>
@@ -29,18 +17,14 @@
       <div class="row all-10 center-block">
 
         <div class="col-md-4">
-          <div class="row">
             <label id="yes">
               <input type="radio" name="yes" value="yes" id="yes">
               YES
             </label>
-          </div>
-          <div class="row">
-            <label id="no">
+            <label class="col-md-offset-1" id="no">
               <input type="radio" name="no" value="no" id="no">
               NO
             </label>
-          </div>
         </div>
 
         <input type="button" value="Valider" id="boutonValider" class="col-md-offset-1 col-md-2 col-sm-push-3 right-5"/>

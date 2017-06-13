@@ -10,29 +10,40 @@
 	margin-top: 100px;
 }
 
+.bot-100{
+	margin-bottom: 100px;
+}
+
+
 .bot-10{
 	margin-bottom: 10px;
+}
+.bot-30{
+	margin-bottom: 30px;
 }
 
 .top-50{
 	margin-top: 50px;
 }
 .border{
-	border-style: double;
-  	border-radius: 10px;
+  border-color: grey;
+  border-style:solid;;
+  border-radius: 10px;
+  border-width: 1px;
 }
 
 fieldset{
 	border:2px solid;
+	border-color: grey;
 }
 
 .right-5{
 	margin: 5px 5px 5px 5px;
 }
 
-form{
+/*form{
  margin-bottom:5%;
-}
+}*/
 
 
 .top-10-pour{

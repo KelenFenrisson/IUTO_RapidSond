@@ -2,7 +2,7 @@ $(function() {
 
 
   $.ajax({
-     url: "http://192.168.13.141:5000/api/questionnaire",
+     url: "http://192.168.13.162:5000/api/questionnaire",
      type: "GET",
      // This is the important part
      xhrFields: {
@@ -15,7 +15,7 @@ $(function() {
          console.log(JSON.stringify(response));
      },
      error: function (xhr, status) {
-         console.log("Mon cul");
+         console.log("Pas de données");
      }
   });
 
