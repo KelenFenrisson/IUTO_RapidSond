@@ -21,6 +21,7 @@ function connect(adresse,fonc){
 
 }
 
+
 // Début fonction Léo
 function remplirInfosFormulaire(idFormulaire){
   connect("/api/questionnaire/"+idFormulaire,testJSON);
@@ -32,41 +33,15 @@ function remplirInfosFormulaire(idFormulaire){
 //Debut fonction Jérémie
 //Fin fonction Jérémie
 //Debut fonction Olivier
+function remplissageFormQuest(){
+  connect("/api/client",ajouteClient);
+  connect("/api/utilisateur",ajouteUtilisateur);
+  connect("/api/panel",ajoutePanel);
+}
+
+// function enregistreFormulaire(){
+//   connect("")
+// }
 //Fin fonction Olivier
 //Debut fonction Julien
 //Fin fonction Julien
-
-function modifSondage(){
-
-	  $.ajax({
-		 url: urlBase+"/api/questionnaire/1",
-		 type: "GET",
-		 // This is the important part
-		 xhrFields: {
-			 withCredentials: true
-		 },
-		 // This is the important part
-		 crossDomain: true,
-		 dataType: 'jsonp',
-		 success: function (data) {
-			console.log(JSON.stringify(data));
-			console.log(data["data"]["id"])
-		},
-		 error: function (xhr, status) {
-			 console.log("Erreur de connexion");
-		 }
-	  });
-
-}
-
-function remplissageFormSonde(){
-  console.log($.getJSON(connect("/api/questionnaire")));
-  // var questionnaires=connect("/api/questionnaire");
-  // for (var i=0;i<questionnaires[num_results];i++){
-  //
-  // }
-}
-
-function enregistreFormulaire(){
-  connect("")
-}
