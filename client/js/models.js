@@ -27,20 +27,19 @@ function Sonde(nom){
 }
 
 
-function modif(){
+
+function modif(adresse,data){
     $.ajax({
-        url:"http://192.168.13.162:5000/api/sonde/1",
+        url:urlBase+adresse,
         type:'PUT',
-        data:JSON.stringify({"id":1,"nom":"MABITE"}),
+        data:data,
+        //JSON.stringify({"id":1,"nom":"MABITE"})
         contentType: "application/json",
-
-
-
         success: function (msg) {
-            alert('Update Success');
+            console.log('Update Success');
         },
         error: function (err){
-            alert('Update Error');
+            console.log('Update Error');
         }
         });
 

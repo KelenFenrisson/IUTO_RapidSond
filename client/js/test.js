@@ -2,7 +2,6 @@ $(function() {
 
 var urlBase="http://192.168.13.162:5000";
 
-modif();
 
   // $.ajax({
   //    url: urlBase+"/api/questionnaire",
