@@ -90,4 +90,89 @@ function supprReponse(){
 //Debut fonction Olivier
 //Fin fonction Olivier
 //Debut fonction Julien
+function affiche_Question_Affichage(data){
+	console.log(data);
+	console.log(data["data"]["id_type"]);
+	console.log(data["data"]["id"]);
+
+	var id = data["data"]["id"];
+
+	switch(data["data"]["id_type"]) {
+    case "n":
+		console.log("C'est un type Note");
+		$("#main").append($(formulaire_Question_A_Remplir).html());
+		$("#typeQuestionnaire").attr("id","typeQuestionnaire"+id);
+		$("#legendeQuestion").attr("id","legendeQuestion"+id);
+		$("#question").attr("id","question"+id);
+		$("#boutonValider").attr("id","boutonValider"+id);
+		$("#boutonAnnuler").attr("id","boutonAnnuler"+id);
+
+
+		$("#legendeQuestion"+id).text("Question"+id);
+		$("#question"+id).val(data["data"]["intitule"]);
+		$("#question"+id).prop('disabled', true);
+
+		$("#boutonValider"+id).attr("value","Edit");
+		$("#boutonValider"+id).attr("onclick","editQuestion()");
+
+		$("#boutonAnnuler"+id).attr("value","Suppr");
+		$("#boutonAnnuler"+id).attr("onclick","suppressionQuestion()");
+
+		$("#boutonAjoutReponse").hide();
+		$("#boutonSupprimerReponse").hide();
+		$("#choixTypeQuestion").hide();
+
+
+		var reponses = data["data"]["reponses"];
+
+		//juste pour test
+		reponses[0]="cool";
+		reponses[1]="Pas top";
+		reponses[2]="NULLLLLLLLL";
+		//juste pour test
+
+		for(var i=0;i<reponses.length;++i){
+			$("#reponse"+i).val(reponses[i]);
+			$("#reponse"+i).prop('disabled', true);
+		}
+
+        break;
+    // case "u":
+	// 	console.log("C'est un type Unique");
+	// 	$("#main").append($(formulaire_Question_A_Remplir3).html());
+    //     break;
+	// case "c":
+	// 	console.log("C'est un type Classement");
+	// 	break;
+	// case "l":
+	// 	console.log("C'est un type Libre");
+	// 	$("#main").append($(formulaire_Question_A_Remplir2).html());
+	// 	break;
+	// case "m":
+	// 	console.log("C'est un type Multiple");
+	// 	$("#main").append($(formulaire_Question_A_Remplir).html());
+	// 	break;
+
+	}
+}
+
+function modifierSondageAffichage(data){
+	console.log(JSON.stringify(data));
+	console.log(data["data"]["questions"]);
+	var listeQuestion = data["data"]["questions"];
+	for(var i=0;i<listeQuestion.length;++i){
+		console.log(listeQuestion[i]);
+		affiche_Question_Donnees(listeQuestion[i]);
+
+	}
+
+	$("#main").empty();
+
+}
+
+// function affiche_client_par_sondage(data){
+// 	console.log(JSON.stringify(data));
+// 	console.log(data["data"]["adresse"]);
+// 	$
+// }
 //Fin fonction Julien

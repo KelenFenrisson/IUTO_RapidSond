@@ -1,8 +1,8 @@
 $(function() {
 
-var urlBase="http://192.168.13.162:5000";
-
-modifSondage();
+// var urlBase="http://192.168.13.162:5000";
+//
+// modifSondage();
 
 
   // $.ajax({

@@ -38,9 +38,7 @@ function accueilSondeur(){
 }
 
 function testJSON(data){
-    //console.log(JSON.stringify(data));
     console.log(data["data"]["id"]);
-
 }
 
 //Debut fonction Roméo
