@@ -81,6 +81,24 @@ function setNomQuestion(lienQuest){
 //Debut fonction Jérémie
 //Fin fonction Jérémie
 //Debut fonction Olivier
+
+// function ajouterDansBase(adresse,data){
+//     $.ajax({
+//         url:urlBase+adresse,
+//         type:'POST',
+//         data:JSON.stringify(data),
+//         //JSON.stringify({"id":1,"nom":"MABITE"})
+//         contentType: "application/json",
+//         success: function (msg) {
+//             console.log('Update Success');
+//         },
+//         error: function (err){
+//             console.log('Update Error');
+//         }
+//         });
+// }
+
+
 function remplissageFormQuest(){
   connect("/api/client",ajouteClient);
   connect("/api/utilisateur",ajouteUtilisateur);
@@ -94,10 +112,17 @@ function remplissageFormQuestRecherche(){
 }
 
 
-function creerForm(){
-  var client=$('#listeClient').val();
-  var panel=$('#choixPanel').val();
-  var concepteur=$('#choixConcepteur').val();
+function recupId(){
+  connect("/api/client",recupIdClient);
+  connect("/api/utilisateur",recupIdConcepteur);
+  connect("/api/panel",recupIdPanel);
+}
+
+function AjouteFormBase(){
+  var str=ajoutFormulaire();
+  console.log(str);
+  ajouterDansBase("/api/questionnaire",str);
+
 }
 //Fin fonction Olivier
 

@@ -6,7 +6,7 @@
         <legend id="legendeQuestion">Question 1 :</legend>
         <div class="row all-10 center-block">
           <label id="questionLabel" for="question" class="col-md-1">Question:</label>
-          <input type="text" id="question" name="question" placeholder="Ecrire ici la question" class="col-md-6" >
+          <input type="text" id="question" name="question" placeholder="Ecrire ici la question" class="col-md-6"/>
           <select name="ChoixTypeQ" id="choixTypeQuestion" class="col-md-offset-1 col-md-2" onchange="choisirTypeQuestion(this)">
             <option value="choixM" selected="on">Choix multiple</option>
             <option value="yesOrNo">Yes or No</option>
@@ -19,13 +19,12 @@
 
           <div class="col-md-4" id="checkboxReponses">
             <div class="row" id="row">
-              <input type="checkbox" id="checkboxreponse" value="reponse" checked />
+              <input type="checkbox" id="checkboxreponse" value="reponse" checked="checked" />
               <input type="text" id="reponse0" placeholder="Entrer une réponse"/>
             </div>
             <div class="row" id="row">
               <input type="checkbox" id="checkboxreponse" value="reponse"/>
               <input type="text" id="reponse1" placeholder="Entrer une réponse"/>
-              </label>
             </div>
             <div class="row" id="row">
               <input type="checkbox" id="checkboxreponse" value="reponse"/>
