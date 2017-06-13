@@ -1,7 +1,8 @@
 
-function connect(adresse){
+function connect(adresse,fonc){
+    var rep = null;
       $.ajax({
-         url: "192.168.13.162:5000"+adresse,
+         url: "http://192.168.13.162:5000"+adresse,
          type: "GET",
          // This is the important part
          xhrFields: {
@@ -10,13 +11,12 @@ function connect(adresse){
          // This is the important part
          crossDomain: true,
          dataType: 'jsonp',
-         success: function (response) {
-             return response;
-         },
+         success: fonc,
          error: function (xhr, status) {
              console.log("Erreur de connexion");
          }
       });
+
 }
 
 function remplirlisteEntreprise(){
