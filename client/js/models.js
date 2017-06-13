@@ -22,9 +22,57 @@ function connect(adresse,fonc){
 }
 
 
+
+function Sonde(nom){
+    this.nom=nom;
+}
+
+
+
+function modif(adresse,data){
+    $.ajax({
+        url:urlBase+adresse,
+        type:'PUT',
+        data:data,
+        //JSON.stringify({"id":1,"nom":"MABITE"})
+        contentType: "application/json",
+        success: function (msg) {
+            console.log('Update Success');
+        },
+        error: function (err){
+            console.log('Update Error');
+        }
+        });
+
+}
 // Début fonction Léo
-function remplirInfosFormulaire(idFormulaire){
-  connect("/api/questionnaire/"+idFormulaire,testJSON);
+function remplirInfosFormulaireQuestionnaire(idFormulaire){
+  connect("/api/questionnaire/"+idFormulaire,ajoutJSONformulaire);
+}
+function setNomPanel(lienPanel){
+    connect(lienPanel,setNomPanelJSON);
+}
+function setNomClient(lienClient){
+  connect(lienClient,setNomClientJSON);
+}
+function setNomConcepteur(lienConcept){
+  connect(lienConcept,setNomConcepteurJSON);
+}
+function remplirInfosFormulaireSonde(idSonde){
+  connect("/api/sonde/"+idSonde,ajoutJSONsonde);
+}
+function remplirInfoQuestionnaireDetails(idFormulaire){
+  connect("/api/questionnaire/"+idFormulaire,ajoutJSONQuestDetail);
+}
+function setNomSonde(idSonde){
+  connect("/api/sonde/"+idSonde,setNomSondeJSON);
+}
+function afficheLesTitresQuestions(idFormulaire){
+    connect("/api/questionnaire/"+idFormulaire,afficheJSONQuestion);
+}
+
+function setNomQuestion(lienQuest){
+  connect(lienQuest,setNomQuestionJSON);
 }
 // Fin fonction Léo
 
@@ -52,5 +100,19 @@ function creerForm(){
   var concepteur=$('#choixConcepteur').val();
 }
 //Fin fonction Olivier
+
 //Debut fonction Julien
+
+function modifSondageDonnees(idSondage){
+	creerFormulaire();
+	connect("/api/questionnaire/"+idSondage,modifierSondageAffichage);
+}
+
+function affiche_Question_Donnees(urlQuestion){
+	connect(urlQuestion,affiche_Question_Affichage);
+}
+// function recup_Client_par_Sondage(urlClient){
+// 	connect(urlClient,affiche_client_par_sondage)
+// }
+
 //Fin fonction Julien
