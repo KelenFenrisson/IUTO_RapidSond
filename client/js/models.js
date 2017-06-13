@@ -73,6 +73,13 @@ function afficheLesTitresQuestions(idFormulaire){
 function setNomQuestion(lienQuest){
   connect(lienQuest,setNomQuestionJSON);
 }
+
+function modifSonde(idSond){
+  data =
+  modif(adresse,data)
+}
+
+
 // Fin fonction Léo
 
 //Debut fonction Roméo
@@ -83,26 +90,3 @@ function setNomQuestion(lienQuest){
 //Fin fonction Olivier
 //Debut fonction Julien
 //Fin fonction Julien
-
-function modifSondage(){
-
-	  $.ajax({
-		 url: urlBase+"/api/questionnaire/1",
-		 type: "GET",
-		 // This is the important part
-		 xhrFields: {
-			 withCredentials: true
-		 },
-		 // This is the important part
-		 crossDomain: true,
-		 dataType: 'jsonp',
-		 success: function (data) {
-			console.log(JSON.stringify(data));
-			console.log(data["data"]["id"])
-		},
-		 error: function (xhr, status) {
-			 console.log("Erreur de connexion");
-		 }
-	  });
-
-}
