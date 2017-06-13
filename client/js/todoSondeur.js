@@ -43,9 +43,7 @@ function testJSON(data){
 
 }
 
-function remplirInfosFormulaire(idFormulaire){
-  //var infos = null;
-  connect("/api/questionnaire/"+idFormulaire,testJSON);
-  //console.log(JSON.stringify(infos[0]));
-
-}
+//Debut fonction Roméo
+//Fin fonction Roméo
+//Debut fonction Léo
+//Fin fonction Léo

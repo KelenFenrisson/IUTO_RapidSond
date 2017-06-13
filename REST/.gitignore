@@ -3,3 +3,4 @@ __pycache__
 *.db
 */*.db
 venv
+/sondages/db_credentials.py
