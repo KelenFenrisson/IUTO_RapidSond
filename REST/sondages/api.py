@@ -44,16 +44,16 @@ def post_get_single_Questionnaire(instance_id=None, result=None, **kw):
     l_questlink = [ api_manager.url_for(Question, q=json.dumps({"filters":[{"and":[{"name":"id","op":"==","val":quest['id']},{"name":"numero","op":"eq","val":quest['numero']}]}]})) for quest in result['questions']]
     result['questions'] = l_questlink
 
-# 127.0.0.1:5001/api/question?q={"filters":[{"and":[{"name":"id","op":"eq","val":1},{"name":"numero","op":"eq","val":2}]}]}
-
-
-
 def post_get_many_Questionnaire(result=None, **kw):
     print("POST_GET_MANY_QUESTIONNAIRE")
     for item in result['objects']:
         item['client']= api_manager.url_for(Client, instid=item['id_client'])
         item['concepteur']= api_manager.url_for(Utilisateur, instid=item['id_concepteur'])
         item['panel']= api_manager.url_for(Panel, instid=item['id_panel'])
+        l_questlink = [api_manager.url_for(Question, q=json.dumps({"filters": [{"and": [
+            {"name": "id", "op": "==", "val": quest['id']}, {"name": "numero", "op": "eq", "val": quest['numero']}]}]}))
+                       for quest in item['questions']]
+        item['questions'] = l_questlink
 
 api_manager.create_api(Questionnaire,
                        methods=['GET', 'POST', 'PATCH'],
@@ -121,14 +121,18 @@ def post_get_single_Question(instance_id=None, search_params=None, result=None, 
     print("POST_GET_SINGLE_QUESTION")
     print("POST_GET", search_params)
     result['questionnaire']=[api_manager.url_for(Questionnaire, instid=q['id']) for q in result['questionnaire']]
+    result['reponses'] = [api_manager.url_for(ValeurPossible, q=json.dumps({"filters": [{"and": [
+        {"name": "question_id", "op": "==", "val": rep['question_id']},
+        {"name": "question_num", "op": "eq", "val": rep['question_num']}, {"name": "id", "op": "eq", "val": rep['id']}]}]}))
+                        for rep in result['reponses']]
 
 def post_get_many_Question(instance_id=None, search_params=None, result=None, **kw):
     print("POST_GET_MANY_QUESTION")
     print("POST_GET", search_params)
-
     for item in result['objects']:
         item['questionnaire'] = [api_manager.url_for(Questionnaire, instid=q['id']) for q in item['questionnaire']]
-
+        item['reponses'] = [api_manager.url_for(ValeurPossible, q=json.dumps({"filters": [{"and": [{"name": "question_id", "op": "==", "val": rep['question_id']}, {"name": "question_num", "op": "eq", "val": rep['question_num']},{"name": "id", "op": "eq", "val": rep['id']}]}]}))
+                       for rep in item['reponses']]
 
 api_manager.create_api(Question,
                        methods=['GET', 'POST', 'PATCH', 'DELETE'],
@@ -164,6 +168,6 @@ api_manager.create_api(Panel,
                        postprocessors={'GET_SINGLE':[post_get_single_Panel],'GET_MANY':[post_get_many_Panel]},
                        )
 
-api_manager.create_api(ValeurPossible, methods=['GET'])
+api_manager.create_api(ValeurPossible, methods=['GET'], exclude_columns=['question'])
 api_manager.create_api(Interroger, methods=['GET'])
 CORS(app)
