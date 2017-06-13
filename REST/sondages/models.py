@@ -1,4 +1,4 @@
-from app import db
+from .application import db
 
 class RoleUtilisateur(db.Model):
     __tablename__="roleutilisateur"
@@ -12,7 +12,7 @@ class Utilisateur(db.Model):
     prenom=db.Column(db.String(30))
     login=db.Column(db.String(30))
     password=db.Column(db.String(30))
-    role_id=db.Column(db.String(1), db.ForeignKey(RoleUtilisateur.id))
+    id_role=db.Column(db.String(1), db.ForeignKey(RoleUtilisateur.id, name="utilisateur_fk1_roleutilisateur"))
 
 class Client(db.Model):
     __tablename__="client"
@@ -29,6 +29,7 @@ class Panel(db.Model):
     __tablename__="panel"
     id=db.Column(db.Integer, primary_key=True)
     intitule=db.Column(db.String(30))
+    # sondes=db.relationship('Constituer', backref='panels', lazy='dynamic', uselist=True)
 
 class Categorie(db.Model):
     __tablename__="categorie"
@@ -43,10 +44,10 @@ class Tranche(db.Model):
 
 class Caracteristique(db.Model):
     __tablename__="caracteristique"
-    id=db.Column(db.String(3), primary_key=True)
+    id=db.Column(db.String(3), index=True, primary_key=True)
     sexe=db.Column(db.String(1))
-    tranche_id=db.Column(db.String(1), db.ForeignKey(Tranche.id))
-    categorie=db.Column(db.String(1), db.ForeignKey(Categorie.id))
+    id_tranche=db.Column(db.String(1), db.ForeignKey(Tranche.id, name="caracteristique_fk1_tranche"))
+    id_categorie=db.Column(db.String(1), db.ForeignKey(Categorie.id, name="caracteriqtique_fk2_categorie"))
 
 
 class Questionnaire(db.Model):
@@ -54,9 +55,10 @@ class Questionnaire(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     titre=db.Column(db.String(30))
     etat=db.Column(db.String(1))
-    client_id= db.Column(db.Integer, db.ForeignKey(Client.id))
-    concepteur_id= db.Column(db.Integer, db.ForeignKey(Client.id))
-    panel_id= db.Column(db.Integer, db.ForeignKey(Panel.id))
+    id_client= db.Column(db.Integer, db.ForeignKey(Client.id, name="questionnaire_fk1_client"))
+    id_concepteur= db.Column(db.Integer, db.ForeignKey(Utilisateur.id, name="questionnaire_fk2_utilisateur"))
+    id_panel= db.Column(db.Integer, db.ForeignKey(Panel.id, name="questionnaire_fk3_panel"))
+    # client=db.relationship('Client', backref='questionnaires', lazy='dynamic', uselist=True)
 
 class TypeQuestion(db.Model):
     __tablename__="typequestion"
@@ -66,18 +68,24 @@ class TypeQuestion(db.Model):
 
 class Question(db.Model):
     __tablename__="question"
-    id=db.Column(db.Integer, primary_key=True)
-    numero= db.Column(db.Integer, primary_key=True)
+    id=db.Column(db.Integer, db.ForeignKey(Questionnaire.id, name="question_fk1_questionnaire") , primary_key=True)
+    numero= db.Column(db.Integer, index=True, primary_key=True)
     intitule=db.Column(db.String(2000))
     max_val=db.Column(db.Integer)
-    type_id=db.Column(db.String(1), db.ForeignKey(TypeQuestion.id))
+    id_type=db.Column(db.String(1), db.ForeignKey(TypeQuestion.id, name="question_fk2_typequestion"))
+    questionnaire = db.relationship('Questionnaire', backref='questions', lazy='dynamic', uselist=True)
+
 
 class ValeurPossible(db.Model):
     __tablename__="valeurpossible"
-    question_id = db.Column(db.Integer, db.ForeignKey(Question.id),primary_key=True)
-    question_num = db.Column(db.Integer, db.ForeignKey(Question.numero),primary_key=True)
+    question_id = db.Column(db.Integer, primary_key=True)
+    question_num = db.Column(db.Integer, primary_key=True)
     id=db.Column(db.Integer, primary_key=True)
     valeur=db.Column(db.Text)
+    __table_args__ = (db.ForeignKeyConstraint([question_id, question_num],[Question.id, Question.numero]),{})
+    question = db.relationship('Question', backref='reponses', lazy='dynamic', uselist=True)
+
+
 
 class Sonde(db.Model):
     __tablename__="sonde"
@@ -86,22 +94,24 @@ class Sonde(db.Model):
     prenom=db.Column(db.String(30))
     date_naissance=db.Column(db.String(10))
     telephone=db.Column(db.String(10))
-    caracteristique_id=db.Column(db.String(1), db.ForeignKey(Caracteristique.id))
+    id_caracteristique=db.Column(db.String(3), db.ForeignKey(Caracteristique.id, name="sonde_fk1_caracteristique"))
+    # panels=db.relationship('Constituer', backref='sondes', lazy='dynamic', uselist=True)
+
 
 class Constituer(db.Model):
     __tablename__="constituer"
-    sonde_id=db.Column(db.Integer, db.ForeignKey(Sonde.id), primary_key=True)
-    panel_id=db.Column(db.Integer, db.ForeignKey(Panel.id), primary_key=True)
+    id_panel=db.Column(db.Integer, db.ForeignKey(Panel.id, name="constituer_fk1_panel"), primary_key=True)
+    id_sonde=db.Column(db.Integer, db.ForeignKey(Sonde.id, name="constituer_fk2_sonde"), primary_key=True)
 
 class Interroger(db.Model):
     __tablename__="interroger"
-    utilisateur_id=db.Column(db.Integer, db.ForeignKey(Utilisateur.id), primary_key=True)
-    sonde_id=db.Column(db.Integer, db.ForeignKey(Sonde.id), primary_key=True)
-    questionnaire_id=db.Column(db.Integer, db.ForeignKey(Questionnaire.id), primary_key=True)
+    id_utilisateur=db.Column(db.Integer, db.ForeignKey(Utilisateur.id, name="interroger_fk1_utilisateur"), primary_key=True)
+    id_sonde=db.Column(db.Integer, db.ForeignKey(Sonde.id, name="interroger_fk2_sonde"), primary_key=True)
+    id_questionnaire=db.Column(db.Integer, db.ForeignKey(Questionnaire.id, name="interroger_fk3_questionnaire"), primary_key=True)
 
 class Repondre(db.Model):
     __tablename__="repondre"
-    questionnaire_id=db.Column(db.Integer, db.ForeignKey(Questionnaire.id), primary_key=True)
-    numero_question=db.Column(db.Integer, db.ForeignKey(Question.numero), primary_key=True)
-    caracteristique_id=db.Column(db.String(1), db.ForeignKey(Caracteristique.id), primary_key=True)
-    valeur=db.Column(db.String(30), primary_key=True)
+    id_questionnaire=db.Column(db.Integer, db.ForeignKey(Questionnaire.id, name="repondre_fk1_questionnaire"), primary_key=True)
+    qu_numero=db.Column(db.Integer, db.ForeignKey(Question.numero, name="repondre_fk2_numero"), primary_key=True)
+    id_caracteristique=db.Column(db.String(3), db.ForeignKey(Caracteristique.id, name="repondre_fk3_caracteristique"), primary_key=True)
+    re_valeur=db.Column(db.String(30), primary_key=True)

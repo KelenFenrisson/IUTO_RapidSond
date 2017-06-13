@@ -30,46 +30,67 @@ function affiche_HTML(fichierHTML)
 //Début fonction affichage des différentes DIVS
 
 function accueilConcepteur(){
+<<<<<<< HEAD
 		$("#main").empty();
 		$("#main").append('<input type="button" value="Créer un nouveau sondage" class="btn btn-primary btn-lg active top-10 col-md-offset-3 col-md-6 bot-10" onclick="creerFormulaire()">');
 	    $("#main").append($(formulaire_Recherche_Sondage).html());
 		// CECI EST POUR LEXEMPLE, à EDITER PAR LA SUITE AVEC UNE RECHERCHE DANS LA BASE
 		for(var i =0;i<4;i++)
 		$("#main").append($(formulaire_Info_Sondage).html());
+=======
+
+	$("#main").empty();
+	$("#main").append('<input type="button" value="Créer un nouveau sondage" class="btn btn-primary btn-lg active top-10 col-md-offset-3 col-md-6 bot-10" onclick="creerFormulaire()">');
+    $("#main").append($(formulaire_Recherche_Sondage).html());
+	// CECI EST POUR LEXEMPLE, à EDITER PAR LA SUITE AVEC UNE RECHERCHE DANS LA BASE
+	for(var i =0;i<4;i++)
+	$("#main").append($(formulaire_Info_Sondage).html());
+>>>>>>> julien/master
 
 }
 
 function creerFormulaire(){
 	$("#main").empty();
+<<<<<<< HEAD
   $("#main").append($(formulaire_Sondage_A_Remplir).html());
+=======
+    $("#main").append($(formulaire_Sondage_A_Remplir).html());
+>>>>>>> julien/master
 	$("#main").append($(formulaire_Question_A_Remplir).html());
   $("#main").append($(formulaire_Question_A_Remplir3).html());
   $("#main").append($(formulaire_Question_A_Remplir2).html());
 	$("#typeQuestionnaire").empty();
+<<<<<<< HEAD
   $("#typeQuestionnaire2").empty();
   $("#typeQuestionnaire3").empty();
   remplissageFormSonde();
+=======
+    $("#typeQuestionnaire2").empty();
+    $("#typeQuestionnaire3").empty();
+
+
+>>>>>>> julien/master
 }
 
 function choisirTypeQuestion(type){
 
 	if(type.value=="choixM"){
 		$("#typeQuestionnaire2").empty();
-    $("#typeQuestionnaire3").empty();
-    $("#typeQuestionnaire").replaceWith($(formulaire_Question_A_Remplir).html());
-  }
+	    $("#typeQuestionnaire3").empty();
+	    $("#typeQuestionnaire").replaceWith($(formulaire_Question_A_Remplir).html());
+	  }
 
 	if(type.value=="yesOrNo"){
-  $("#typeQuestionnaire").empty();
-  $("#typeQuestionnaire2").empty();
-  $("#typeQuestionnaire3").replaceWith($(formulaire_Question_A_Remplir3).html());
-  }
+	  $("#typeQuestionnaire").empty();
+	  $("#typeQuestionnaire2").empty();
+	  $("#typeQuestionnaire3").replaceWith($(formulaire_Question_A_Remplir3).html());
+	}
 
 	if(type.value=="reponseLibre"){
-  $("#typeQuestionnaire").empty();
-  $("#typeQuestionnaire3").empty();
-  $("#typeQuestionnaire2").replaceWith($(formulaire_Question_A_Remplir2).html());
-  }
+	  $("#typeQuestionnaire").empty();
+	  $("#typeQuestionnaire3").empty();
+	  $("#typeQuestionnaire2").replaceWith($(formulaire_Question_A_Remplir2).html());
+  	}
 
 }
 
@@ -82,3 +103,10 @@ function ajoutReponse(){
 function supprReponse(){
   $('#row').last().remove();
 }
+
+//Debut fonction Jérémie
+//Fin fonction Jérémie
+//Debut fonction Olivier
+//Fin fonction Olivier
+//Debut fonction Julien
+//Fin fonction Julien
