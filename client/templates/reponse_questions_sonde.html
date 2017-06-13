@@ -2,49 +2,29 @@
 
 <div>
 <div id="repquest" class="col-md-offset-4 col-md-8">
-	<h2>Formulaire n°123456</h2>
+	<h2 id ="titrequestdet">Formulaire n°123456</h2>
 </div>
 
-<div id="formrech" class="col-md-offset-1 row">
-	<div id="champdate" class="col-md-3">
-		<p>Crée le : <span id="date">21/07/2016</span></p>
+
+	<div id="champcreateur" class="col-md-4">
+			<label>Par : </label>
+			<span id="createur">Marcel</span>
+
 	</div>
-	<div id="champcreateur" class="col-md-3">
-		<label>Par : </label>
-			<p id="createur">Marcel</p>
-	</div>
-	<div id="champclient" class="col-md-3">
+	<div id="champclient" class="col-md-4">
 		<label>Client : </label>
-			<p id="client">Buitoni</p>
+			<span id="titrecli">Buitoni</span>
 	</div>
-	<div id="champsonde" class="col-md-3">
+	<div id="champsonde" class="col-md-4">
 		<label>Sondé : </label>
-			<p id="sonde">Dupont</p>
+			<span id="sonde">Dupont</span>
 	</div>
 </div>
 
-<div id="quest1" class="border">
-	<h2>Question 1 : Bla</h2>
-	<p class="col-md-offset-1">Quelle est la réponse à la question ?</p>
-	<label class="col-md-offset-1">
-		<input type="checkbox" id="cbox1" value="checkbox1"> réponse 1<br/>
-		<input type="checkbox" id="cbox2" value="checkbox2"> réponse 2<br/>
-		<input type="checkbox" id="cbox3" value="checkbox3"> réponse 3<br/>
-	</label>
-</div>
-
 <br/>
-
-<div id="quest2" class="border">
-	<h2>Question 2 : Blabla </h2>
-	<p class="col-md-offset-1">Quelle est la réponse à celle-ci ?</p>
-	<input class="col-md-offset-1" value=" "/>
-</div>
-
-<br/>
-
-<div id="boutons" class="col-md-offset-4">
-	<input id="boutoncode" type="button" class="btn btn-danger" value="Annuler"/>
-	<input id="boutoncode" type="button" class="col-md-offset-2 btn btn-success" value="Valider"/>
-</div>
+	<div id ="listeQuestions">	</div>
+		<div id="boutons" class="col-md-offset-4">
+			<input id="boutoncode" type="button" class="col-md-offset-1 btn btn-danger  top-100" value="Annuler" onclick="annulationQuestion()"/>
+			<input id="boutoncode" type="button" class="col-md-offset-2 btn btn-success  top-100" value="Valider"/>
+		</div>
 </div>
