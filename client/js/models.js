@@ -31,14 +31,11 @@ function modif(){
     $.ajax({
         url:"http://192.168.13.162:5000/api/sonde/1",
         type:'PUT',
+        data:JSON.stringify({"id":1,"nom":"MABITE"}),
         contentType: "application/json",
-        data:JSON.stringify({"id":1,"nom":"picouille"}),
-        xhrFields: {
-            withCredentials: true
-        },
-        // This is the important part
-        crossDomain: true,
-        dataType: 'jsonp',
+
+
+
         success: function (msg) {
             alert('Update Success');
         },
