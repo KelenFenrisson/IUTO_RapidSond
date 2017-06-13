@@ -117,6 +117,13 @@ function remplissageFormQuestRecherche(){
 //Fin fonction Olivier
 
 //Debut fonction Julien
+function affiche_client_par_sondage_donnees(urlClient){
+	connect(urlClient,recup_client_par_sondage_Affichage);
+}
+
+function afficheSondageDonnees(){
+	connect("/api/questionnaire",AfficheSondageAffichage);
+}
 
 function modifSondageDonnees(idSondage){
 	creerFormulaire();
@@ -126,8 +133,5 @@ function modifSondageDonnees(idSondage){
 function affiche_Question_Donnees(urlQuestion){
 	connect(urlQuestion,affiche_Question_Affichage);
 }
-// function recup_Client_par_Sondage(urlClient){
-// 	connect(urlClient,affiche_client_par_sondage)
-// }
 
 //Fin fonction Julien

@@ -33,11 +33,10 @@ function accueilConcepteur(){
 	$("#main").empty();
 	$("#main").append('<input type="button" value="Créer un nouveau sondage" class="btn btn-primary btn-lg active top-10 col-md-offset-3 col-md-6 bot-10" onclick="creerFormulaire()">');
     $("#main").append($(formulaire_Recherche_Sondage).html());
-	// CECI EST POUR LEXEMPLE, à EDITER PAR LA SUITE AVEC UNE RECHERCHE DANS LA BASE
-	for(var i =0;i<4;i++){
-  	$("#main").append($(formulaire_Info_Sondage).html());
-  }
-  remplissageFormQuestRecherche()
+
+	afficheSondageDonnees();
+
+ 	remplissageFormQuestRecherche()
 }
 
 function creerFormulaire(){
@@ -127,6 +126,8 @@ function ajoutePanelRecherche(panel){
 //Fin fonction Olivier
 //Debut fonction Julien
 
+
+//affiche question Pour edit formulaire
 function affiche_Question_Affichage(data){
 	console.log(JSON.stringify(data));
 	console.log(data["data"]["id_type"]);
@@ -230,14 +231,71 @@ function editQuestion(id){
 	$("#boutonValider"+newId).attr("onclick","Envoi(data)");
 	$("#boutonAnnuler"+newId).attr("value","Annuler");
 	$("#boutonAnnuler"+newId).attr("onclick","Annule(data)");
+	// A REVOIR
 }
 
 function supprQuestion(id){
 	console.log(id);
 	var newId = id.charAt(13);
 	console.log(newId);
-
+	// IMPOSSIBLE
 
 }
 
+function AfficheSondageAffichage(data){
+	// console.log(JSON.stringify(data));
+	// console.log(JSON.stringify(data["data"]["objects"]));
+	var questionnaires = data["data"]["objects"];
+	var numero ;
+	for(var i=0;i<questionnaires.length;++i){
+		numero = questionnaires[i]["id"];
+		$("#main").append($(formulaire_Info_Sondage).html());
+		$("#formulaire_Info_Sondage").attr("id","formulaire_Info_Sondage"+numero);
+		remplirSondage(questionnaires[i]);
+	}
+	nbForm=1;
+}
+
+var nbForm=1;
+
+function recup_client_par_sondage_Affichage(data){
+	// console.log(nbForm);
+	// console.log(data["data"]["raison"]);
+	// console.log(nbForm);
+	$("#listeEntreprise"+nbForm).text(data["data"]["raison"]);
+
+	nbForm++;
+}
+
+function remplirSondage(data){
+	console.log(data);
+	num=data["id"];
+	// console.log(num);
+	$("#listeEntreprise").attr("id","listeEntreprise"+num);
+	$("#listeStatut").attr("id","listeStatut"+num);
+	$("#listeUser").attr("id","listeUser"+num);
+	$("#listePanel").attr("id","listePanel"+num);
+
+	var client = data["client"];
+	// console.log(JSON.stringify(client));
+
+	// switch(data["etat"]) {
+	//     case "C":
+	// 		$("#listeStatut"+num).text("Concepteur");
+	// 		break;
+	// 	case "S":
+	// 		$("#listeStatut"+num).text("Sondeur");
+	// 		break;
+	// 	case "A":
+	// 		$("#listeStatut"+num).text("Analyse");
+	// 		break;
+	// 	}
+
+
+	affiche_client_par_sondage_donnees(client);
+
+	// $("#listeUser"+num).val(reponses[i]);
+	// $("#listePanel"+num).val(reponses[i]);
+
+}
 //Fin fonction Julien
