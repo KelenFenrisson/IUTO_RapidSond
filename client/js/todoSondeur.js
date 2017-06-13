@@ -33,4 +33,19 @@ function accueilSondeur(){
   $("#questInfo").append($(formulaire_infoQuest).html());
 
   $("#main").append($(formulaire_Appel).html());
+
+  remplirInfosFormulaire("1");
+}
+
+function testJSON(data){
+    //console.log(JSON.stringify(data));
+    console.log(data["data"]["id"]);
+
+}
+
+function remplirInfosFormulaire(idFormulaire){
+  //var infos = null;
+  connect("/api/questionnaire/"+idFormulaire,testJSON);
+  //console.log(JSON.stringify(infos[0]));
+
 }
