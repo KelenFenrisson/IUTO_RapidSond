@@ -1,5 +1,5 @@
 
-function connect(adresse, fonction){
+function connect(adresse, fcontion){
       $.ajax({
          url: adresse,
          type: "GET",
