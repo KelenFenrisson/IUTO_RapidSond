@@ -45,9 +45,12 @@ function remplissageFormQuestRecherche(){
   connect("/api/panel",ajoutePanelRecherche);
 }
 
-// function enregistreFormulaire(){
-//   connect("")
-// }
+
+function creerForm(){
+  var client=$('#listeClient').val();
+  var panel=$('#choixPanel').val();
+  var concepteur=$('#choixConcepteur').val();
+}
 //Fin fonction Olivier
 //Debut fonction Julien
 //Fin fonction Julien
