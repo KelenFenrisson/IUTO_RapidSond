@@ -1,13 +1,13 @@
 <div>
-  
+
   <div id="typeQuestionnaire" class="col-md-offset-1 col-md-10">
     <form name="questions">
       <fieldset>
         <legend id="legendeQuestion">Question 1 :</legend>
         <div class="row all-10 center-block">
-          <label id="question" for="question" class="col-md-1">Question:</label>
-          <input type="text" id="question" name="question" placeholder="Ecrire ici la question" class="col-md-3" >
-          <select name="ChoixTypeQ" id="choixTypeQuestion" class="col-md-offset-4 col-md-2" onchange="choisirTypeQuestion(this)">
+          <label id="questionLabel" for="question" class="col-md-1">Question:</label>
+          <input type="text" id="question" name="question" placeholder="Ecrire ici la question" class="col-md-6" >
+          <select name="ChoixTypeQ" id="choixTypeQuestion" class="col-md-offset-1 col-md-2" onchange="choisirTypeQuestion(this)">
             <option value="choixM" selected="on">Choix multiple</option>
             <option value="yesOrNo">Yes or No</option>
             <option value="reponseLibre">Réponse Libre</option>
@@ -20,22 +20,22 @@
           <div class="col-md-4" id="checkboxReponses">
             <div class="row" id="row">
               <input type="checkbox" id="checkboxreponse" value="reponse" checked />
-              <input type="text" id="reponse" placeholder="Entrer une réponse"/>
+              <input type="text" id="reponse0" placeholder="Entrer une réponse"/>
             </div>
             <div class="row" id="row">
               <input type="checkbox" id="checkboxreponse" value="reponse"/>
-              <input type="text" id="reponse" placeholder="Entrer une réponse"/>
+              <input type="text" id="reponse1" placeholder="Entrer une réponse"/>
               </label>
             </div>
             <div class="row" id="row">
               <input type="checkbox" id="checkboxreponse" value="reponse"/>
-              <input type="text" id="reponse" placeholder="Entrer une réponse"/>
+              <input type="text" id="reponse2" placeholder="Entrer une réponse"/>
             </div>
           </div>
 
 
           <input type="button" value="Valider" id="boutonValider" class="col-md-offset-1 col-md-2 col-sm-push-3 right-5"/>
-          <input type="reset" value="Annuler" id="boutonAnnuler" class="col-md-2 col-sm-push-3 right-5"/>
+          <input type="button" value="Annuler" id="boutonAnnuler" class="col-md-2 col-sm-push-3 right-5"/>
 
         </div>
 

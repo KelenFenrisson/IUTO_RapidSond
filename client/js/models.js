@@ -22,6 +22,7 @@ function connect(adresse,fonc){
 }
 
 
+
 function Sonde(nom){
     this.nom=nom;
 }
@@ -66,7 +67,7 @@ function remplirInfoQuestionnaireDetails(idFormulaire){
 function setNomSonde(idSonde){
   connect("/api/sonde/"+idSonde,setNomSondeJSON);
 }
-function afficheLesTitresQuestions(idFormulaire){
+function afficheLesQuestions(idFormulaire){
     connect("/api/questionnaire/"+idFormulaire,afficheJSONQuestion);
 }
 
@@ -79,6 +80,10 @@ function modifSonde(idSond){
   modif(adresse,data)
 }
 
+function affiche_Question_Donnees_Sondeur(urlQuestion){
+	connect(urlQuestion,affiche_Question_Affichage_Sondeur);
+}
+
 
 // Fin fonction Léo
 
@@ -87,6 +92,36 @@ function modifSonde(idSond){
 //Debut fonction Jérémie
 //Fin fonction Jérémie
 //Debut fonction Olivier
+function remplissageFormQuest(){
+  connect("/api/client",ajouteClient);
+  connect("/api/utilisateur",ajouteUtilisateur);
+  connect("/api/panel",ajoutePanel);
+}
+
+function remplissageFormQuestRecherche(){
+  connect("/api/client",ajouteClientRecherche);
+  connect("/api/utilisateur",ajouteUtilisateurRecherche);
+  connect("/api/panel",ajoutePanelRecherche);
+}
+
+// function enregistreFormulaire(){
+//   connect("")
+// }
 //Fin fonction Olivier
+
 //Debut fonction Julien
+
+
+function modifSondageDonnees(idSondage){
+	creerFormulaire();
+	connect("/api/questionnaire/"+idSondage,modifierSondageAffichage);
+}
+
+function affiche_Question_Donnees(urlQuestion){
+	connect(urlQuestion,affiche_Question_Affichage);
+}
+// function recup_Client_par_Sondage(urlClient){
+// 	connect(urlClient,affiche_client_par_sondage)
+// }
+
 //Fin fonction Julien

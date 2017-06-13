@@ -8,34 +8,25 @@
 
 				<label id="labelEntreprise" for="listeEntreprise" class="col-md-2 top-10 text-center">Entreprise </label>
 				<div class="col-md-2">
-					<select id="listeEntreprise" name="listeEntreprise" class="col-md-10 top-10 text-center">
-						<option value="1" selected="selected">test</option>
-					</select>
+					<select id="listeEntreprise" name="listeEntreprise" class="col-md-10 top-10 text-center"></select>
 				</div>
 
 				<label id="labelStatut" for="listeStatut" class="col-md-2 top-10 text-center">Statut </label>
-				<div class="col-md-2"><select id="listeStatut" name="listeStatut" class="col-md-10 top-10 text-center" /></select></div>
+				<div class="col-md-2"><select id="listeStatut" name="listeStatut" class="col-md-10 top-10 text-center">
+					<option value="conception">Conception</option>
+					<option value="sondage">Sondage</option>
+					<option value="analyse">Analyse</option>
+				</select></div>
 
 				<label id="labelConcepteur" for="listeConcepteur" class="col-md-2 top-10 text-center">Concepteur </label>
-				<div class="col-md-2"> <select id="listeConcepteur" name="listeConcepteur" class="col-md-10 top-10 text-center" /></select></div>
+				<div class="col-md-2"> <select id="listeConcepteur" name="listeConcepteur" class="col-md-10 top-10 text-center"></select></div>
 
 			</div>
 
 			<div class="row bot-10">
 
 				<label id="labelPanel" for="listePanel" class="col-md-2 top-10 text-center">Panel</label>
-				<div class="col-md-2"><select id="listePanel" name="listePanel" class="col-md-10 top-10 text-center" /></select></div>
-
-				<label id="labelDateDebut" value="test" for="choixDateDebut" class="col-md-2 top-10 text-center">Date</label>
-
-				<div class="col-md-3">
-
-					<select id="choixDateDebut" name="choixDateDebut" class="col-md-4 top-10 text-center" /></select>
-
-					<label id="labelDateFin" for="choixDateFin" class="col-md-4 text-center top-10"> à </label>
-					<select id="choixDateFin" name="choixDateFin" class="col-md-4 top-10 text-center" /></select>
-
-				</div>
+				<div class="col-md-2"><select id="listePanel" name="listePanel" class="col-md-10 top-10 text-center"></select></div>
 
 				<input type="button" value="Actualiser" class="btn btn-primary top-10 col-md-offset-1 col-md-1 " onclick="appui()"/>
 
