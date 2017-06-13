@@ -47,6 +47,7 @@ function remplissageFormQuest(){
 //Debut fonction Julien
 
 function modifSondageDonnees(idSondage){
+	creerFormulaire();
 	connect("/api/questionnaire/"+idSondage,modifierSondageAffichage);
 }
 

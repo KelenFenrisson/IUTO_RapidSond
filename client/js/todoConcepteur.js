@@ -114,8 +114,10 @@ function affiche_Question_Affichage(data){
 	var id = data["data"]["id"];
 
 	switch(data["data"]["id_type"]) {
+		// si Question est de type note
     case "n":
 		console.log("C'est un type Note");
+		//création et affichage de la question
 		$("#main").append($(formulaire_Question_A_Remplir).html());
 		$("#typeQuestionnaire").attr("id","typeQuestionnaire"+id);
 		$("#legendeQuestion").attr("id","legendeQuestion"+id);
@@ -123,17 +125,20 @@ function affiche_Question_Affichage(data){
 		$("#boutonValider").attr("id","boutonValider"+id);
 		$("#boutonAnnuler").attr("id","boutonAnnuler"+id);
 
-
+		//changement des noms des Ids  ******************************************************
+		// change le numéro de la question
 		$("#legendeQuestion"+id).text("Question"+id);
+		//remplit la question
 		$("#question"+id).val(data["data"]["intitule"]);
+		//désactive la question
 		$("#question"+id).prop('disabled', true);
-
+		//change le boutton en edit avec sa fonction du onclick
 		$("#boutonValider"+id).attr("value","Edit");
 		$("#boutonValider"+id).attr("onclick","editQuestion()");
-
+		//change le boutton en suppr avec sa fonction du onclick
 		$("#boutonAnnuler"+id).attr("value","Suppr");
 		$("#boutonAnnuler"+id).attr("onclick","suppressionQuestion()");
-
+		//cache les bouttons
 		$("#boutonAjoutReponse").hide();
 		$("#boutonSupprimerReponse").hide();
 		$("#choixTypeQuestion").hide();
@@ -147,6 +152,7 @@ function affiche_Question_Affichage(data){
 		reponses[2]="NULLLLLLLLL";
 		//juste pour test
 
+		// affiche les réponses dans les input avec désactivation 
 		for(var i=0;i<reponses.length;++i){
 			$("#reponse"+i).val(reponses[i]);
 			$("#reponse"+i).prop('disabled', true);
@@ -175,6 +181,8 @@ function affiche_Question_Affichage(data){
 function modifierSondageAffichage(data){
 	console.log(JSON.stringify(data));
 	console.log(data["data"]["questions"]);
+	console.log(data["data"]["id"]);
+
 	var listeQuestion = data["data"]["questions"];
 	for(var i=0;i<listeQuestion.length;++i){
 		console.log(listeQuestion[i]);
@@ -182,8 +190,7 @@ function modifierSondageAffichage(data){
 
 	}
 
-	$("#main").empty();
-
+	$('#TitreFormulaire').text("Formulaire N°"+data["data"]["id"]);
 }
 
 // function affiche_client_par_sondage(data){
