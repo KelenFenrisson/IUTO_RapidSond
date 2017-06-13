@@ -22,8 +22,17 @@ function connect(adresse,fonc){
 }
 
 // Début fonction Léo
-function remplirInfosFormulaire(idFormulaire){
-  connect("/api/questionnaire/"+idFormulaire,testJSON);
+function remplirInfosFormulaireQuestionnaire(idFormulaire){
+  connect("/api/questionnaire/"+idFormulaire,ajoutJSONformulaire);
+}
+function setNomPanel(lienPanel){
+    connect(lienPanel,setNomPanelJSON);
+}
+function setNomClient(lienClient){
+  connect(lienClient,setNomClientJSON);
+}
+function remplirInfosFormulaireSonde(idSonde){
+  connect("/api/sonde/"+idSonde,ajoutJSONsonde);
 }
 // Fin fonction Léo
 
