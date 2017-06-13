@@ -24,18 +24,22 @@ api_manager.create_api(Utilisateur, methods=['GET', 'POST'], preprocessors={'GET
 
 
 ###### API QUESTIONNAIRE
-def pre_get_single_Questionnaire(instance_id=None,**kw):
+def pre_get_single_Questionnaire(instance_id=None, search_params=None, data=None,**kw):
     print("PRE_GET_SINGLE_QUESTIONNAIRE")
+    print(search_params)
 
-def pre_get_many_Questionnaire(result=None, **kw):
+def pre_get_many_Questionnaire(instance_id=None, search_params=None, data=None,**kw):
     print("PRE_GET_MANY_QUESTIONNAIRE")
+    print(search_params)
+
 
 def post_get_single_Questionnaire(instance_id=None, result=None, **kw):
     print("POST_GET_SINGLE_QUESTIONNAIRE")
     result['client']= api_manager.url_for(Client, instid=result['id_client'])
     result['concepteur']= api_manager.url_for(Utilisateur, instid=result['id_concepteur'])
     result['panel']= api_manager.url_for(Panel, instid=result['id_panel'])
-
+    result['testquestions'] = [ api_manager.url_for(Question)+"?q={\"filters\":[{\"id\":"+str(q['id'])+", \"numero\":"+str(q['numero'])+"}], \"single\":true}" for q in result['questions']]
+    result['questions'] = [ api_manager.url_for(Question, instid=q['id']) for q in result['questions']]
 
 
 def post_get_many_Questionnaire(result=None, **kw):
@@ -97,17 +101,44 @@ api_manager.create_api(Sonde,
 
 
 ###### API QUESTION
-def pre_get_single_Question(**kw):
+def question_serialize(instance):
+    print(instance.numero)
+    question = {"id": str(instance.id)+"-"+str(instance.numero),
+                "id_type":instance.id_type,
+                "intitule":instance.intitule,
+                "max_val":instance.max_val,
+                "numero":instance.numero}
+    return Question.dump(instance).data
+
+def question_deserialize(data):
+    print(data)
+    question = Question()
+    question.id=data['id'].split('-')[0]
+    question.numero=data['numero']
+    question.max_val=data['max_val']
+    question.id_type=data['id_type']
+    question.intitule=data['intitule']
+    return Question.load(data).data
+
+def pre_get_single_Question(instance_id=None, search_params=None, data=None,**kw):
     print("PRE_GET_SINGLE_QUESTION")
+    print(search_params)
 
-def pre_get_many_Question(**kw):
+def pre_get_many_Question(instance_id=None, search_params=None, data=None,**kw):
     print("PRE_GET_MANY_QUESTION")
+    print(search_params)
 
-def post_get_single_Question(instance_id=None, result=None, **kw):
+
+def post_get_single_Question(instance_id=None, search_params=None, result=None, **kw):
     print("POST_GET_SINGLE_QUESTION")
+    print('')
+    result['questionnaire']=[api_manager.url_for(Questionnaire, instid=q['id']) for q in result['questionnaire']]
 
-def post_get_many_Question(instance_id=None, result=None, **kw):
+def post_get_many_Question(instance_id=None, search_params=None, result=None, **kw):
     print("POST_GET_MANY_QUESTION")
+    # for item in result['objects']:
+    #     if item['id']==int(search_params['id']) and item['numero']==int(search_params['numero']):
+    #         item['questionnaire'] = [api_manager.url_for(Questionnaire, instid=q['id']) for q in item['questionnaire']]
 
 
 api_manager.create_api(Question,
@@ -115,7 +146,9 @@ api_manager.create_api(Question,
                        preprocessors={'GET_SINGLE':[pre_get_single_Question],
                                       'GET_MANY':[pre_get_many_Question]},
                        postprocessors={'GET_SINGLE':[post_get_single_Question],
-                                      'GET_MANY':[post_get_many_Question]}
+                                      'GET_MANY':[post_get_many_Question]},
+                       serializer=question_serialize,
+                       deserializer=question_deserialize
                        )
 
 
@@ -144,3 +177,4 @@ api_manager.create_api(Panel,
                        )
 
 api_manager.create_api(ValeurPossible, methods=['GET'])
+api_manager.create_api(Interroger, methods=['GET'])

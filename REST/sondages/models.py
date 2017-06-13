@@ -58,7 +58,8 @@ class Questionnaire(db.Model):
     id_client= db.Column(db.Integer, db.ForeignKey(Client.id, name="questionnaire_fk1_client"))
     id_concepteur= db.Column(db.Integer, db.ForeignKey(Utilisateur.id, name="questionnaire_fk2_utilisateur"))
     id_panel= db.Column(db.Integer, db.ForeignKey(Panel.id, name="questionnaire_fk3_panel"))
-    # client=db.relationship('Client', backref='questionnaires', lazy='dynamic', uselist=True)
+    # questions = db.relationship('Question', backref='questionnaire_', lazy='dynamic', uselist=True)
+
 
 class TypeQuestion(db.Model):
     __tablename__="typequestion"
