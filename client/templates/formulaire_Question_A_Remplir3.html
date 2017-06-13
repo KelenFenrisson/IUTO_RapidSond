@@ -1,38 +1,37 @@
 <div>
-<div id="typeQuestionnaire3" class="col-md-offset-1 col-md-10">
-  <form name="questions">
-    <fieldset>
-      <legend id="legendeQuestion">Question 1 :</legend>
-      <div class="row all-10 center-block">
-        <label id="question" for="question" class="col-md-1">Question:</label>
-        <input type="text" id="question" name="question" class="col-md-3" >
-        <select name="ChoixTypeQ" id="choixTypeQuestion" class="col-md-offset-4 col-md-2" onchange="choisirTypeQuestion(this)">
-          <option value="choixM">Choix multiple</option>
-          <option value="yesOrNo" selected="selected">Yes or No</option>
-          <option value="reponseLibre">Réponse Libre</option>
-        </select>
-      </div>
-
-
-      <div class="row all-10 center-block">
-
-        <div class="col-md-4">
-            <label id="yes">
-              <input type="radio" name="yes" value="yes" id="yes">
-              YES
-            </label>
-            <label class="col-md-offset-1" id="no">
-              <input type="radio" name="no" value="no" id="no">
-              NO
-            </label>
+  <div id="typeQuestionnaire3" class="col-md-offset-1 col-md-10">
+    <form name="questions">
+      <fieldset>
+        <legend id="legendeQuestion">Question 1 :</legend>
+        <div class="row all-10 center-block">
+          <label id="question" for="question" class="col-md-1">Question:</label>
+          <input type="text" id="question" name="question" placeholder="Ecrire ici la question" class="col-md-3"/>
+          <select name="ChoixTypeQ" id="choixTypeQuestion" class="col-md-offset-4 col-md-2" onchange="choisirTypeQuestion(this)">
+            <option value="choixM">Choix multiple</option>
+            <option value="yesOrNo" selected="selected">Yes or No</option>
+            <option value="reponseLibre">Réponse Libre</option>
+          </select>
         </div>
 
-        <input type="button" value="Valider" id="boutonValider" class="col-md-offset-1 col-md-2 col-sm-push-3 right-5"/>
-        <input type="button" value="Annuler" id="boutonAnnuler" class="col-md-2 col-sm-push-3 right-5"/>
+        <div class="row all-10 center-block">
 
-      </div>
+          <div class="col-md-4">
+              <label id="yes">
+                <input type="radio" name="yes" value="yes" id="yes"/>
+                YES
+              </label>
+              <label class="col-md-offset-1" id="no">
+                <input type="radio" name="no" value="no" id="no"/>
+                NO
+              </label>
+          </div>
 
-    </fieldset>
-  </form>
+          <input type="button" value="Valider" id="boutonValider" class="col-md-offset-1 col-md-2 col-sm-push-3 right-5"/>
+          <input type="button" value="Annuler" id="boutonAnnuler" class="col-md-2 col-sm-push-3 right-5"/>
+
+        </div>
+
+      </fieldset>
+    </form>
+  </div>
 </div>
-</html>

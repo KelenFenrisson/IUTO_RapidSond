@@ -30,7 +30,6 @@ function affiche_HTML(fichierHTML)
 //Début fonction affichage des différentes DIVS
 
 function accueilConcepteur(){
-
 	$("#main").empty();
 	$("#main").append('<input type="button" value="Créer un nouveau sondage" class="btn btn-primary btn-lg active top-10 col-md-offset-3 col-md-6 bot-10" onclick="creerFormulaire()">');
     $("#main").append($(formulaire_Recherche_Sondage).html());
@@ -42,15 +41,14 @@ function accueilConcepteur(){
 
 function creerFormulaire(){
 	$("#main").empty();
-    $("#main").append($(formulaire_Sondage_A_Remplir).html());
+  $("#main").append($(formulaire_Sondage_A_Remplir).html());
 	$("#main").append($(formulaire_Question_A_Remplir).html());
-    $("#main").append($(formulaire_Question_A_Remplir3).html());
-    $("#main").append($(formulaire_Question_A_Remplir2).html());
+  $("#main").append($(formulaire_Question_A_Remplir3).html());
+  $("#main").append($(formulaire_Question_A_Remplir2).html());
 	$("#typeQuestionnaire").empty();
-    $("#typeQuestionnaire2").empty();
-    $("#typeQuestionnaire3").empty();
-
-
+  $("#typeQuestionnaire2").empty();
+  $("#typeQuestionnaire3").empty();
+  remplissageFormQuest();
 }
 
 function choisirTypeQuestion(type){
@@ -88,6 +86,24 @@ function supprReponse(){
 //Debut fonction Jérémie
 //Fin fonction Jérémie
 //Debut fonction Olivier
+function ajouteClient(client){
+  for(var i=0; i<client["data"]["num_results"]; i++){
+    $('#listeClient').append('<option value="'+client['data']['objects'][i]['raison']+'">'+client['data']['objects'][i]['raison']+'</option>');
+  }
+}
+
+function ajouteUtilisateur(utilisateur){
+  for(var i=0; i<utilisateur["data"]["num_results"]; i++){
+    $('#choixConcepteur').append('<option value="'+utilisateur['data']['objects'][i]['nom']+'">'+utilisateur['data']['objects'][i]['nom']+'</option>');
+  }
+}
+
+function ajoutePanel(panel){
+  for(var i=0; i<panel["data"]["num_results"]; i++){
+    $('#choixPanel').append('<option value="'+panel['data']['objects'][i]['intitule']+'">'+panel['data']['objects'][i]['intitule']+'</option>');
+  }
+}
+
 //Fin fonction Olivier
 //Debut fonction Julien
 function affiche_Question_Affichage(data){

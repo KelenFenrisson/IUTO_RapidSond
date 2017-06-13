@@ -21,6 +21,7 @@ function connect(adresse,fonc){
 
 }
 
+
 // Début fonction Léo
 function remplirInfosFormulaire(idFormulaire){
 	connect("/api/questionnaire/"+idFormulaire,testJSON);
@@ -32,6 +33,15 @@ function remplirInfosFormulaire(idFormulaire){
 //Debut fonction Jérémie
 //Fin fonction Jérémie
 //Debut fonction Olivier
+function remplissageFormQuest(){
+  connect("/api/client",ajouteClient);
+  connect("/api/utilisateur",ajouteUtilisateur);
+  connect("/api/panel",ajoutePanel);
+}
+
+// function enregistreFormulaire(){
+//   connect("")
+// }
 //Fin fonction Olivier
 
 //Debut fonction Julien
@@ -46,4 +56,5 @@ function affiche_Question_Donnees(urlQuestion){
 // function recup_Client_par_Sondage(urlClient){
 // 	connect(urlClient,affiche_client_par_sondage)
 // }
+
 //Fin fonction Julien
