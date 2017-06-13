@@ -1,6 +1,8 @@
 ################################### DESCRIPTION ET PARAMETRAGE DES API
 from sondages.application import api_manager, app
 from sondages.models import *
+from flask_cors import CORS
+import json
 
 
 
@@ -38,8 +40,12 @@ def post_get_single_Questionnaire(instance_id=None, result=None, **kw):
     result['client']= api_manager.url_for(Client, instid=result['id_client'])
     result['concepteur']= api_manager.url_for(Utilisateur, instid=result['id_concepteur'])
     result['panel']= api_manager.url_for(Panel, instid=result['id_panel'])
-    result['testquestions'] = [ api_manager.url_for(Question)+"?q={\"filters\":[{\"id\":"+str(q['id'])+", \"numero\":"+str(q['numero'])+"}], \"single\":true}" for q in result['questions']]
-    result['questions'] = [ api_manager.url_for(Question, instid=q['id']) for q in result['questions']]
+
+    l_questlink = [ api_manager.url_for(Question, q=json.dumps({"filters":[{"and":[{"name":"id","op":"==","val":quest['id']},{"name":"numero","op":"eq","val":quest['numero']}]}]})) for quest in result['questions']]
+    result['questions'] = l_questlink
+
+# 127.0.0.1:5001/api/question?q={"filters":[{"and":[{"name":"id","op":"eq","val":1},{"name":"numero","op":"eq","val":2}]}]}
+
 
 
 def post_get_many_Questionnaire(result=None, **kw):
@@ -113,17 +119,20 @@ def pre_get_many_Question(instance_id=None, search_params=None, data=None,**kw):
 
 def post_get_single_Question(instance_id=None, search_params=None, result=None, **kw):
     print("POST_GET_SINGLE_QUESTION")
+    print("POST_GET", search_params)
     result['questionnaire']=[api_manager.url_for(Questionnaire, instid=q['id']) for q in result['questionnaire']]
 
 def post_get_many_Question(instance_id=None, search_params=None, result=None, **kw):
     print("POST_GET_MANY_QUESTION")
+    print("POST_GET", search_params)
+
     for item in result['objects']:
-        if item['id']==int(search_params['id']) and item['numero']==int(search_params['numero']):
-            item['questionnaire'] = [api_manager.url_for(Questionnaire, instid=q['id']) for q in item['questionnaire']]
+        item['questionnaire'] = [api_manager.url_for(Questionnaire, instid=q['id']) for q in item['questionnaire']]
 
 
 api_manager.create_api(Question,
                        methods=['GET', 'POST', 'PATCH', 'DELETE'],
+                       primary_key='numero',
                        preprocessors={'GET_SINGLE':[pre_get_single_Question],
                                       'GET_MANY':[pre_get_many_Question]},
                        postprocessors={'GET_SINGLE':[post_get_single_Question],
@@ -157,3 +166,4 @@ api_manager.create_api(Panel,
 
 api_manager.create_api(ValeurPossible, methods=['GET'])
 api_manager.create_api(Interroger, methods=['GET'])
+CORS(app)
