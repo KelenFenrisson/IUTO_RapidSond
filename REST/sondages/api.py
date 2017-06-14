@@ -131,9 +131,12 @@ def post_get_many_Question(instance_id=None, search_params=None, result=None, **
         item['reponses'] = [api_manager.url_for(ValeurPossible, q=json.dumps({"filters": [{"and": [{"name": "question_id", "op": "==", "val": rep['question_id']}, {"name": "question_num", "op": "eq", "val": rep['question_num']},{"name": "id", "op": "eq", "val": rep['id']}]}]}))
                        for rep in item['reponses']]
 
+def pre_delete_single_Question(**kw):
+    pass
+
 app.config['API_LIST']['Question']=api_manager.create_api(Question,
                        methods=['GET', 'POST', 'PATCH', 'DELETE'],
-                       primary_key='numero',
+                       primary_key='numero', allow_delete_many=True,
                        preprocessors={'GET_SINGLE':[pre_get_single_Question],
                                       'GET_MANY':[pre_get_many_Question]},
                        postprocessors={'GET_SINGLE':[post_get_single_Question],
@@ -163,7 +166,7 @@ app.config['API_LIST']['Panel']=api_manager.create_api(Panel,
                        postprocessors={'GET_SINGLE':[post_get_single_Panel],'GET_MANY':[post_get_many_Panel]},
                        )
 
-app.config['API_LIST']['ValeurPossible']=api_manager.create_api(ValeurPossible, methods=['GET','POST','PATCH'], exclude_columns=['question'])
+app.config['API_LIST']['ValeurPossible']=api_manager.create_api(ValeurPossible, methods=['GET','POST','PATCH','DELETE'], exclude_columns=['question'])
 app.config['API_LIST']['Interroger']=api_manager.create_api(Interroger, methods=['GET','POST','PATCH'])
 app.config['API_LIST']['Constituer']=api_manager.create_api(Constituer, methods=['GET','POST','PATCH'])
 app.config['API_LIST']['Repondre']=api_manager.create_api(Repondre, methods=['GET','POST','PATCH'])
