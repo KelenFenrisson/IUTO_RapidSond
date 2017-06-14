@@ -256,9 +256,12 @@ function affiche_Question_Affichage(data){
 
 			// console.log("C'est un type Note");
 			var reponses = data["data"]["objects"][0]["reponses"];
-
+			// console.log(JSON.stringify(reponses));
 			// affiche les réponses dans les input avec désactivation
+			tabReponses=Array();
 			for(var i=0;i<reponses.length;++i){
+				// console.log(JSON.stringify(reponses[i]));
+
 				tabReponses.push(reponses[i]);
 				// $("#reponse"+i).val(reponses[i]);
 				$("#reponse"+i).prop('disabled', true);
@@ -347,7 +350,7 @@ function editQuestion(id){
 }
 
 function MAJ_Donnees(data){
-	
+
 }
 
 function supprQuestion(id){
