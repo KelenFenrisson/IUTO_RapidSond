@@ -32,7 +32,7 @@ function Sonde(nom){
 function modif(adresse,data){
     $.ajax({
         url:urlBase+adresse,
-        type:'PUT',
+        type:'PATCH',
         data:data,
         //JSON.stringify({"id":1,"nom":"MABITE"})
         contentType: "application/json",
@@ -116,6 +116,10 @@ function affiche_Question_Donnees_Sondeur(urlQuestion){
 	connect(urlQuestion,affiche_Question_Affichage_Sondeur);
 }
 
+function setReponsesCHoixMultiple(lienReponse){
+  connect(lienReponse,affiche_reponses_QCM);
+
+}
 
 // Fin fonction Léo
 
