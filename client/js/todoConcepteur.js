@@ -7,6 +7,10 @@ var formulaire_Question_A_Remplir = affiche_HTML("formulaire_Question_A_Remplir.
 var formulaire_Info_Sondage = affiche_HTML("formulaire_Info_Sondage.html");
 var formulaire_Sondage_A_Remplir = affiche_HTML("formulaire_Sondage_A_Remplir.html");
 
+// Variables pour créerquestionnaire dans la base
+
+var idCli, idPan, idC;
+
 // Début fonction récup HTML en string *******************************************************************************
 function affiche_HTML(fichierHTML)
 {
@@ -32,23 +36,22 @@ function affiche_HTML(fichierHTML)
 function accueilConcepteur(){
 	$("#main").empty();
 	$("#main").append('<input type="button" value="Créer un nouveau sondage" class="btn btn-primary btn-lg active top-10 col-md-offset-3 col-md-6 bot-10" onclick="creerFormulaire()">');
-    $("#main").append($(formulaire_Recherche_Sondage).html());
-
-	afficheSondageDonnees();
-
- 	remplissageFormQuestRecherche()
+  	$("#main").append($(formulaire_Recherche_Sondage).html());
+  	afficheSondageDonnees();
+  	remplissageFormQuestRecherche();
 }
 
 function creerFormulaire(){
 	$("#main").empty();
-  $("#main").append($(formulaire_Sondage_A_Remplir).html());
+	$("#main").append($(formulaire_Sondage_A_Remplir).html());
 	$("#main").append($(formulaire_Question_A_Remplir).html());
-  $("#main").append($(formulaire_Question_A_Remplir3).html());
-  $("#main").append($(formulaire_Question_A_Remplir2).html());
+  	$("#main").append($(formulaire_Question_A_Remplir3).html());
+  	$("#main").append($(formulaire_Question_A_Remplir2).html());
 	$("#typeQuestionnaire").empty();
-  $("#typeQuestionnaire2").empty();
-  $("#typeQuestionnaire3").empty();
-  remplissageFormQuest();
+  	$("#typeQuestionnaire2").empty();
+  	$("#typeQuestionnaire3").empty();
+  	remplissageFormQuest();
+  	recupId();
 }
 
 function choisirTypeQuestion(type){
@@ -85,7 +88,8 @@ function supprReponse(){
 
 //Debut fonction Jérémie
 //Fin fonction Jérémie
-//Debut fonction Olivier
+
+// --------------------------------------- Debut fonction Olivier ---------------------------------------
 function ajouteClient(client){
   for(var i=0; i<client["data"]["num_results"]; i++){
     $('#listeClient').append('<option value="'+client['data']['objects'][i]['raison']+'">'+client['data']['objects'][i]['raison']+'</option>');
@@ -122,8 +126,47 @@ function ajoutePanelRecherche(panel){
   }
 }
 
+function recupIdClient(clients){
+  var client=$('#listeClient').val();
+  for(var i=0; i<clients["data"]["num_results"]; i++){
+    if (client==clients['data']['objects'][i]['raison']){
+      idCli=clients['data']['objects'][i]["id"];
+    }
+  }
+}
 
-//Fin fonction Olivier
+function recupIdConcepteur(utilisateur){
+  var concepteur=$('#choixConcepteur').val();
+  for(var i=0; i<utilisateur["data"]["num_results"]; i++){
+    if (concepteur==utilisateur['data']['objects'][i]['nom']){
+      idC=utilisateur['data']['objects'][i]["id"];
+    }
+  }
+}
+
+function recupIdPanel(panel){
+  var pan=$('#choixPanel').val();
+  for(var i=0; i<panel["data"]["num_results"]; i++){
+    if (pan==panel['data']['objects'][i]['intitule']){
+      idPan=panel['data']['objects'][i]["id"];
+    }
+  }
+}
+
+function ajoutFormulaire(){
+  var str={
+    "etat": "C",
+    "id_client": idCli,
+    "id_concepteur": idC,
+    "id_panel": idPan,
+    "titre": "nouveau Q"
+  }
+  // var str='"client": "/api/client/'+idCli+'", "etat": "C", ';
+  // str=str+'"concepteur": "/api/utilisateur/'+idC+'", "id_client": '+idCli+', "id_concepteur": '+idC+', ';
+  // str=str+'"id_panel": '+idPan+', "panel": "/api/panel/'+idPan+'", "titre": "nouveau Q"';
+  return str;
+}
+// --------------------------------------- Fin fonction Olivier ---------------------------------------
 //Debut fonction Julien
 
 

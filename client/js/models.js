@@ -99,6 +99,8 @@ function setNomQuestion(lienQuest){
 //Debut fonction Jérémie
 //Fin fonction Jérémie
 //Debut fonction Olivier
+
+
 function remplissageFormQuest(){
   connect("/api/client",ajouteClient);
   connect("/api/utilisateur",ajouteUtilisateur);
@@ -111,9 +113,18 @@ function remplissageFormQuestRecherche(){
   connect("/api/panel",ajoutePanelRecherche);
 }
 
-// function enregistreFormulaire(){
-//   connect("")
-// }
+
+function recupId(){
+  connect("/api/client",recupIdClient);
+  connect("/api/utilisateur",recupIdConcepteur);
+  connect("/api/panel",recupIdPanel);
+}
+
+function AjouteFormBase(){
+  var str=ajoutFormulaire();
+  ajout("/api/questionnaire",JSON.stringify(str));
+  $("#typeQuestionnaire").replaceWith($(formulaire_Question_A_Remplir).html());
+}
 //Fin fonction Olivier
 
 //Debut fonction Julien
