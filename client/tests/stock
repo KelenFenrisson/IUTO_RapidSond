@@ -1,0 +1,17 @@
+<div id="quest1" class="border">
+	<h2>Question 1 : Bla</h2>
+	<p class="col-md-offset-1">Quelle est la réponse à la question ?</p>
+	<label class="col-md-offset-1">
+		<input type="checkbox" id="cbox1" value="checkbox1"> réponse 1<br/>
+		<input type="checkbox" id="cbox2" value="checkbox2"> réponse 2<br/>
+		<input type="checkbox" id="cbox3" value="checkbox3"> réponse 3<br/>
+	</label>
+</div>
+
+<br/>
+
+<div id="quest2" class="border">
+	<h2>Question 2 : Blabla </h2>
+	<p class="col-md-offset-1">Quelle est la réponse à celle-ci ?</p>
+	<input class="col-md-offset-1" value=" "/>
+</div>
