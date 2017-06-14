@@ -2,6 +2,7 @@
 from sondages.application import api_manager, app
 from sondages.models import *
 from flask_cors import CORS
+from flask_restless import  ProcessingException
 import json
 
 
@@ -21,8 +22,11 @@ def post_get_single_Utilisateur(**kw):
 def post_get_many_Utilisateur(**kw):
     pass
 
-app.config['API_LIST']['Utilisateur']=api_manager.create_api(Utilisateur, methods=['GET', 'POST', 'PATCH'], preprocessors={'GET_SINGLE':[pre_get_single_Utilisateur],
-                                                                    'GET_MANY':[pre_get_many_Utilisateur]})
+app.config['API_LIST']['Utilisateur']=api_manager.create_api(Utilisateur,
+                                                             methods=['GET', 'POST', 'PATCH'],
+                                                             results_per_page=100,
+                                                             preprocessors={'GET_SINGLE':[pre_get_single_Utilisateur],
+                                                                                                                           'GET_MANY':[pre_get_many_Utilisateur]})
 
 
 ###### API QUESTIONNAIRE
@@ -53,12 +57,13 @@ def post_get_many_Questionnaire(result=None, **kw):
         item['questions'] = l_questlink
 
 app.config['API_LIST']['Questionnaire']=api_manager.create_api(Questionnaire,
-                       methods=['GET', 'POST', 'PATCH','DELETE'],
-                       preprocessors={'GET_SINGLE':[pre_get_single_Questionnaire],
-                                      'GET_MANY':[pre_get_many_Questionnaire]},
-                       postprocessors={'GET_SINGLE': [post_get_single_Questionnaire],
-                                      'GET_MANY': [post_get_many_Questionnaire]}
-                       )
+                                                               results_per_page=100,
+                                                               methods=['GET', 'POST', 'PATCH','DELETE'],
+                                                               preprocessors={'GET_SINGLE':[pre_get_single_Questionnaire],
+                                                                              'GET_MANY':[pre_get_many_Questionnaire]},
+                                                               postprocessors={'GET_SINGLE': [post_get_single_Questionnaire],
+                                                                               'GET_MANY': [post_get_many_Questionnaire]}
+                                                               )
 
 
 
@@ -76,8 +81,11 @@ def post_get_single_Client(result=None,**kw):
 def post_get_many_Client(result=None,**kw):
     pass
 
-app.config['API_LIST']['Client']=api_manager.create_api(Client, methods=['GET', 'POST', 'PATCH'], preprocessors={'GET_SINGLE':[pre_get_single_Client],
-                                                                'GET_MANY':[pre_get_many_Client]})
+app.config['API_LIST']['Client']=api_manager.create_api(Client,
+                                                        methods=['GET', 'POST', 'PATCH'],
+                                                        results_per_page=100,
+                                                        preprocessors={'GET_SINGLE':[pre_get_single_Client],
+                                                                                                                 'GET_MANY':[pre_get_many_Client]})
 
 ###### API SONDE
 def pre_get_single_Sonde(**kw):
@@ -97,9 +105,10 @@ def post_get_many_Sonde(result=None,**kw):
 
 
 app.config['API_LIST']['Sonde']=api_manager.create_api(Sonde,
-                       methods=['GET', 'PATCH', 'POST'],
-                       preprocessors={'GET_SINGLE':[pre_get_single_Sonde], 'GET_MANY':[pre_get_many_Sonde]},
-                       postprocessors={'GET_SINGLE':[post_get_single_Sonde], 'GET_MANY':[post_get_many_Sonde]})
+                                                       methods=['GET', 'PATCH', 'POST'],
+                                                       results_per_page=100,
+                                                       preprocessors={'GET_SINGLE':[pre_get_single_Sonde], 'GET_MANY':[pre_get_many_Sonde]},
+                                                       postprocessors={'GET_SINGLE':[post_get_single_Sonde], 'GET_MANY':[post_get_many_Sonde]})
 
 
 
@@ -121,7 +130,7 @@ def post_get_single_Question(instance_id=None, search_params=None, result=None, 
     result['reponses'] = [api_manager.url_for(ValeurPossible, q=json.dumps({"filters": [{"and": [
         {"name": "question_id", "op": "==", "val": rep['question_id']},
         {"name": "question_num", "op": "eq", "val": rep['question_num']}, {"name": "id", "op": "eq", "val": rep['id']}]}]}))
-                        for rep in result['reponses']]
+                          for rep in result['reponses']]
 
 def post_get_many_Question(instance_id=None, search_params=None, result=None, **kw):
     # print("POST_GET_MANY_QUESTION")
@@ -129,19 +138,22 @@ def post_get_many_Question(instance_id=None, search_params=None, result=None, **
     for item in result['objects']:
         item['questionnaire'] = [api_manager.url_for(Questionnaire, instid=q['id']) for q in item['questionnaire']]
         item['reponses'] = [api_manager.url_for(ValeurPossible, q=json.dumps({"filters": [{"and": [{"name": "question_id", "op": "==", "val": rep['question_id']}, {"name": "question_num", "op": "eq", "val": rep['question_num']},{"name": "id", "op": "eq", "val": rep['id']}]}]}))
-                       for rep in item['reponses']]
+                            for rep in item['reponses']]
 
-def pre_delete_single_Question(**kw):
-    pass
+def pre_delete_many_Question(search_params=None,**kw):
+    if search_params is None:
+        raise ProcessingException("Complete table deletion is impossible!")
 
 app.config['API_LIST']['Question']=api_manager.create_api(Question,
-                       methods=['GET', 'POST', 'PATCH', 'DELETE'],
-                       primary_key='numero', allow_delete_many=True,
-                       preprocessors={'GET_SINGLE':[pre_get_single_Question],
-                                      'GET_MANY':[pre_get_many_Question]},
-                       postprocessors={'GET_SINGLE':[post_get_single_Question],
-                                      'GET_MANY':[post_get_many_Question]}
-                       )
+                                                          methods=['GET', 'POST', 'PATCH', 'DELETE'],
+                                                          results_per_page=100,
+                                                          primary_key='numero', allow_delete_many=True,
+                                                          preprocessors={'GET_SINGLE':[pre_get_single_Question],
+                                                                         'GET_MANY':[pre_get_many_Question],
+                                                                         'DELETE_MANY':[pre_delete_many_Question]},
+                                                          postprocessors={'GET_SINGLE':[post_get_single_Question],
+                                                                          'GET_MANY':[post_get_many_Question]}
+                                                          )
 
 
 ###### API PANEL
@@ -161,13 +173,25 @@ def post_get_many_Panel(result=None, **kw):
 
 
 app.config['API_LIST']['Panel']=api_manager.create_api(Panel,
-                       methods=['GET', 'POST'],
-                       preprocessors={'GET_SINGLE':[pre_get_single_Panel],'GET_MANY':[pre_get_many_Panel]},
-                       postprocessors={'GET_SINGLE':[post_get_single_Panel],'GET_MANY':[post_get_many_Panel]},
-                       )
+                                                       methods=['GET', 'POST'],
+                                                       results_per_page=100,
+                                                       preprocessors={'GET_SINGLE':[pre_get_single_Panel],'GET_MANY':[pre_get_many_Panel]},
+                                                       postprocessors={'GET_SINGLE':[post_get_single_Panel],'GET_MANY':[post_get_many_Panel]},
+                                                       )
 
-app.config['API_LIST']['ValeurPossible']=api_manager.create_api(ValeurPossible, methods=['GET','POST','PATCH','DELETE'], exclude_columns=['question'])
-app.config['API_LIST']['Interroger']=api_manager.create_api(Interroger, methods=['GET','POST','PATCH'])
-app.config['API_LIST']['Constituer']=api_manager.create_api(Constituer, methods=['GET','POST','PATCH'])
-app.config['API_LIST']['Repondre']=api_manager.create_api(Repondre, methods=['GET','POST','PATCH'])
+app.config['API_LIST']['ValeurPossible']=api_manager.create_api(ValeurPossible,
+                                                                methods=['GET','POST','PATCH','DELETE'],
+                                                                results_per_page=100,
+                                                                exclude_columns=['question'])
+app.config['API_LIST']['Interroger']=api_manager.create_api(Interroger,
+                                                            results_per_page=100,
+                                                            methods=['GET','POST','PATCH'])
+
+app.config['API_LIST']['Constituer']=api_manager.create_api(Constituer,
+                                                            results_per_page=100,
+                                                            methods=['GET','POST','PATCH'])
+
+app.config['API_LIST']['Repondre']=api_manager.create_api(Repondre,
+                                                          max_results_per_page=100,
+                                                          methods=['GET','POST','PATCH'])
 CORS(app)
