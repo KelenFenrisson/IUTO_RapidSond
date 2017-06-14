@@ -166,4 +166,5 @@ app.config['API_LIST']['Panel']=api_manager.create_api(Panel,
 app.config['API_LIST']['ValeurPossible']=api_manager.create_api(ValeurPossible, methods=['GET','POST','PATCH'], exclude_columns=['question'])
 app.config['API_LIST']['Interroger']=api_manager.create_api(Interroger, methods=['GET','POST','PATCH'])
 app.config['API_LIST']['Constituer']=api_manager.create_api(Constituer, methods=['GET','POST','PATCH'])
+app.config['API_LIST']['Repondre']=api_manager.create_api(Repondre, methods=['GET','POST','PATCH'])
 CORS(app)
