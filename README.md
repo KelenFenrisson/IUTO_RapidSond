@@ -91,6 +91,13 @@ mysql > source jeu_essai.sql
 - Integrateur principal : Julien
 - Developpeurs : Julien, Leo, Olivier, Jeremie, Roméo
 
+	- Julien :  Accueil + Conception ( Affiche Sondage avec infos + affiche Questions des sondages ) + Visuels HTML
+	- Leo + Roméo : Sondage (Affiche sondés et formulaires + répondre aux formulaires + passer aux sondés suivants ) + Visuels HTML
+	- Olivier : Conception ( Création d'un nouveau sondage + creation de nouvelles questions/reponses + ajout et suppression dans la base de données + remplir liste déroulante) + Visuels HTML
+	- Jeremie : Visuels HTML + Diapo
+
+
+
 #### Programme
 
 Une application web onepage permettant de concevoir des questionnaires et d'interroger des sondés.
@@ -122,4 +129,3 @@ Principalement du python3, un peu de html/CSS
 ###### Interface
 
 - home (/) : contient une description sommaire de l'API REST et des entités manipulables
-
