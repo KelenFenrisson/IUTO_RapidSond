@@ -189,11 +189,21 @@ function afficheSondageDonnees(){
 }
 
 function affiche_Tout_dans_sondage_donnees(){
-	connect("/api/panel/3",affiche_Tout_dans_sondage_Affichage);
+	connect("/api/panel",affiche_Tout_dans_sondage_Affichage);
+}
+
+function affiche_Reponse_donnees(url){
+	connect(url,affiche_Reponse_Affichage);
 }
 
 function modifSondageDonnees(idSondage){
 	creerFormulaire();
+	if(idSondage.length==9){
+		idSondage=idSondage.charAt(8);
+	}
+	else{
+		idSondage=idSondage.charAt(8)+idSondage.charAt(9);
+	}
 	connect("/api/questionnaire/"+idSondage,modifierSondageAffichage);
 }
 
