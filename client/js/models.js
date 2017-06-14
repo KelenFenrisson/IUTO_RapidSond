@@ -60,7 +60,6 @@ function ajout(adresse,data){
             console.log('Insert Error');
         }
         });
-
 }
 
 function supprimer(adresse){
@@ -121,6 +120,14 @@ function setReponsesCHoixMultiple(lienReponse){
 
 }
 
+function affecteridcaraccourant(idSonde){
+  connect("/api/sonde/"+idSonde,affecterJSONidcarac);
+}
+
+function recherchesonde(){
+	connect("/api/sonde",listeSonde);
+}
+
 // Fin fonction Léo
 
 //Debut fonction Roméo
@@ -157,16 +164,26 @@ function AjouteFormBase(){
 }
 
 function supprQ(){
-  supprimer("/api/questionnaire/25");
+  supprimer("/api/questionnaire/28");
 }
 
 function supprQuestion(){
-  supprimer("/api/question?q=%7B%22filters%22%3A+%5B%7B%22and%22%3A+%5B%7B%22name%22%3A+%22id%22%2C+%22val%22%3A+24%2C+%22op%22%3A+%22%3D%3D%22%7D%2C+%7B%22name%22%3A+%22numero%22%2C+%22val%22%3A+1%2C+%22op%22%3A+%22eq%22%7D%5D%7D%5D%7D");
+  supprimer("/api/question?q=%7B%22filters%22%3A+%5B%7B%22and%22%3A+%5B%7B%22name%22%3A+%22id%22%2C+%22val%22%3A+29%2C+%22op%22%3A+%22%3D%3D%22%7D%2C+%7B%22name%22%3A+%22numero%22%2C+%22val%22%3A+1%2C+%22op%22%3A+%22eq%22%7D%5D%7D%5D%7D");
 }
 
 function questionSuivante(){
   var str=ajoutQuestion();
   ajout("/api/question",JSON.stringify(str));
+  if ($("#choixTypeQuestion").val()=="choixM"){
+    var i=0;
+    while ($("#reponse"+i).length > 0){
+      var valeurs=ajoutValeurs("#reponse"+i,i+1);
+      ajout("/api/valeurpossible",JSON.stringify(valeurs));
+      i=i+1;
+    }
+    $("#typeQuestionnaire").remove();
+    $("#main").append($(formulaire_Question_A_Remplir).html());
+  }
 }
 
 //Fin fonction Olivier
@@ -189,16 +206,28 @@ function afficheSondageDonnees(){
 }
 
 function affiche_Tout_dans_sondage_donnees(){
-	connect("/api/panel/3",affiche_Tout_dans_sondage_Affichage);
+	connect("/api/panel",affiche_Tout_dans_sondage_Affichage);
+}
+
+function affiche_Reponse_donnees(url){
+	connect(url,affiche_Reponse_Affichage);
 }
 
 function modifSondageDonnees(idSondage){
 	creerFormulaire();
+	if(idSondage.length==9){
+		idSondage=idSondage.charAt(8);
+	}
+	else{
+		idSondage=idSondage.charAt(8)+idSondage.charAt(9);
+	}
 	connect("/api/questionnaire/"+idSondage,modifierSondageAffichage);
 }
 
 function affiche_Question_Donnees(urlQuestion){
 	connect(urlQuestion,affiche_Question_Affichage);
 }
+
+
 
 //Fin fonction Julien

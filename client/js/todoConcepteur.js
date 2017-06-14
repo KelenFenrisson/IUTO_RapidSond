@@ -168,9 +168,6 @@ function ajoutFormulaire(){
     "id_panel": idPan,
     "titre": "nouveau Q"
   }
-  // var str='"client": "/api/client/'+idCli+'", "etat": "C", ';
-  // str=str+'"concepteur": "/api/utilisateur/'+idC+'", "id_client": '+idCli+', "id_concepteur": '+idC+', ';
-  // str=str+'"id_panel": '+idPan+', "panel": "/api/panel/'+idPan+'", "titre": "nouveau Q"';
   return str;
 }
 
@@ -186,8 +183,6 @@ function ajoutQuestion(){
       "max_val": null,
       "numero": nbQuestion
     }
-    $("#typeQuestionnaire").remove();
-    $("#main").append($(formulaire_Question_A_Remplir).html());
   }
   if ($("#choixTypeQuestion").val()=="yesOrNo"){
     var str={
@@ -200,6 +195,7 @@ function ajoutQuestion(){
     $("#typeQuestionnaire3").remove();
     $("#main").append($(formulaire_Question_A_Remplir).html());
   }
+
   if ($("#choixTypeQuestion").val()=="reponseLibre"){
     var str={
       "id": idQ,
@@ -215,12 +211,22 @@ function ajoutQuestion(){
   return str;
 }
 
+function ajoutValeurs(rep,i){
+  var str={
+    "id": i,
+    "question_id": idQ,
+    "question_num": 1,
+    "valeur": $(rep).val()
+  }
+  return str;
+}
+
 
 
 // --------------------------------------- Fin fonction Olivier ---------------------------------------
 //Debut fonction Julien
-
-
+var numeroReponse ;
+var tabReponses = new Array();
 //affiche question Pour edit formulaire
 function affiche_Question_Affichage(data){
 	// console.log(JSON.stringify(data));
@@ -250,14 +256,23 @@ function affiche_Question_Affichage(data){
 
 			// console.log("C'est un type Note");
 			var reponses = data["data"]["objects"][0]["reponses"];
-
+			// console.log(JSON.stringify(reponses));
 			// affiche les réponses dans les input avec désactivation
+			tabReponses=Array();
 			for(var i=0;i<reponses.length;++i){
-				$("#reponse"+i).val(reponses[i]);
+				// console.log(JSON.stringify(reponses[i]));
+
+				tabReponses.push(reponses[i]);
+				// $("#reponse"+i).val(reponses[i]);
 				$("#reponse"+i).prop('disabled', true);
+			}
+			// console.log(" test "+ tabReponses[1]);
+			for(var i=0 ; i<tabReponses.length;++i){
+				affiche_Reponse_donnees(tabReponses[i]);
 			}
 			break;
 	}
+
 	try{
 		$("#legendeQuestion").attr("id","legendeQuestion"+num);
 		$("#question").attr("id","question"+num);
@@ -308,26 +323,40 @@ function modifierSondageAffichage(data){
 		// console.log(listeQuestion[i]);
 		affiche_Question_Donnees(listeQuestion[i]);
 	}
-
 	$('#TitreFormulaire').text("Formulaire N°"+data["data"]["id"]);
+	numeroReponses=0;
 }
 
+var numeroReponses=0;
+function affiche_Reponse_Affichage(data){
+		// console.log(JSON.stringify(data));
+		$("#reponse"+numeroReponses).val(data["data"]["objects"][0]["valeur"]);
+		$("#reponse"+numeroReponses).prop('disabled', false);
+		numeroReponses++;
+}
+
+
+
 function editQuestion(id){
-	console.log(id);
+	// console.log(id);
 	var newId = id.charAt(13);
-	console.log(newId);
+	// console.log(newId);
 	$("#question"+newId).prop('disabled', false);
-	$("#boutonValider"+newId).attr("value","Valider");
-	$("#boutonValider"+newId).attr("onclick","Envoi(data)");
+	$("#boutonValider"+newId).attr("value","Mise à jour");
+	$("#boutonValider"+newId).attr("onclick","MAJ(data)");
 	$("#boutonAnnuler"+newId).attr("value","Annuler");
 	$("#boutonAnnuler"+newId).attr("onclick","Annule(data)");
 	// A REVOIR
 }
 
+function MAJ_Donnees(data){
+
+}
+
 function supprQuestion(id){
-	console.log(id);
+	// console.log(id);
 	var newId = id.charAt(13);
-	console.log(newId);
+	// console.log(newId);
 	// IMPOSSIBLE
 
 }
@@ -338,7 +367,7 @@ var tabClient = new Array();
 var tabConcepteur = new Array();
 var tabPanel = new Array();
 var tabNum = new Array();
-
+var tabTitre = new Array();
 
 function AfficheSondageAffichage(data){
 	questionnaires = data["data"]["objects"];
@@ -368,11 +397,10 @@ function remplirSondage(data){
 	$("#listeStatutAff").attr("id","listeStatutAff"+num);
 	$("#listeUserAff").attr("id","listeUserAff"+num);
 	$("#listePanelAff").attr("id","listePanelAff"+num);
+	$("#titreSondage").attr("id","titreSondage"+num);
+	$("#editSond").attr("id","editSond"+num);
 
-	// $("#listeEntrepriseAff"+num).text(data["client"]);
-	// $("#listeStatutAff"+num).text(data["etat"]);
-	// $("#listeUserAff"+num).text(data["concepteur"]);
-	// $("#listePanelAff"+num).text(data["panel"]);
+
 
 	var client = data["client"];
 	var concepteur = data["concepteur"];
@@ -400,24 +428,25 @@ function remplirSondage(data){
 }
 
 function recup_client_par_sondage_Affichage(data){
-	console.log("client");
+	// console.log("client");
 	// console.log(JSON.stringify(data));
 	tabClient.push(data["data"]["raison"]);
 }
 function recup_concepteur_par_sondage_Affichage(data){
-	console.log("Concepteur");
+	// console.log("Concepteur");
 	// console.log(JSON.stringify(data));
 	tabConcepteur.push(data["data"]["nom"]);
 }
 function recup_panel_par_sondage_Affichage(data){
-	console.log("Panel");
+	// console.log("Panel");
 	// console.log(JSON.stringify(data));
 	tabPanel.push(data["data"]["intitule"]);
 }
 
+
 function affiche_Tout_dans_sondage_Affichage(data){
 
-	console.log("test");
+	// console.log("test");
 	// console.log(tabNum);
 	// console.log(tabClient);
 	// console.log(tabConcepteur);
@@ -428,6 +457,8 @@ function affiche_Tout_dans_sondage_Affichage(data){
 		$("#listeEntrepriseAff"+numeroTab).text(tabClient[i]);
 		$("#listeUserAff"+numeroTab).text(tabConcepteur[i]);
 		$("#listePanelAff"+numeroTab).text(tabPanel[i]);
+		$("#titreSondage"+numeroTab).text("Sondage n°"+numeroTab);
+
 	}
 
 }
