@@ -139,14 +139,25 @@ function AjouteFormBase(){
 //Fin fonction Olivier
 
 //Debut fonction Julien
-function affiche_client_par_sondage_donnees(urlClient){
-	connect(urlClient,recup_client_par_sondage_Affichage);
+function affiche_client_par_sondage_donnees(url){
+	connect(url,recup_client_par_sondage_Affichage);
+}
+
+function recup_concepteur_par_sondage_donnees(url){
+	connect(url,recup_concepteur_par_sondage_Affichage);
+}
+
+function recup_panel_par_sondage_donnees(url){
+	connect(url,recup_panel_par_sondage_Affichage);
 }
 
 function afficheSondageDonnees(){
 	connect("/api/questionnaire",AfficheSondageAffichage);
 }
 
+function affiche_Tout_dans_sondage_donnees(){
+	connect("/api/panel/3",affiche_Tout_dans_sondage_Affichage);
+}
 
 function modifSondageDonnees(idSondage){
 	creerFormulaire();
