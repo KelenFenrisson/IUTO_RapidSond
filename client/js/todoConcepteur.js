@@ -9,7 +9,7 @@ var formulaire_Sondage_A_Remplir = affiche_HTML("formulaire_Sondage_A_Remplir.ht
 
 // Variables pour créerquestionnaire dans la base
 
-var idCli, idPan, idC;
+var idCli, idPan, idC, idQ;
 
 // Début fonction récup HTML en string *******************************************************************************
 function affiche_HTML(fichierHTML)
@@ -154,6 +154,13 @@ function recupIdPanel(panel){
   }
 }
 
+function recupIdQuestionnaire(questionnaire){
+  var numQ=questionnaire['data']['num_results'];
+  numQ=numQ-1;
+  idQ=questionnaire['data']['objects'][numQ]['id'];
+  idQ=idQ+1;
+}
+
 function ajoutFormulaire(){
   var str={
     "etat": "C",
@@ -167,6 +174,50 @@ function ajoutFormulaire(){
   // str=str+'"id_panel": '+idPan+', "panel": "/api/panel/'+idPan+'", "titre": "nouveau Q"';
   return str;
 }
+
+var nbQuestion=1;
+
+
+function ajoutQuestion(){
+  if ($("#choixTypeQuestion").val()=="choixM"){
+    var str={
+      "id": idQ,
+      "id_type": "m",
+      "intitule": $("#question").val(),
+      "max_val": null,
+      "numero": nbQuestion
+    }
+    $("#typeQuestionnaire").remove();
+    $("#main").append($(formulaire_Question_A_Remplir).html());
+  }
+  if ($("#choixTypeQuestion").val()=="yesOrNo"){
+    var str={
+      "id": idQ,
+      "id_type": "u",
+      "intitule": $("#question").val(),
+      "max_val": null,
+      "numero": nbQuestion
+    }
+    $("#typeQuestionnaire3").remove();
+    $("#main").append($(formulaire_Question_A_Remplir).html());
+  }
+  if ($("#choixTypeQuestion").val()=="reponseLibre"){
+    var str={
+      "id": idQ,
+      "id_type": "l",
+      "intitule": $("#question").val(),
+      "max_val": null,
+      "numero": nbQuestion
+    }
+    $("#typeQuestionnaire2").remove();
+    $("#main").append($(formulaire_Question_A_Remplir).html());
+  }
+  nbQuestion=nbQuestion+1;
+  return str;
+}
+
+
+
 // --------------------------------------- Fin fonction Olivier ---------------------------------------
 //Debut fonction Julien
 
