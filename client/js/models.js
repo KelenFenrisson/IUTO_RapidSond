@@ -45,6 +45,24 @@ function modif(adresse,data){
         });
 
 }
+
+function ajout(adresse,data){
+    $.ajax({
+        url:urlBase+adresse,
+        type:'POST',
+        data:data,
+        //JSON.stringify({"id":1,"nom":"MABITE"})
+        contentType: "application/json",
+        success: function (msg) {
+            console.log('Insert Success');
+        },
+        error: function (err){
+            console.log('Insert Error');
+        }
+        });
+
+}
+
 // Début fonction Léo
 function remplirInfosFormulaireQuestionnaire(idFormulaire){
   connect("/api/questionnaire/"+idFormulaire,ajoutJSONformulaire);
@@ -92,6 +110,8 @@ function affiche_Question_Donnees_Sondeur(urlQuestion){
 //Debut fonction Jérémie
 //Fin fonction Jérémie
 //Debut fonction Olivier
+
+
 function remplissageFormQuest(){
   connect("/api/client",ajouteClient);
   connect("/api/utilisateur",ajouteUtilisateur);
@@ -104,12 +124,28 @@ function remplissageFormQuestRecherche(){
   connect("/api/panel",ajoutePanelRecherche);
 }
 
-// function enregistreFormulaire(){
-//   connect("")
-// }
+
+function recupId(){
+  connect("/api/client",recupIdClient);
+  connect("/api/utilisateur",recupIdConcepteur);
+  connect("/api/panel",recupIdPanel);
+}
+
+function AjouteFormBase(){
+  var str=ajoutFormulaire();
+  ajout("/api/questionnaire",JSON.stringify(str));
+  $("#typeQuestionnaire").replaceWith($(formulaire_Question_A_Remplir).html());
+}
 //Fin fonction Olivier
 
 //Debut fonction Julien
+function affiche_client_par_sondage_donnees(urlClient){
+	connect(urlClient,recup_client_par_sondage_Affichage);
+}
+
+function afficheSondageDonnees(){
+	connect("/api/questionnaire",AfficheSondageAffichage);
+}
 
 
 function modifSondageDonnees(idSondage){
@@ -120,8 +156,5 @@ function modifSondageDonnees(idSondage){
 function affiche_Question_Donnees(urlQuestion){
 	connect(urlQuestion,affiche_Question_Affichage);
 }
-// function recup_Client_par_Sondage(urlClient){
-// 	connect(urlClient,affiche_client_par_sondage)
-// }
 
 //Fin fonction Julien
