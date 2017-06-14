@@ -183,8 +183,6 @@ function ajoutQuestion(){
       "max_val": null,
       "numero": nbQuestion
     }
-    $("#typeQuestionnaire").remove();
-    $("#main").append($(formulaire_Question_A_Remplir).html());
   }
   if ($("#choixTypeQuestion").val()=="yesOrNo"){
     var str={
@@ -197,6 +195,7 @@ function ajoutQuestion(){
     $("#typeQuestionnaire3").remove();
     $("#main").append($(formulaire_Question_A_Remplir).html());
   }
+
   if ($("#choixTypeQuestion").val()=="reponseLibre"){
     var str={
       "id": idQ,
@@ -209,6 +208,16 @@ function ajoutQuestion(){
     $("#main").append($(formulaire_Question_A_Remplir).html());
   }
   nbQuestion=nbQuestion+1;
+  return str;
+}
+
+function ajoutValeurs(rep,i){
+  var str={
+    "id": i,
+    "question_id": idQ,
+    "question_num": 1,
+    "valeur": $(rep).val()
+  }
   return str;
 }
 
