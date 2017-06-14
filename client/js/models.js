@@ -85,13 +85,24 @@ function remplirInfoQuestionnaireDetails(idFormulaire){
 function setNomSonde(idSonde){
   connect("/api/sonde/"+idSonde,setNomSondeJSON);
 }
-function afficheLesTitresQuestions(idFormulaire){
+function afficheLesQuestions(idFormulaire){
     connect("/api/questionnaire/"+idFormulaire,afficheJSONQuestion);
 }
 
 function setNomQuestion(lienQuest){
   connect(lienQuest,setNomQuestionJSON);
 }
+
+function modifSonde(idSond){
+  data =
+  modif(adresse,data)
+}
+
+function affiche_Question_Donnees_Sondeur(urlQuestion){
+	connect(urlQuestion,affiche_Question_Affichage_Sondeur);
+}
+
+
 // Fin fonction Léo
 
 //Debut fonction Roméo
@@ -135,6 +146,7 @@ function affiche_client_par_sondage_donnees(urlClient){
 function afficheSondageDonnees(){
 	connect("/api/questionnaire",AfficheSondageAffichage);
 }
+
 
 function modifSondageDonnees(idSondage){
 	creerFormulaire();
