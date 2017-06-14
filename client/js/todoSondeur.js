@@ -301,8 +301,21 @@ function insertInfoSonde(){
 
 
 function repondre(){
-  if (confirm("Voulez-vous valider le questionnaire ? Ce choix est définitif !")) { 
+  if (confirm("Voulez-vous valider le questionnaire ? Ce choix est définitif !")) {
 
+    var bo = true;
+
+      for(var id of dicoReponses.keys()){
+
+          if (dicoReponses.get(id) == 0){
+              if($("#"+id).val() == " ") bo=false;
+
+          }
+       }
+
+
+
+if(bo){
   for(var id of dicoReponses.keys()){
 
       if (dicoReponses.get(id) == 0){
@@ -352,6 +365,9 @@ function repondre(){
    }
 
   retourSondeur();}
+  else alert("Veuillez remplir tout les champs");
+
+}
 
 }
 
