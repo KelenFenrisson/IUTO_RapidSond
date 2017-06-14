@@ -32,3 +32,8 @@ function seConnecter(){
 	if($("#role option:selected").val()=="sondeur")
 		accueilSondeur();
 }
+
+
+$(function() {
+	afficheAccueil();
+})
