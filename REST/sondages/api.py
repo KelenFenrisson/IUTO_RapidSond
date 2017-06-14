@@ -143,20 +143,16 @@ app.config['API_LIST']['Question']=api_manager.create_api(Question,
 
 ###### API PANEL
 def pre_get_single_Panel(**kw):
-    # print("PRE_GET_SINGLE_QUESTION")
     pass
 
 def pre_get_many_Panel(**kw):
-    # print("PRE_GET_MANY_QUESTION")
     pass
 
 def post_get_single_Panel(result=None, **kw):
-    # print("POST_GET_SINGLE_QUESTION")
     result['sondes']=[api_manager.url_for(Sonde, instid=p['id_sonde']) for p in result['sondes']]
 
 
 def post_get_many_Panel(result=None, **kw):
-    print("POST_GET_MANY_QUESTION")
     for item in result['objects']:
         item['sondes'] = [api_manager.url_for(Sonde, instid=p['id_sonde']) for p in item['sondes']]
 

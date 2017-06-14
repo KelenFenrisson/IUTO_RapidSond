@@ -7,16 +7,6 @@ from flask_bootstrap import Bootstrap
 
 from .db_credentials import *
 from .utils import mkpath
-#########################  HELPER FUNCTIONS
-def mkpath(p):
-	return os.path.normpath(
-		os.path.join(
-			os.path.dirname(__file__),
-			p))
-###########################################
-
-
-
 
 app = Flask(__name__)
 Bootstrap(app)
