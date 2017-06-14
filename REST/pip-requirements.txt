@@ -1,8 +1,8 @@
-appdirs==1.4.3
 click==6.7
 dominate==2.3.1
 Flask==0.12.2
 Flask-Bootstrap==3.3.7.1
+Flask-Cors==3.0.2
 Flask-Restless==0.17.0
 Flask-Script==2.0.5
 Flask-SQLAlchemy==2.2
@@ -10,9 +10,6 @@ itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
 mimerender==0.6.0
-packaging==16.8
-PyMySQL==0.7.11
-pyparsing==2.2.0
 python-dateutil==2.6.0
 python-mimeparse==1.6.0
 six==1.10.0
