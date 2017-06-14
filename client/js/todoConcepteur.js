@@ -242,29 +242,29 @@ function supprQuestion(id){
 
 }
 
+var num;
+
 function AfficheSondageAffichage(data){
 	// console.log(JSON.stringify(data));
 	// console.log(JSON.stringify(data["data"]["objects"]));
 	var questionnaires = data["data"]["objects"];
-	var numero ;
 	for(var i=0;i<questionnaires.length;++i){
-		numero = questionnaires[i]["id"];
+		num = questionnaires[i]["id"];
 		$("#main").append($(formulaire_Info_Sondage).html());
-		$("#formulaire_Info_Sondage").attr("id","formulaire_Info_Sondage"+numero);
+		$("#formulaire_Info_Sondage").attr("id","formulaire_Info_Sondage"+num);
 		remplirSondage(questionnaires[i]);
+		num++;
 	}
-	nbForm=1;
+	num=1;
 }
 
-var nbForm=1;
+
 
 function recup_client_par_sondage_Affichage(data){
 	// console.log(nbForm);
 	// console.log(data["data"]["raison"]);
 	// console.log(nbForm);
-	$("#listeEntreprise"+nbForm).text(data["data"]["raison"]);
-
-	nbForm++;
+	$("#listeEntreprise"+num).text(data["data"]["raison"]);
 }
 
 function remplirSondage(data){
