@@ -76,12 +76,12 @@ mysql > source jeu_essai.sql
 
 ## Projet
 
-- Integrateur principal: Mathieu
+- Integrateur global: Mathieu
 - Developpeurs : Mathieu, Julien, Jérémie, Leo, Olivier, Roméo
 
 
+#### Base de données
 
-#### Base de données
 - Conception, script de création et jeu d'essai: Mr LIMET
 
 

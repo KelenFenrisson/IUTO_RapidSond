@@ -144,13 +144,20 @@ def pre_delete_many_Question(search_params=None,**kw):
     if search_params is None:
         raise ProcessingException("Complete table deletion is impossible!")
 
+def pre_patch_many_Question(search_params=None,**kw):
+    if search_params is None:
+        raise ProcessingException("Complete table patching is impossible!")
+
 app.config['API_LIST']['Question']=api_manager.create_api(Question,
                                                           methods=['GET', 'POST', 'PATCH', 'DELETE'],
                                                           results_per_page=100,
-                                                          primary_key='numero', allow_delete_many=True,
+                                                          primary_key='numero',
+                                                          allow_delete_many=True,
+                                                          allow_patch_many=True,
                                                           preprocessors={'GET_SINGLE':[pre_get_single_Question],
                                                                          'GET_MANY':[pre_get_many_Question],
-                                                                         'DELETE_MANY':[pre_delete_many_Question]},
+                                                                         'DELETE_MANY':[pre_delete_many_Question],
+                                                                         'PATCH_MANY':[pre_patch_many_Question]},
                                                           postprocessors={'GET_SINGLE':[post_get_single_Question],
                                                                           'GET_MANY':[post_get_many_Question]}
                                                           )
