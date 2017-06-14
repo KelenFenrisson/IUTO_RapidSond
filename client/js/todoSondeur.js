@@ -51,7 +51,7 @@ function accueilSondeur(){
   $("#main").append($(formulaire_Appel).html());
 
   questionnaireCourant=trouverQuestionnaireCourant();
-  sondeCourant = trouverSondeCourant();
+  trouverSondeCourant();
 
 
   remplirInfosFormulaireQuestionnaire(questionnaireCourant);
@@ -145,8 +145,14 @@ function trouverQuestionnaireCourant(){
 }
 
 function trouverSondeCourant(){
-  affecteridcaraccourant("1");
-  return "1";
+  sondeCourant = getRandomInt(0,1000).toString();
+  affecteridcaraccourant(sondeCourant);
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function ajoutJSONQuestDetail(data){
@@ -295,6 +301,7 @@ function insertInfoSonde(){
 
 
 function repondre(){
+  if (confirm("Voulez-vous valider le questionnaire ? Ce choix est définitif !")) { 
 
   for(var id of dicoReponses.keys()){
 
@@ -321,7 +328,7 @@ function repondre(){
 
       if (dicoReponses.get(id) == 1){
         if ($("#"+id+"c").is(':checked')){
-        
+
         ajout("/api/repondre",JSON.stringify({
           "id_caracteristique":idcaracCourant,
           "id_questionnaire":questionnaireCourant,
@@ -344,6 +351,7 @@ function repondre(){
 
    }
 
+  retourSondeur();}
 
 }
 
