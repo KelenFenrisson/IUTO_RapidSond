@@ -2,6 +2,10 @@ var formulaire_Appel = affiche_HTML("formulaire_Appel.html");
 var formulaire_infoQuest = affiche_HTML("formulaire_infoQuest.html");
 var formulaire_infoSonde = affiche_HTML("formulaire_infoSonde.html");
 var reponse_questions_sonde = affiche_HTML("reponse_questions_sonde.html");
+var choixlibre_sonde=affiche_HTML('choixlibre_sonde.html');
+var choixmultiple_sonde=affiche_HTML('choixmultiple_sonde.html');
+var choixunique_sonde=affiche_HTML('choixunique_sonde.html');
+
 
 var questionnaireCourant;
 var sondeCourant;
@@ -131,6 +135,8 @@ function setNomSondeJSON(data){
 
 function afficheJSONQuestion(data){
 	var listeQuestion = data["data"]["questions"];
+  console.log(listeQuestion[1]);
+
 	for(var i=0;i<listeQuestion.length;++i){
 		affiche_Question_Donnees_Sondeur(listeQuestion[i]);
 	}
@@ -150,29 +156,30 @@ function annulationQuestion(){
 
 function affiche_Question_Affichage_Sondeur(data){
 
-	var num = data["data"]["numero"];
+	var num = data["data"]["objects"][0]["numero"];
 
-	switch(data["data"]["id_type"]) {
+	console.log(data["data"]["objects"][0]["id_type"]);
+	switch(data["data"]["objects"][0]["id_type"]) {
 
 	    case "u":
-			$("#listeQuestions").append($(formulaire_Question_A_Remplir3).html());
-			$("#typeQuestionnaire3").attr("id","typeQuestionnaire"+num);
+			$("#listeQuestions").append($(choixunique_sonde).html());
+			$("#choixunique").attr("id","typeQuestionnaire"+num);
 	        break;
 
 		case "l":
-			$("#listeQuestions").append($(formulaire_Question_A_Remplir2).html());
-			$("#typeQuestionnaire2").attr("id","typeQuestionnaire"+num);
+			$("#listeQuestions").append($(choixlibre_sonde).html());
+			$("#choixlibre").attr("id","typeQuestionnaire"+num);
 			break;
 
 		case "m":
 
 			//création et affichage de la question
-			$("#listeQuestions").append($(formulaire_Question_A_Remplir).html());
-			$("#typeQuestionnaire").attr("id","typeQuestionnaire"+num);
+			$("#listeQuestions").append($(choixmultiple_sonde).html());
+			$("#choixmul").attr("id","typeQuestionnaire"+num);
 
 
 			console.log("C'est un type Note");
-			var reponses = data["data"]["reponses"];
+			var reponses = data["data"]["objects"][0]["reponses"];
 
 			//juste pour test
 			// reponses[0]="cool";
@@ -182,36 +189,26 @@ function affiche_Question_Affichage_Sondeur(data){
 
 			// affiche les réponses dans les input avec désactivation
 			for(var i=0;i<reponses.length;++i){
-				$("#reponse"+i).val(reponses[i]);
-				$("#reponse"+i).prop('disabled', true);
+				$("#reponse"+i).text(reponses[i]);
+
+
 			}
 			break;
 	}
 	try{
 		$("#legendeQuestion").attr("id","legendeQuestion"+num);
 		$("#question").attr("id","question"+num);
-		$("#boutonValider").attr("id","boutonValider"+num);
-		$("#boutonAnnuler").attr("id","boutonAnnuler"+num);
-		$("#choixTypeQuestion").attr("id","choixTypeQuestion"+num);
 
 		//changement des noms des Ids  ******************************************************
 		// change le numéro de la question
 
-		$("#legendeQuestion"+num).text("Question "+num);
+	$("#legendeQuestion"+num).text("Question "+num);
 		//remplit la question
-		$("#question"+num).val(data["data"]["intitule"]);
+		$("#question"+num).text(data["data"]["objects"][0]["intitule"]);
 		//désactive la question
-		$("#question"+num).prop('disabled', true);
-		//change le boutton en edit avec sa fonction du onclick
-		$("#boutonValider"+num).attr("value","Edit");
-		$("#boutonValider"+num).attr("onclick","editQuestion(id)");
-		//change le boutton en suppr avec sa fonction du onclick
-		$("#boutonAnnuler"+num).attr("value","Suppr");
-		$("#boutonAnnuler"+num).attr("onclick","suppressionQuestion(num)");
-		//cache les bouttons
-		$("#boutonAjoutReponse").hide();
-		$("#boutonSupprimerReponse").hide();
-		$("#choixTypeQuestion"+num).hide();
+
+
+
 	}
 	catch(err)
 	{
