@@ -9,7 +9,7 @@ var formulaire_Sondage_A_Remplir = affiche_HTML("formulaire_Sondage_A_Remplir.ht
 
 // Variables pour créerquestionnaire dans la base
 
-var idCli, idPan, idC;
+var idCli, idPan, idC, idQ;
 
 // Début fonction récup HTML en string *******************************************************************************
 function affiche_HTML(fichierHTML)
@@ -37,8 +37,8 @@ function accueilConcepteur(){
 	$("#main").empty();
 	$("#main").append('<input type="button" value="Créer un nouveau sondage" class="btn btn-primary btn-lg active top-10 col-md-offset-3 col-md-6 bot-10" onclick="creerFormulaire()">');
   	$("#main").append($(formulaire_Recherche_Sondage).html());
-  	afficheSondageDonnees();
   	remplissageFormQuestRecherche();
+	afficheSondageDonnees();
 }
 
 function creerFormulaire(){
@@ -153,6 +153,13 @@ function recupIdPanel(panel){
   }
 }
 
+function recupIdQuestionnaire(questionnaire){
+  var numQ=questionnaire['data']['num_results'];
+  numQ=numQ-1;
+  idQ=questionnaire['data']['objects'][numQ]['id'];
+  idQ=idQ+1;
+}
+
 function ajoutFormulaire(){
   var str={
     "etat": "C",
@@ -166,19 +173,63 @@ function ajoutFormulaire(){
   // str=str+'"id_panel": '+idPan+', "panel": "/api/panel/'+idPan+'", "titre": "nouveau Q"';
   return str;
 }
+
+var nbQuestion=1;
+
+
+function ajoutQuestion(){
+  if ($("#choixTypeQuestion").val()=="choixM"){
+    var str={
+      "id": idQ,
+      "id_type": "m",
+      "intitule": $("#question").val(),
+      "max_val": null,
+      "numero": nbQuestion
+    }
+    $("#typeQuestionnaire").remove();
+    $("#main").append($(formulaire_Question_A_Remplir).html());
+  }
+  if ($("#choixTypeQuestion").val()=="yesOrNo"){
+    var str={
+      "id": idQ,
+      "id_type": "u",
+      "intitule": $("#question").val(),
+      "max_val": null,
+      "numero": nbQuestion
+    }
+    $("#typeQuestionnaire3").remove();
+    $("#main").append($(formulaire_Question_A_Remplir).html());
+  }
+  if ($("#choixTypeQuestion").val()=="reponseLibre"){
+    var str={
+      "id": idQ,
+      "id_type": "l",
+      "intitule": $("#question").val(),
+      "max_val": null,
+      "numero": nbQuestion
+    }
+    $("#typeQuestionnaire2").remove();
+    $("#main").append($(formulaire_Question_A_Remplir).html());
+  }
+  nbQuestion=nbQuestion+1;
+  return str;
+}
+
+
+
 // --------------------------------------- Fin fonction Olivier ---------------------------------------
 //Debut fonction Julien
 
 
 //affiche question Pour edit formulaire
 function affiche_Question_Affichage(data){
-	console.log(JSON.stringify(data));
-	console.log(data["data"]["id_type"]);
-	console.log(data["data"]["numero"]);
+	// console.log(JSON.stringify(data));
+	// console.log(data["data"]["id_type"]);
+	// console.log(data["data"]["numero"]);
 
-	var num = data["data"]["numero"];
-
-	switch(data["data"]["id_type"]) {
+	var num = data["data"]["objects"][0]["numero"];
+	// console.log(num);
+	switch(data["data"]["objects"][0]["id_type"]) {
 
 	    case "u":
 			$("#main").append($(formulaire_Question_A_Remplir3).html());
@@ -197,14 +248,8 @@ function affiche_Question_Affichage(data){
 			$("#typeQuestionnaire").attr("id","typeQuestionnaire"+num);
 
 
-			console.log("C'est un type Note");
-			var reponses = data["data"]["reponses"];
-
-			//juste pour test
-			// reponses[0]="cool";
-			// reponses[1]="Pas top";
-			// reponses[2]="NULLLLLLLLL";
-			//juste pour test
+			// console.log("C'est un type Note");
+			var reponses = data["data"]["objects"][0]["reponses"];
 
 			// affiche les réponses dans les input avec désactivation
 			for(var i=0;i<reponses.length;++i){
@@ -225,7 +270,7 @@ function affiche_Question_Affichage(data){
 
 		$("#legendeQuestion"+num).text("Question "+num);
 		//remplit la question
-		$("#question"+num).val(data["data"]["intitule"]);
+		$("#question"+num).val(data["data"]["objects"][0]["intitule"]);
 		//désactive la question
 		$("#question"+num).prop('disabled', true);
 		//change le boutton en edit avec sa fonction du onclick
@@ -247,18 +292,20 @@ function affiche_Question_Affichage(data){
 
 }
 
+
 function modifierSondageAffichage(data){
-	console.log(JSON.stringify(data));
-	console.log(data["data"]["questions"]);
-	console.log(data["data"]["id"]);
+	// console.log(JSON.stringify(data));
+	// console.log(data["data"]["questions"]);
+	// console.log(data["data"]["id"]);
 
 	$("#typeQuestionnaire2").remove();
 	$("#typeQuestionnaire3").remove();
 	$("#typeQuestionnaire").remove();
-
+	// console.log("DEBUT DES TESTS");
 	var listeQuestion = data["data"]["questions"];
+	// console.log(JSON.stringify(listeQuestion));
 	for(var i=0;i<listeQuestion.length;++i){
-		console.log(listeQuestion[i]);
+		// console.log(listeQuestion[i]);
 		affiche_Question_Donnees(listeQuestion[i]);
 	}
 
@@ -286,57 +333,103 @@ function supprQuestion(id){
 }
 
 var num;
+var questionnaires=0;
+var tabClient = new Array();
+var tabConcepteur = new Array();
+var tabPanel = new Array();
+var tabNum = new Array();
+
 
 function AfficheSondageAffichage(data){
-	// console.log(JSON.stringify(data));
-	// console.log(JSON.stringify(data["data"]["objects"]));
-	var questionnaires = data["data"]["objects"];
+	questionnaires = data["data"]["objects"];
+	AfficheSondageAffichageBis();
+}
+
+function AfficheSondageAffichageBis(){
+	// console.log(questionnaires);
+
 	for(var i=0;i<questionnaires.length;++i){
 		num = questionnaires[i]["id"];
 		$("#main").append($(formulaire_Info_Sondage).html());
 		$("#formulaire_Info_Sondage").attr("id","formulaire_Info_Sondage"+num);
+		tabNum.push(num);
 		remplirSondage(questionnaires[i]);
-		affiche_client_par_sondage_donnees(questionnaires[i]["client"]);
-		num++;
-
 	}
-	num=1;
+	affiche_Tout_dans_sondage_donnees();
+
 }
 
-
-
-function recup_client_par_sondage_Affichage(data){
-	console.log(data["data"]["raison"]);
-	$("#listeEntrepriseAff"+num).text(data["data"]["raison"]);
-}
 
 function remplirSondage(data){
-	console.log(data);
+	// console.log(data);
 	// console.log(num);
+	// console.log(JSON.stringify(data));
 	$("#listeEntrepriseAff").attr("id","listeEntrepriseAff"+num);
 	$("#listeStatutAff").attr("id","listeStatutAff"+num);
 	$("#listeUserAff").attr("id","listeUserAff"+num);
 	$("#listePanelAff").attr("id","listePanelAff"+num);
 
-	// var client = data["client"];
-	// console.log(JSON.stringify(client));
+	// $("#listeEntrepriseAff"+num).text(data["client"]);
+	// $("#listeStatutAff"+num).text(data["etat"]);
+	// $("#listeUserAff"+num).text(data["concepteur"]);
+	// $("#listePanelAff"+num).text(data["panel"]);
 
-	// switch(data["etat"]) {
-	//     case "C":
-	// 		$("#listeStatut"+num).text("Concepteur");
-	// 		break;
-	// 	case "S":
-	// 		$("#listeStatut"+num).text("Sondeur");
-	// 		break;
-	// 	case "A":
-	// 		$("#listeStatut"+num).text("Analyse");
-	// 		break;
-	// 	}
+	var client = data["client"];
+	var concepteur = data["concepteur"];
+	var panel = data["panel"];
 
-	// affiche_client_par_sondage_donnees(client);
+	affiche_client_par_sondage_donnees(client);
+	recup_concepteur_par_sondage_donnees(concepteur);
+	recup_panel_par_sondage_donnees(panel);
 
-	// $("#listeUser"+num).val(reponses[i]);
-	// $("#listePanel"+num).val(reponses[i]);
+
+	switch(data["etat"]) {
+	    case "C":
+			$("#listeStatut"+num).text("Concepteur");
+			break;
+		case "S":
+			$("#listeStatut"+num).text("Sondeur");
+			break;
+		case "A":
+			$("#listeStatut"+num).text("Analyse");
+			break;
+		}
+	// console.log(data["id"]);
+
 
 }
+
+function recup_client_par_sondage_Affichage(data){
+	console.log("client");
+	// console.log(JSON.stringify(data));
+	tabClient.push(data["data"]["raison"]);
+}
+function recup_concepteur_par_sondage_Affichage(data){
+	console.log("Concepteur");
+	// console.log(JSON.stringify(data));
+	tabConcepteur.push(data["data"]["nom"]);
+}
+function recup_panel_par_sondage_Affichage(data){
+	console.log("Panel");
+	// console.log(JSON.stringify(data));
+	tabPanel.push(data["data"]["intitule"]);
+}
+
+function affiche_Tout_dans_sondage_Affichage(data){
+
+	console.log("test");
+	// console.log(tabNum);
+	// console.log(tabClient);
+	// console.log(tabConcepteur);
+	// console.log(tabPanel);
+
+	for (var i=0;i<tabNum.length;++i){
+		var numeroTab = tabNum[i];
+		$("#listeEntrepriseAff"+numeroTab).text(tabClient[i]);
+		$("#listeUserAff"+numeroTab).text(tabConcepteur[i]);
+		$("#listePanelAff"+numeroTab).text(tabPanel[i]);
+	}
+
+}
+
 //Fin fonction Julien
