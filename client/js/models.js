@@ -125,6 +125,10 @@ function affecteridcaraccourant(idSonde){
   connect("/api/sonde/"+idSonde,affecterJSONidcarac);
 }
 
+function recherchesonde(){
+	connect("/api/sonde",listeSonde);
+}
+
 // Fin fonction Léo
 
 //Debut fonction Roméo
@@ -204,5 +208,7 @@ function modifSondageDonnees(idSondage){
 function affiche_Question_Donnees(urlQuestion){
 	connect(urlQuestion,affiche_Question_Affichage);
 }
+
+
 
 //Fin fonction Julien
