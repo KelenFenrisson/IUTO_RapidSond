@@ -296,7 +296,9 @@ function AfficheSondageAffichage(data){
 		$("#main").append($(formulaire_Info_Sondage).html());
 		$("#formulaire_Info_Sondage").attr("id","formulaire_Info_Sondage"+num);
 		remplirSondage(questionnaires[i]);
+		affiche_client_par_sondage_donnees(questionnaires[i]["client"]);
 		num++;
+
 	}
 	num=1;
 }
@@ -304,22 +306,19 @@ function AfficheSondageAffichage(data){
 
 
 function recup_client_par_sondage_Affichage(data){
-	// console.log(nbForm);
-	// console.log(data["data"]["raison"]);
-	// console.log(nbForm);
-	$("#listeEntreprise"+num).text(data["data"]["raison"]);
+	console.log(data["data"]["raison"]);
+	$("#listeEntrepriseAff"+num).text(data["data"]["raison"]);
 }
 
 function remplirSondage(data){
 	console.log(data);
-	num=data["id"];
 	// console.log(num);
-	$("#listeEntreprise").attr("id","listeEntreprise"+num);
-	$("#listeStatut").attr("id","listeStatut"+num);
-	$("#listeUser").attr("id","listeUser"+num);
-	$("#listePanel").attr("id","listePanel"+num);
+	$("#listeEntrepriseAff").attr("id","listeEntrepriseAff"+num);
+	$("#listeStatutAff").attr("id","listeStatutAff"+num);
+	$("#listeUserAff").attr("id","listeUserAff"+num);
+	$("#listePanelAff").attr("id","listePanelAff"+num);
 
-	var client = data["client"];
+	// var client = data["client"];
 	// console.log(JSON.stringify(client));
 
 	// switch(data["etat"]) {
@@ -334,8 +333,7 @@ function remplirSondage(data){
 	// 		break;
 	// 	}
 
-
-	affiche_client_par_sondage_donnees(client);
+	// affiche_client_par_sondage_donnees(client);
 
 	// $("#listeUser"+num).val(reponses[i]);
 	// $("#listePanel"+num).val(reponses[i]);
