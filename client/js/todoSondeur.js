@@ -14,6 +14,9 @@ var numQ;
 var tabQ;
 var maMap;
 var numMax;
+var idcaracCourant;
+
+var dicoReponses;
 // Début fonction récup HTML en string *******************************************************************************
 function affiche_HTML(fichierHTML)
 {
@@ -79,7 +82,7 @@ function sleep(seconds){
 
 function afficheReponseQuestionSonde(){
   maMap = new Map();
-console.log("aaaa");
+  dicoReponses = new Map();
 $("#main").empty();
 $("#main").append($(reponse_questions_sonde).html());
 remplirInfoQuestionnaireDetails(questionnaireCourant);
@@ -90,7 +93,6 @@ afficheLesQuestions(questionnaireCourant);
 }
 
 function exec(){
-  console.log("coucou");
   sleep(1);
   tabQ=new Array();
   numQ=-1;
@@ -107,7 +109,6 @@ for(var question of maMap.keys()){
 }
 function ajoutJSONformulaire(data){
     //console.log(JSON.stringify(data));
-    console.log(data["data"]["id"]);
   //  $(#titreForm).empty();
     $("#titreForm").text("Formulaire n° "+data["data"]["id"]);
     $("#titre").text(data["data"]["titre"]);
@@ -139,10 +140,12 @@ function ajoutJSONsonde(data){
 
 
 function trouverQuestionnaireCourant(){
+
   return "1";
 }
 
 function trouverSondeCourant(){
+  affecteridcaraccourant("1");
   return "1";
 }
 
@@ -162,14 +165,12 @@ function setNomSondeJSON(data){
 
 function afficheJSONQuestion(data){
 	var listeQuestion = data["data"]["questions"];
-  console.log(listeQuestion[1]);
   numMax  = listeQuestion.length;
 	for(var i=0;i<listeQuestion.length;++i){
 		affiche_Question_Donnees_Sondeur(listeQuestion[i]);
 	}
 
 	$('#TitreFormulaire').text("Formulaire N°"+data["data"]["id"]);
-  console.log(maMap);
 
 
 
@@ -211,11 +212,15 @@ function affiche_Question_Affichage_Sondeur(data){
 		case "l":
 			$("#listeQuestions").append($(choixlibre_sonde).html());
 			$("#choixlibre").attr("id","typeQuestionnaire"+num);
+      $('#repUnique').attr("id","repUnique"+num);
+      dicoReponses.set("repUnique"+num,0);
 			break;
 
       case "n":
   			$("#listeQuestions").append($(choixlibre_sonde).html());
   			$("#choixlibre").attr("id","typeQuestionnaire"+num);
+              $('#repUnique').attr("id","repUnique"+num);
+        dicoReponses.set("repUnique"+num,0);
   			break;
 
 		case "m":
@@ -242,7 +247,6 @@ function affiche_Question_Affichage_Sondeur(data){
 	try{
 		$("#legendeQuestion").attr("id","legendeQuestion"+num);
 		$("#question").attr("id","question"+num);
-console.log(maMap);
 		//changement des noms des Ids  ******************************************************
 		// change le numéro de la question
 
@@ -269,9 +273,8 @@ function affiche_reponses_QCM(data){
 
 
   numQ++;
-    console.log(tabQ[numQ]);
-  $("#propQCM"+tabQ[numQ]).append('<input type="checkbox" id="reponse'+data["data"]["objects"][0]["id"]+'1" value="checkbox1"><span id="reponse'+data["data"]["objects"][0]["id"]+'"> '+data["data"]["objects"][0]["valeur"]+' </span><br/>');
-
+  $("#propQCM"+tabQ[numQ]).append('<input type="checkbox" id="reponse'+tabQ[numQ]+data["data"]["objects"][0]["id"]+"c"+'" value="checkbox1"><span id="reponse'+tabQ[numQ]+data["data"]["objects"][0]["id"]+'"> '+data["data"]["objects"][0]["valeur"]+' </span><br/>');
+      dicoReponses.set('reponse'+tabQ[numQ]+data["data"]["objects"][0]["id"],1);
 }
 
 function insertInfoSonde(){
@@ -288,6 +291,65 @@ function insertInfoSonde(){
 
 
 
+}
+
+
+function repondre(){
+
+  for(var id of dicoReponses.keys()){
+
+      if (dicoReponses.get(id) == 0){
+
+
+        ajout("/api/repondre",JSON.stringify({
+          "id_caracteristique":idcaracCourant,
+          "id_questionnaire":questionnaireCourant,
+          "qu_numero":id.charAt(9),
+          "re_valeur":$("#"+id).val()
+        }));
+
+
+        console.log(JSON.stringify({
+          "id_caracteristique":idcaracCourant,
+          "id_questionnaire":questionnaireCourant,
+          "qu_numero":id.charAt(9),
+          "re_valeur":$("#"+id).val()
+        }));
+
+
+      }
+
+      if (dicoReponses.get(id) == 1){
+        if ($("#"+id+"c").is(':checked')){
+        
+        ajout("/api/repondre",JSON.stringify({
+          "id_caracteristique":idcaracCourant,
+          "id_questionnaire":questionnaireCourant,
+          "qu_numero":id.charAt(8),
+          "re_valeur":$("#"+id).text()
+        }));
+
+      console.log( JSON.stringify({
+          "id_caracteristique":idcaracCourant,
+          "id_questionnaire":questionnaireCourant,
+          "qu_numero":id.charAt(7),
+          "re_valeur":$("#"+id).text()
+        }));
+      }
+      }
+
+
+
+
+
+   }
+
+
+}
+
+
+function affecterJSONidcarac(data){
+  idcaracCourant = data["data"]["id_caracteristique"];
 }
 //Debut fonction Roméo
 //Fin fonction Roméo

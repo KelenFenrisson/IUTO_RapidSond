@@ -120,6 +120,10 @@ function setReponsesCHoixMultiple(lienReponse){
 
 }
 
+function affecteridcaraccourant(idSonde){
+  connect("/api/sonde/"+idSonde,affecterJSONidcarac);
+}
+
 // Fin fonction Léo
 
 //Debut fonction Roméo
