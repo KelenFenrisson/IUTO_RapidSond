@@ -39,7 +39,6 @@ function accueilConcepteur(){
   	$("#main").append($(formulaire_Recherche_Sondage).html());
   	remplissageFormQuestRecherche();
 	afficheSondageDonnees();
-	AfficheSondageAffichageBis();
 }
 
 function creerFormulaire(){
@@ -342,9 +341,8 @@ var tabNum = new Array();
 
 
 function AfficheSondageAffichage(data){
-	// console.log(JSON.stringify(data));
-	// console.log(JSON.stringify(data["data"]["objects"]));
 	questionnaires = data["data"]["objects"];
+	AfficheSondageAffichageBis();
 }
 
 function AfficheSondageAffichageBis(){
