@@ -2,10 +2,18 @@ var formulaire_Appel = affiche_HTML("formulaire_Appel.html");
 var formulaire_infoQuest = affiche_HTML("formulaire_infoQuest.html");
 var formulaire_infoSonde = affiche_HTML("formulaire_infoSonde.html");
 var reponse_questions_sonde = affiche_HTML("reponse_questions_sonde.html");
+var choixlibre_sonde=affiche_HTML('choixlibre_sonde.html');
+var choixmultiple_sonde=affiche_HTML('choixmultiple_sonde.html');
+var choixunique_sonde=affiche_HTML('choixunique_sonde.html');
+
 
 var questionnaireCourant;
 var sondeCourant;
-
+var num;
+var numQ;
+var tabQ;
+var maMap;
+var numMax;
 // Début fonction récup HTML en string *******************************************************************************
 function affiche_HTML(fichierHTML)
 {
@@ -64,16 +72,39 @@ function retourSondeur(){
   remplirInfosFormulaireQuestionnaire(questionnaireCourant);
   remplirInfosFormulaireSonde(sondeCourant);
 }
-
-
-function afficheReponseQuestionSonde(){
-
-  $("#main").empty();
-  $("#main").append($(reponse_questions_sonde).html());
-  remplirInfoQuestionnaireDetails(questionnaireCourant);
-  afficheLesQuestions(questionnaireCourant);
+function sleep(seconds){
+    var waitUntil = new Date().getTime() + seconds*1000;
+    while(new Date().getTime() < waitUntil) true;
 }
 
+function afficheReponseQuestionSonde(){
+  maMap = new Map();
+console.log("aaaa");
+$("#main").empty();
+$("#main").append($(reponse_questions_sonde).html());
+remplirInfoQuestionnaireDetails(questionnaireCourant);
+afficheLesQuestions(questionnaireCourant);
+
+
+
+}
+
+function exec(){
+  console.log("coucou");
+  sleep(1);
+  tabQ=new Array();
+  numQ=-1;
+for(var question of maMap.keys()){
+
+  for(var i=0;i<maMap.get(question).length;i++){
+    $("#propQCM"+question).empty();
+    tabQ.push(question);
+   setReponsesCHoixMultiple(maMap.get(question)[i]);
+
+  }
+ }
+
+}
 function ajoutJSONformulaire(data){
     //console.log(JSON.stringify(data));
     console.log(data["data"]["id"]);
@@ -131,11 +162,17 @@ function setNomSondeJSON(data){
 
 function afficheJSONQuestion(data){
 	var listeQuestion = data["data"]["questions"];
+  console.log(listeQuestion[1]);
+  numMax  = listeQuestion.length;
 	for(var i=0;i<listeQuestion.length;++i){
 		affiche_Question_Donnees_Sondeur(listeQuestion[i]);
 	}
 
 	$('#TitreFormulaire').text("Formulaire N°"+data["data"]["id"]);
+  console.log(maMap);
+
+
+
 }
 function setNomQuestionJSON(data){
   $("#listeQuestions").append("<p>"+data["data"]["intitule"]+"</p>");
@@ -150,73 +187,105 @@ function annulationQuestion(){
 
 function affiche_Question_Affichage_Sondeur(data){
 
-	var num = data["data"]["numero"];
+	 num = data["data"]["objects"][0]["numero"];
 
-	switch(data["data"]["id_type"]) {
+
+	switch(data["data"]["objects"][0]["id_type"]) {
 
 	    case "u":
-			$("#listeQuestions").append($(formulaire_Question_A_Remplir3).html());
-			$("#typeQuestionnaire3").attr("id","typeQuestionnaire"+num);
-	        break;
+
+      //création et affichage de la question
+      $("#listeQuestions").append($(choixmultiple_sonde).html());
+      $("#choixmul").attr("id","typeQuestionnaire"+num);
+      $("#propQCM").attr("id","propQCM"+num);
+      var reponses = data["data"]["objects"][0]["reponses"];
+      var tab=new Array();
+
+      for( var i=0;i<reponses.length;++i){
+        tab[i]=reponses[i];
+      //  setReponsesCHoixMultiple(reponses[i]);
+        }
+              maMap.set(num,tab);
+      break;
 
 		case "l":
-			$("#listeQuestions").append($(formulaire_Question_A_Remplir2).html());
-			$("#typeQuestionnaire2").attr("id","typeQuestionnaire"+num);
+			$("#listeQuestions").append($(choixlibre_sonde).html());
+			$("#choixlibre").attr("id","typeQuestionnaire"+num);
 			break;
+
+      case "n":
+  			$("#listeQuestions").append($(choixlibre_sonde).html());
+  			$("#choixlibre").attr("id","typeQuestionnaire"+num);
+  			break;
 
 		case "m":
 
+
 			//création et affichage de la question
-			$("#listeQuestions").append($(formulaire_Question_A_Remplir).html());
-			$("#typeQuestionnaire").attr("id","typeQuestionnaire"+num);
+			$("#listeQuestions").append($(choixmultiple_sonde).html());
+			$("#choixmul").attr("id","typeQuestionnaire"+num);
+      $("#propQCM").attr("id","propQCM"+num);
 
 
-			console.log("C'est un type Note");
-			var reponses = data["data"]["reponses"];
 
-			//juste pour test
-			// reponses[0]="cool";
-			// reponses[1]="Pas top";
-			// reponses[2]="NULLLLLLLLL";
-			//juste pour test
+			var reponses = data["data"]["objects"][0]["reponses"];
 
-			// affiche les réponses dans les input avec désactivation
-			for(var i=0;i<reponses.length;++i){
-				$("#reponse"+i).val(reponses[i]);
-				$("#reponse"+i).prop('disabled', true);
-			}
+      var tab=new Array();
+
+      for( var i=0;i<reponses.length;++i){
+        tab[i]=reponses[i];
+      //  setReponsesCHoixMultiple(reponses[i]);
+        }
+              maMap.set(num,tab);
 			break;
 	}
 	try{
 		$("#legendeQuestion").attr("id","legendeQuestion"+num);
 		$("#question").attr("id","question"+num);
-		$("#boutonValider").attr("id","boutonValider"+num);
-		$("#boutonAnnuler").attr("id","boutonAnnuler"+num);
-		$("#choixTypeQuestion").attr("id","choixTypeQuestion"+num);
-
+console.log(maMap);
 		//changement des noms des Ids  ******************************************************
 		// change le numéro de la question
 
-		$("#legendeQuestion"+num).text("Question "+num);
+	$("#legendeQuestion"+num).text("Question "+num);
 		//remplit la question
-		$("#question"+num).val(data["data"]["intitule"]);
+		$("#question"+num).text(data["data"]["objects"][0]["intitule"]);
 		//désactive la question
-		$("#question"+num).prop('disabled', true);
-		//change le boutton en edit avec sa fonction du onclick
-		$("#boutonValider"+num).attr("value","Edit");
-		$("#boutonValider"+num).attr("onclick","editQuestion(id)");
-		//change le boutton en suppr avec sa fonction du onclick
-		$("#boutonAnnuler"+num).attr("value","Suppr");
-		$("#boutonAnnuler"+num).attr("onclick","suppressionQuestion(num)");
-		//cache les bouttons
-		$("#boutonAjoutReponse").hide();
-		$("#boutonSupprimerReponse").hide();
-		$("#choixTypeQuestion"+num).hide();
+
+        if(num==numMax)$("#boutoncode2").click();
+
+
+
 	}
 	catch(err)
 	{
 		console.log("Pas de questions")
 	}
+
+
+}
+
+
+function affiche_reponses_QCM(data){
+
+
+  numQ++;
+    console.log(tabQ[numQ]);
+  $("#propQCM"+tabQ[numQ]).append('<input type="checkbox" id="reponse'+data["data"]["objects"][0]["id"]+'1" value="checkbox1"><span id="reponse'+data["data"]["objects"][0]["id"]+'"> '+data["data"]["objects"][0]["valeur"]+' </span><br/>');
+
+}
+
+function insertInfoSonde(){
+
+  if (confirm("Voulez-vous vraiment modifier les infos du sondé ?")) { // Clic sur OK
+
+  modif("/api/sonde/"+sondeCourant,JSON.stringify({
+    "id":sondeCourant,
+    "nom":$("#nomsond").val(),
+    "prenom":$("#prenomsond").val(),
+    "date_naissance":$("#datesond").val()
+    }));
+  }
+
 
 
 }
