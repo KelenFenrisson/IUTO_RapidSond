@@ -14,6 +14,8 @@ Prérequis : Votre machine doit êter capable d'héberger une application web
 
 1. Copier le dossier /client et son contenu sur un serveur web. Vous pouvez le renommer comme vous le souhaitez.
 
+2.
+
 #### Partie Serveur
 
 Prerequis : Votre machine doit êter capable d'heberger une application Flask (Serveur VPS)
@@ -63,12 +65,61 @@ mysql > source jeu_essai.sql
 
 
 
-7. Lancer le serveur
+7. Lancer le serveur (dans l'exemple , le serveur est lançé sur 127.0.0.1:5000)
 
 ``` bash
-(venv)login@machine ~/mon/chemin/REST/ $ ./manage.py runserver -h 0.0.0.0 -p 5000
+(venv)login@machine ~/mon/chemin/REST/ $ ./manage.py runserver -h 127.0.0.1 -p 5000
 ```
 
 ## Documentation
 
-//TODO
+
+## Projet
+
+- Integrateur principal: Mathieu
+- Developpeurs : Mathieu, Julien, Jérémie, Leo, Olivier, Roméo
+
+
+
+#### Base de données
+- Conception, script de création et jeu d'essai: Mr LIMET
+
+
+
+## Module client Onepage
+
+- Integrateur principal : Julien
+- Developpeurs : Julien, Leo, Olivier, Jeremie, Roméo
+
+#### Programme
+
+Une application web onepage permettant de concevoir des questionnaires et d'interroger des sondés.
+Le développement d'une partie analyse statistique
+
+###### Code
+
+- Javascript, JQuery(Ajax), HTML/CSS(BootStrap)
+
+###### Interface
+
+- Maquettage issu du projet MyBalsamiq de conception d'interfaces : https://infoiut45.mybalsamiq.com/projects/sondasa/grid
+
+
+
+## Module serveur REST
+
+- Integrateur : Mathieu
+- Developpeur : Mathieu
+
+#### Programme
+
+Un serveur REST développé en python (Flask-Restless), alimenté par une base de données mysql
+
+###### Code
+
+Principalement du python3, un peu de html/CSS
+
+###### Interface
+
+- home (/) : contient une description sommaire de l'API REST et des entités manipulables
+
