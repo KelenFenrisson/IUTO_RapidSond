@@ -32,7 +32,7 @@ function Sonde(nom){
 function modif(adresse,data){
     $.ajax({
         url:urlBase+adresse,
-        type:'PUT',
+        type:'PATCH',
         data:data,
         //JSON.stringify({"id":1,"nom":"MABITE"})
         contentType: "application/json",
