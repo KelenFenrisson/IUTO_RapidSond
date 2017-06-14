@@ -23,6 +23,7 @@ function affiche_HTML(fichierHTML)
 function afficheAccueil(){
 	$("#main").empty();
 	$("#main").append($(accueil_Connexion).html());
+
 }
 
 function seConnecter(){
@@ -32,3 +33,8 @@ function seConnecter(){
 	if($("#role option:selected").val()=="sondeur")
 		accueilSondeur();
 }
+
+
+$(function() {
+	afficheAccueil();
+})

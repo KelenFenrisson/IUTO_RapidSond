@@ -1,29 +1,32 @@
 
 
 <div>
-<div id="repquest" class="col-md-offset-4 col-md-8">
+
+<div  id="repquest" class"text-center">
 	<h2 id ="titrequestdet">Formulaire n°123456</h2>
+	<input id="boutoncode2" type="button" class=" btn btn-info" value="Refresh" onclick ="exec()"/>
 </div>
 
-<div id="formrech" class="col-md-offset-1 row">
-	<div id="champcreateur" class="col-md-4">
+<div class ="row">
+	<div id="champcreateur" class="col-md-4 ">
 			<label>Par : </label>
 			<span id="createur">Marcel</span>
+
 	</div>
-	<div id="champclient" class="col-md-4">
+	<div id="champclient" class="col-md-4 ">
 		<label>Client : </label>
 			<span id="titrecli">Buitoni</span>
 	</div>
-	<div id="champsonde" class="col-md-4">
+	<div id="champsonde" class="col-md-4 ">
 		<label>Sondé : </label>
 			<span id="sonde">Dupont</span>
 	</div>
-</div>
 
+</div>
 <br/>
-	<div id ="listeQuestions">	</div>
+	<div id ="listeQuestions" class="row">	</div>
 		<div id="boutons" class="col-md-offset-4">
-			<input id="boutoncode" type="button" class="btn btn-danger" value="Annuler" onclick="annulationQuestion()"/>
-			<input id="boutoncode" type="button" class="col-md-offset-2 btn btn-success" value="Valider"/>
+			<input id="boutoncode" type="button" class="col-md-offset-1 btn btn-danger  top-100" value="Annuler" onclick="annulationQuestion()"/>
+			<input id="boutoncode1" type="button" class="col-md-offset-2 btn btn-success  top-100" value="Valider"/>
 		</div>
 </div>
